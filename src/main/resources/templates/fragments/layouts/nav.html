@@ -31,11 +31,15 @@ function close(){
 var myTimer;
 $(".imagehover").mouseenter(function() {
 	$(".Yqbwu").css("display","flex");
+	$("#secondcatediv").css("display", "none");
+	$("#thirdcatediv").css("display", "none");
 	clearTimeout(myTimer);
 	console.log("1");
 });
 
 $(".imagehover").mouseleave(function() {
+	$("#secondcatediv").css("display", "none");
+	$("#thirdcatediv").css("display", "none");
 	myTimer = setTimeout(function () {
 		close()
 	}, 2000);
@@ -55,7 +59,11 @@ $(".ijOTSi").mouseenter(function() {
 		}, 2000);
 	});
 	$(".sc-caSCKo").mouseenter(function() {
+		var $selectFirstCat = $(".iYNSfN");
+		 $selectFirstCat.empty();
 		$(this).css("background-color","black");
+		$("#secondcatediv").css("display", "inline-block");
+		$("#thirdcatediv").css("display", "none");
 		var $third = $("#thirdcate");
 		$third.empty();
 		getOption2($(this).html());
@@ -63,12 +71,13 @@ $(".ijOTSi").mouseenter(function() {
 	
 	$(".sc-caSCKo").mouseleave(function() {
 		$(this).css("background-color","");
-	
 	});
 	
 	$(".cROcuna").on("mouseenter","a",function() {
+		var $selectSecondCat = $(".bJhWTa");
+		$selectSecondCat.empty();
 		$(this).css("background-color","black");
-	
+		$("#thirdcatediv").css("display", "inline-block");
 		getOption3($(this).html());
 	});
 	
@@ -98,12 +107,14 @@ function getOption2(option) {
 		dataType : 'json',
 		success : function(result) {
 			var $cat2 = $("#secondcate");
+			var $selectFirstCat = $(".iYNSfN");
 			$cat2.empty();
 				$.each(result,
 				function(index, el) {
 				console.log('element',index, el);
-				$cat2.append("<a class='sc-kjoXOD cEGydc' href='/categories/310?&amp;req_ref=popular_category'>"+ el + "</a>");
+				$cat2.append("<a class='sc-kjoXOD cEGydc' th:href='@{searchCategory1(CATEGORY2=@{"+el+"})}'>"+ el + "</a>");
 				});
+			$selectFirstCat.append("<div class='sc-eqIVtm iYNSfN'>"+option+"<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC' width='6' height='9' alt='화살표 아이콘'></div>");
 		}
 		}).fail(function(error) {
 			alert("에러" + JSON.stringify(error));
@@ -118,12 +129,14 @@ function getOption3(option) {
 	dataType : 'json',
 	success : function(result) {
 		var $cat3 = $("#thirdcate");
+		var $selectSecondCat = $(".bJhWTa");
 		$cat3.empty();
 		$.each(result,
 		function(index, el) {
 			console.log('element',index, el);
-			$cat3.append("<a class='sc-kjoXOD cEGydc' href='/categories/310?&amp;req_ref=popular_category'>"+ el + "</a>");
+			$cat3.append("<a class='sc-kjoXOD cEGydc'  th:href='@{searchCategory1(CATEGORY3=@{"+el+"})}'>"+ el + "</a>");
 			});
+			$selectSecondCat.append("<div class='sc-eqIVtm iYNSfN'>"+option+"<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC' width='6' height='9' alt='화살표 아이콘'></div>");
 		}
 	}).fail(function(error) {
 		alert("에러" + JSON.stringify(error));
@@ -220,24 +233,22 @@ function getOption3(option) {
 										width="6" height="9" alt="화살표 아이콘">
 								</div>
 								<div class="sc-fAjcbJ cROcun">
-									<a class="sc-caSCKo cxSaWG" href="/categories/310?&amp;req_ref=popular_category">패션</a>
-									<a class="sc-caSCKo cxSaWG" href="/categories/320?&amp;req_ref=popular_category">가전/디지털</a>
-									<a class="sc-caSCKo cxSaWG" href="/categories/405?&amp;req_ref=popular_category">도서</a>
-									<a class="sc-caSCKo cxSaWG" href="/categories/430?&amp;req_ref=popular_category">식품</a>
+									<a class="sc-caSCKo cxSaWG" th:href="@{searchCategory1(CATEGORY1=@{'패션'})}">패션</a>
+									<a class="sc-caSCKo cxSaWG" th:href="@{searchCategory1(CATEGORY1=@{'가전/디지털'})}">가전/디지털</a>
+									<a class="sc-caSCKo cxSaWG" th:href="@{searchCategory1(CATEGORY1=@{'도서'})}">도서</a>
+									<a class="sc-caSCKo cxSaWG" th:href="@{searchCategory1(CATEGORY1=@{'식품'})}">식품</a>
 								</div>
 							</div>
-							<div class="sc-dVhcbM ijOTSi">
-								<div class="sc-eqIVtm iYNSfN">여성의류
-									<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC"
-											width="6" height="9" alt="화살표 아이콘">
+							<div id ="secondcatediv" class="sc-dVhcbM ijOTSi">
+								<div class="sc-eqIVtm iYNSfN">
 								</div>
 								<div id="secondcate" class="sc-fAjcbJ cROcuna">
 								
 								</div>
 							</div>
-							<div class="sc-dVhcbM ijOTSi">
-								<div class="sc-eqIVtm bJhWTa">패딩/점퍼</div>
-								<div id="thirdcate"  class="sc-fAjcbJ cROcunb">
+							<div id ="thirdcatediv" class="sc-dVhcbM ijOTSi">
+								<div class="sc-eqIVtm bJhWTa"></div>
+								<div id="thirdcate" class="sc-fAjcbJ cROcunb">
 									
 								</div>
 							</div>

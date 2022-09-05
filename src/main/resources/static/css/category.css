@@ -1,5 +1,10 @@
 @charset "UTF-8";
-
+#secondcatediv{
+	display:none;
+}
+#thirdcatediv{
+	display:none;
+}
 .Yqbwu {
     top: calc(100% + 28px);
     left: 0px;
@@ -39,6 +44,7 @@
     border-bottom: 1px solid rgb(238, 238, 238);
     padding: 20px 0px 25px;
     overflow-y: auto;
+    
 }
 .cROcunb {
     height: calc(100% - 40px);
