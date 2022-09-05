@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+#findId{
+	margin: 0px auto;
+	width:400px;
+	border:2px solid rgb(0,0,0);
+	
+}
+#findPW{
+	margin: 0px auto;
+	width:400px;
+	border:2px solid rgb(0,0,0);
+	
+}
+#join{
+	margin: 0px auto;
+	width:400px;
+	border:2px solid rgb(0,0,0);
+	
+}
+#theform{
+	margin: 0px auto;
+	width:400px;
+	border:2px solid rgb(0,0,0);
+	
+}
+#login{
+	text-align: left;
+    padding: 10px 15px 20px 15px;
+    border: none;
+    display: flex;
+    -webkit-box-pack: center;
+    flex-direction: column;
+	
+}
+input{
+	text-align:left;
+}

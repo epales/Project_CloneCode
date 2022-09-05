@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="fragment-nav">
+	<script type="text/javascript">
+		var search = document.getElementById("search");
+
+		$(document).on('keydown', '#search', function(e) {
+			if (e.keyCode == 13 && !e.shiftKey) {
+				const message = $(this).val(); // 현재 입력된 메세지를 담는다.
+
+				let search3 = $('#search').val();
+
+				if (search3.replace(/\s|  /gi, "").length == 0) {
+					return false;
+					$('#search').focus();
+				}
+				var url = "/search/" + message;
+				location.replace(url);
+				return true;
+
+			}
+		});
+	</script>
+<script type="text/javascript">
+$(document).ready(function() {
+		 
+function close(){
+	$(".Yqbwu").css("display","none");
+}
+
+var myTimer;
+$(".imagehover").mouseenter(function() {
+	$(".Yqbwu").css("display","flex");
+	clearTimeout(myTimer);
+	console.log("1");
+});
+
+$(".imagehover").mouseleave(function() {
+	myTimer = setTimeout(function () {
+		close()
+	}, 2000);
+	console.log("2");
+});
+
+$(".ijOTSi").mouseenter(function() {
+	$(".Yqbwu").css("display","flex");
+	clearTimeout(myTimer);
+	console.log("3");
+	
+});
+
+	$(".ijOTSi").mouseleave(function() {
+		myTimer = setTimeout(function () {
+			close()
+		}, 2000);
+	});
+	$(".sc-caSCKo").mouseenter(function() {
+		$(this).css("background-color","black");
+		var $third = $("#thirdcate");
+		$third.empty();
+		getOption2($(this).html());
+	});
+	
+	$(".sc-caSCKo").mouseleave(function() {
+		$(this).css("background-color","");
+	
+	});
+	
+	$(".cROcuna").on("mouseenter","a",function() {
+		$(this).css("background-color","black");
+	
+		getOption3($(this).html());
+	});
+	
+	$(".cROcuna").on("mouseleave","a",function() {
+		$(this).css("background-color","");
+		
+	});
+	$(".cROcunb").on("mouseenter","a",function() {
+		$(this).css("background-color","black");
+		
+	});
+	
+	$(".cROcunb").on("mouseleave","a",function() {
+		$(this).css("background-color","");
+		
+	});
+	
+});
+
+
+
+function getOption2(option) {
+	$.ajax({
+		type : 'GET',
+		url : '/categoryTap1',
+		data : {"category" : option},
+		dataType : 'json',
+		success : function(result) {
+			var $cat2 = $("#secondcate");
+			$cat2.empty();
+				$.each(result,
+				function(index, el) {
+				console.log('element',index, el);
+				$cat2.append("<a class='sc-kjoXOD cEGydc' href='/categories/310?&amp;req_ref=popular_category'>"+ el + "</a>");
+				});
+		}
+		}).fail(function(error) {
+			alert("에러" + JSON.stringify(error));
+	})
+}
+
+function getOption3(option) {
+	$.ajax({
+	type : 'GET',
+	url : '/categoryTap1',
+	data : {"category" : option},
+	dataType : 'json',
+	success : function(result) {
+		var $cat3 = $("#thirdcate");
+		$cat3.empty();
+		$.each(result,
+		function(index, el) {
+			console.log('element',index, el);
+			$cat3.append("<a class='sc-kjoXOD cEGydc' href='/categories/310?&amp;req_ref=popular_category'>"+ el + "</a>");
+			});
+		}
+	}).fail(function(error) {
+		alert("에러" + JSON.stringify(error));
+		})
+}
+
+</script>
+	<div id="header01">
+		<div class="top">
+			<div class="a">
+				<a href="#"> <img
+					src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTYiIGhlaWdodD0iMTciIHZpZXdCb3g9IjAgMCAxNiAxNyI+CiAgICA8ZGVmcz4KICAgICAgICA8cGF0aCBpZD0ibTg4aW90dDQ5YSIgZD0iTTE2IDExLjAxOGwtLjAwMS41N2MtLjAwMS4xNi0uMDAzLjMyLS4wMDcuNDgxLS4wMS4zNDktLjAzLjcwMS0uMDk0IDEuMDQ2LS4wNjMuMzUtLjE2Ny42NzYtLjMzMS45OTUtLjE2MS4zMTItLjM3MS41OTktLjYyMi44NDdzLS41NC40NTYtLjg1Ny42MTVjLS4zMjIuMTYyLS42NTEuMjY1LTEuMDA2LjMyOC0uMzQ5LjA2Mi0uNzA1LjA4Mi0xLjA1OC4wOTItLjY3OS4wMDgtLjg3MS4wMDgtMS4wNjQuMDA4SDUuMDRjLS43NC0uMDAyLS45MDItLjAwNC0xLjA2NC0uMDA4LS4zNTMtLjAxLS43MDktLjAzLTEuMDU4LS4wOTItLjM1NC0uMDYzLS42ODQtLjE2Ni0xLjAwNi0uMzI4LS4zMTYtLjE2LS42MDYtLjM2Ny0uODU3LS42MTUtLjI1LS4yNDgtLjQ2LS41MzUtLjYyMi0uODQ3LS4xNjQtLjMxOS0uMjY4LS42NDUtLjMzMS0uOTk1LS4wNjMtLjM0NS0uMDg0LS42OTctLjA5My0xLjA0Ni0uMDA1LS4xNi0uMDA3LS4zMi0uMDA4LS40OEwwIDExLjAxOFY0Ljk4MmwuMDAxLS41N2MuMDAxLS4xNi4wMDMtLjMyLjAwOC0uNDgxLjAxLS4zNDkuMDMtLjcwMS4wOTMtMS4wNDYuMDYzLS4zNS4xNjctLjY3Ni4zMzEtLjk5NS4xNjEtLjMxMy4zNzEtLjU5OS42MjItLjg0N3MuNTQtLjQ1Ni44NTctLjYxNUMyLjIzNC4yNjYgMi41NjQuMTYzIDIuOTE4LjFjLjM1LS4wNjIuNzA1LS4wODIgMS4wNTgtLjA5MkM0LjY1NiAwIDQuODQ4IDAgNS4wNCAwSDEwLjgwMiA4Ljc1aDIuMjFjLjc0LjAwMi45MDIuMDA0IDEuMDY0LjAwOC4zNTMuMDEuNzA5LjAzIDEuMDU4LjA5Mi4zNTUuMDYzLjY4NC4xNjYgMS4wMDYuMzI4LjMxNi4xNi42MDYuMzY3Ljg1Ny42MTUuMjUuMjQ4LjQ2MS41MzQuNjIyLjg0Ny4xNjQuMzE5LjI2OC42NDQuMzMxLjk5NS4wNjMuMzQ1LjA4NC42OTcuMDk0IDEuMDQ2LjAwNC4xNi4wMDYuMzIuMDA3LjQ4bC4wMDEuNTcxdjYuMDM2eiIvPgogICAgPC9kZWZzPgogICAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCwgMS4wMDAwMDApIj4KICAgICAgICAgICAgPG1hc2sgaWQ9IjN4bmRjNnc0YWIiIGZpbGw9IiNmZmYiPgogICAgICAgICAgICAgICAgPHVzZSB4bGluazpocmVmPSIjbTg4aW90dDQ5YSIvPgogICAgICAgICAgICA8L21hc2s+CiAgICAgICAgICAgIDxwYXRoIGZpbGw9IiNEODBDMTgiIGQ9Ik0wIDBIMTZWMTZIMHoiIG1hc2s9InVybCgjM3huZGM2dzRhYikiLz4KICAgICAgICAgICAgPGcgZmlsbD0iI0ZGRiIgbWFzaz0idXJsKCMzeG5kYzZ3NGFiKSI+CiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNOC45MSA0LjkyMUwzLjY0MyAxMC41NmMtLjAzNC4wMzYtLjA5NS4wMDgtLjA4OS0uMDQybC41ODgtNC43NzZIMS43MDRjLS4wNDUgMC0uMDY4LS4wNTQtLjAzOC0uMDg3TDYuOTMzLjAxN2MuMDM0LS4wMzcuMDk1LS4wMDkuMDg5LjA0MWwtLjU4OCA0Ljc3NmgyLjQzN2MuMDQ2IDAgLjA3LjA1NC4wMzkuMDg3eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMi43MTE4NjQsIDIuNzExODY0KSIvPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K"
+					width="16" height="17" alt="앱다운로드버튼 이미지"> 앱다운로드
+				</a> <a href="#"> <img
+					src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDE2IDE1Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggc3Ryb2tlPSIjQ0NDIiBkPSJNLTE2LjUtMTYuNWg0OXY0OWgtNDl6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U5QjQ1NyIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNOCAwbDIuNSA0LjkzNCA1LjUuNzktNCAzLjg0OC45IDUuNDI4TDggMTIuNDM0IDMuMSAxNSA0IDkuNTcyIDAgNS43MjRsNS41LS43OXoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+					width="16" height="15" alt="즐겨찾기버튼 이미지"> 즐겨찾기
+				</a>
+			</div>
+			<div class="b">
+				<div id="wrap">
+					<!-- Content -->
+					<div class="container">
+						<!-- 팝업용 임시 버튼입니다. -->
+						<div th:if="${session.userId == null}">
+							<button class="e_button1" onClick="javascript:popOpen();">로그인</button>
+						</div>
+						<div th:unless="${session.userId == null}">
+							<div th:if="${session.password == null}">
+								<button class="e_button1" onClick="kakaoLogout();">로그아웃</button>
+							</div>
+							<div th:unless="${session.password == null}">
+								<button class="e_button1" onClick="location='logoutAction'">로그아웃</button>
+							</div>
+						</div>
+						<!-- //팝업용 임시 버튼입니다. -->
+					</div>
+					<!-- //Content -->
+				</div>
+				<div th:if="${session.userId == null}">
+					<button class="e_button1" onClick="javascript:popOpen();">내
+						상점</button>
+				</div>
+				<div th:unless="${session.userId == null}">
+					<a href="/myshop">내 상점</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="header02">
+		<div class="center">
+			<div class="center-top">
+				<div class="c">
+					<a href="/index"><img src="/image/logo.jpg"></a>
+				</div>
+				<div class="d">
+					<input type="text" name="title" placeholder="상품명 입력" id="search"
+						class="search" value="" autocomplete="off"> <a href="#"><img
+						src="/image/searchImage.png"></a>
+				</div>
+				<div class="e">
+					<div th:if="${session.userId == null}" class="e_myshop">
+						<a onClick="javascript:popOpen();"><img src="/image/sell.png">판매하기</a>
+					</div>
+					<div th:unless="${session.userId == null}" class="e_myshop">
+						<a href="/sellForm"><img src="/image/sell.png">판매하기</a>
+					</div>
+					<div th:if="${session.userId == null}" class="e_myshop">
+						<a onClick="javascript:popOpen();"><img
+							src="/image/myshop.png">내 상점</a>
+					</div>
+					<div th:unless="${session.userId == null}" class="e_myshop">
+						<a href="/myshop"><img src="/image/myshop.png">내 상점</a>
+					</div>
+					<div th:if="${session.userId == null}" class="e_myshop">
+						<button class="e_button2" onClick="javascript:popOpen();">
+							<img src="/image/talk.png">번개톡
+						</button>
+					</div>
+					<div th:unless="${session.userId == null}" class="e_myshop">
+						<button class="e_button2" onClick="location.href='/talk'">
+							<img src="/image/talk.png">번개톡
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="sc-eXEjpC ZKoFr">
+				<div class="sc-fBuWsC gIJOQQ">
+					<img class="imagehover" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAYAAABgrToAAAAAAXNSR0IArs4c6QAAAExJREFUWAnt1sEJACAMA0DrJt1/SAVXyKfI9V8Il0+qu88afHtwthdNwOkNyUeAAAECvwuUNRNWbM2EgN4JECBAgEAoYM2EgMuaSQUv1d0EPE4sEMMAAAAASUVORK5CYII="
+						width="20" height="16" alt="메뉴 버튼 아이콘">
+						<div class="sc-fMiknA Yqbwu">
+							<div class="sc-dVhcbM ijOTSi">
+								<div class="sc-eqIVtm frdEdR">
+									전체 카테고리<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC"
+										width="6" height="9" alt="화살표 아이콘">
+								</div>
+								<div class="sc-fAjcbJ cROcun">
+									<a class="sc-caSCKo cxSaWG" href="/categories/310?&amp;req_ref=popular_category">패션</a>
+									<a class="sc-caSCKo cxSaWG" href="/categories/320?&amp;req_ref=popular_category">가전/디지털</a>
+									<a class="sc-caSCKo cxSaWG" href="/categories/405?&amp;req_ref=popular_category">도서</a>
+									<a class="sc-caSCKo cxSaWG" href="/categories/430?&amp;req_ref=popular_category">식품</a>
+								</div>
+							</div>
+							<div class="sc-dVhcbM ijOTSi">
+								<div class="sc-eqIVtm iYNSfN">여성의류
+									<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC"
+											width="6" height="9" alt="화살표 아이콘">
+								</div>
+								<div id="secondcate" class="sc-fAjcbJ cROcuna">
+								
+								</div>
+							</div>
+							<div class="sc-dVhcbM ijOTSi">
+								<div class="sc-eqIVtm bJhWTa">패딩/점퍼</div>
+								<div id="thirdcate"  class="sc-fAjcbJ cROcunb">
+									
+								</div>
+							</div>
+						</div>
+				</div>
+				<div style="display: flex; align-items: center; gap: 4px;">
+					<b>카테고리 메뉴</b>
+					<img src="data:image/png;base64,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"
+						width="72" height="26" alt="카테고리 메뉴">
+				</div>
+			</div>
+			<div class="f">
+				<div class="f1">
+					<div class="f2">
+						<div class="f3">찜한상품</div>
+					</div>
+					<div class="f2">
+						<div class="f3">최근 본 상품</div>
+					</div>
+					<div class="f2">
+						<div class="f3">
+							앱 다운로드 <img src="/image/qr.png">
+						</div>
+					</div>
+					<div id="topButton" class="f2" onclick="window.scrollTo(0,0);">
+						<div class="f3">
+							<button class="e_button1">TOP</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- modal 영역 -->
+	<div class="modal-bg" onClick="javascript:popClose();"></div>
+	<div class="modal-wrap">
+		<button class="modal-close" onClick="javascript:popClose();">
+			<img th:src="@{/image/ee442d3dd827628bc5fe.png}" width="24"
+				height="24" alt="로그인 모달 닫기 버튼 아이콘">
+		</button>
+		<div class="main1">
+			<img th:src="@{/image/56db3dd43075482b1d31.png}" width="30"
+				height="34">
+			<div class="text1">번개장터로 중고거래 시작하기</div>
+			<div class="text2">간편하게 가입하고 상품을 확인하세요</div>
+			<div class="kakaoLogin">
+				<button class="moveKakao" onclick="kakaoLogin()">
+					<div class="kakaoIcon"></div>
+					카카오로 이용하기
+				</button>
+				<button class="moveKakao exvIJc">
+					<div class="fackbookIcon"></div>
+					페이스북으로 이용하기
+				</button>
+				<button class="moveKakao eAIGCf">
+					<div class="naverIcon"></div>
+					네이버로 이용하기
+				</button>
+				<div class="moveKakao">
+					<a class="register" href="/loginForm"> 본인인증으로 이용하기</a>
+				</div>
+			</div>
+			<div class="explainFooter">
+				<p>
+					도움이 필요하면 <a href="mailto:help@bunjang.co.kr">이메일</a> 또는 고객센터<b>1670-2910</b>로
+					문의 부탁드립니다.<br>고객센터 운영시간: 09~18시 (점심시간 12~13시, 주말/공휴일 제외)
+				</p>
+			</div>
+		</div>
+	</div>
+</th:block>
+</html>

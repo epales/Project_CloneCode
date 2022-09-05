@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"xmlns:th="http://www.thymeleaf.org"xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"layout:decorate="~{cmmn/adminLayout}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>로그인 화면</title>
+<script type="text/javascript" src="js/test.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <form id="addForm" name="addForm" method="post" encType="multipart/form-data">
+		<div class="sc-izvnbC eIxVfd">
+			<div class="sc-cbMPqi jETxPj"> 
+				<div class="sc-gMcBNU jeqdkH">
+			<h2>
+				기본정보<span>*필수항목</span>
+			</h2>
+			<ul class="sc-dYzWWc hOFNTa">
+				<li class="sc-iLVFha iwsyNh">
+					<div class="sc-cgzHhG fMDfrj">
+						상품이미지<span>*</span>
+					</div>
+					<div class="sc-jtHxuu kfgfBW">
+						<ul class="sc-hlILIN esydjP">
+					<li class="sc-jQMNup dghCFG">이미지 등록
+						<input type="file"name="product_image"id="product_image"onchange="previewImage(this,'View_area')" style="display: none;" multiple>
+						<span id='View_area' style="position:relative; color: black; border: 0px solid black;">
+        				</span>
+					</li>
+			</ul>
+					<div class="sc-TuwoP isocOz">
+						<b>* 상품 이미지는 640x640에 최적화 되어 있습니다.</b><br>- 상품 이미지는 PC에서는
+						1:1, 모바일에서는 1:1.23 비율로 보여집니다. <br>- 이미지는 상품 등록 시 정사각형으로 잘려서
+						등록됩니다.<br>- 이미지를 클릭할 경우 원본 이미지를 확인할 수 있습니다.<br>- 이미지를
+						클릭 후 이동하여 등록순서를 변경할 수 있습니다.<br>- 큰 이미지일 경우 이미지가 깨지는 경우가 발생할
+						수 있습니다.<br>최대 지원 사이즈인 640 X 640으로 리사이즈 해서 올려주세요.(개당 이미지 최대
+						10M)
+					</div>
+				</div>
+				</li>
+				<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG iReqUw">
+						제목<span>*</span>
+					</div>
+					<div class="sc-jtHxuu kfgfBW">
+						<div class="sc-dlyikq hdamdz">
+							<div class="sc-blIhvV dUxHUN">
+								<input type="text" placeholder="상품 제목을 입력해주세요." class="sc-glUWqk gDXthV" value="">
+								<a href="https://help.bunjang.co.kr/faq/2/220" target="_blank">거래금지 품목</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="sc-iLVFha iwsyNh">
+					<div class="sc-cgzHhG jowNbo">
+						카테고리<span>*</span>
+					</div>
+					<div class="sc-jtHxuu kfgfBW">
+						<div class="sc-fCPvlr wNrKZ">
+							<div class="sc-gAmQfK bUJOfH">
+								<ul class="sc-hAXbOi hZiIqV">
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">여성의류</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">남성의류</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">신발</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">가방</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">시계/쥬얼리</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">패션 액세서리</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">디지털/가전</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">스포츠/레저</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">차량/오토바이</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">스타굿즈</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">키덜트</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">예술/희귀/수집품</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">음반/악기</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">도서/티켓/문구</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">뷰티/미용</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">가구/인테리어</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">생활/가공식품</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">유아동/출산</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">반려동물용품</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">기타</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">지역 서비스</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">원룸/함께살아요</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button"class="sc-cfWELz gNMaOW">번개나눔</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button"class="sc-cfWELz gNMaOW">구인구직</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">재능</button>
+									</li>
+									<li class="sc-cCVOAp kJlieW">
+									<button type="button" class="sc-cfWELz gNMaOW">커뮤니티</button>
+									</li>
+								</ul>
+							</div>
+							<div class="sc-gAmQfK bUJOfH">중분류 선택</div>
+							
+							<div class="sc-gAmQfK bUJOfH">소분류 선택</div>
+						</div>
+						<h3 class="sc-kAdXeD iUkvws">
+							선택한 카테고리 : <b></b>
+						</h3>
+					</div>
+				</li>
+				<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG iReqUw">
+						거래지역<span>*</span>
+					</div>
+					<div class="sc-jtHxuu kfgfBW">
+						<div class="sc-bTiqRo iYFFKG">
+							<button type="button" class="sc-bEufUU jJcvsb">내 위치</button>
+							<button type="button" class="sc-bEufUU jJcvsb">최근 지역</button>
+							<button type="button" class="sc-bEufUU jJcvsb">주소 검색</button>
+							<button type="button" class="sc-bEufUU jJcvsb">지역설정안함</button>
+						</div>
+						<input readonly="" placeholder="선호 거래 지역을 검색해주세요." class="sc-gFXMyG ivFisA" value="지역설정안함">
+					</div>
+				</li>
+				<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG drXtBZ">
+						상태<span>*</span>
+					</div>
+					<div class="sc-jtHxuu kfgfBW">
+						<div class="sc-dPNhBE ePieHk">
+							<label for="중고상품" class="sc-kkwfeq kzXpnJ">
+								<input id="중고상품" type="radio" value="0" checked>중고상품
+							</label>
+							<label for="새상품" class="sc-kkwfeq dQrzlv">
+								<input id="새상품" type="radio" value="0">새상품
+							</label>
+						</div>
+					</div>
+				</li>
+				<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG drXtBZ">
+						교환<span>*</span>
+					</div>
+					<div class="sc-jtHxuu kfgfBW">
+						<div class="sc-dPNhBE ePieHk">
+							<label for="교환불가" class="sc-kkwfeq kzXpnJ">
+								<input id="교환불가" type="radio" value="0" checked>교환불가
+							</label>
+							<label for="교환가능" class="sc-kkwfeq dQrzlv">
+								<input id="교환가능" type="radio" value="0">교환가능
+							</label>
+						</div>
+					</div>
+				</li>
+				<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG iReqUw">
+						가격<span>*</span>
+					</div>
+					<div class="sc-jtHxuu kfgfBW">
+						<div class="sc-gQNndl jNxOgc">
+							<input type="text" placeholder="숫자만 입력해주세요."
+								class="sc-MYvYT hPgTYY" value="">원
+						</div>
+						<div class="sc-RmnOB gnoLfy">
+							<div class="sc-bIKvTM emkahU">
+								<label for="freesShipping" class="sc-jPPmml iXpedI">
+								<input id="freesShipping"  type="checkbox">배송비 포함</label>
+							</div>
+						</div>
+					</div></li>
+				<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG edsRwT">
+						설명<span>*</span>
+					</div>
+					<div class="sc-jtHxuu kfgfBW">
+						<textarea rows="6" class="sc-dNoQZL cWRaxv" placeHolder="상품 설명을 입력해주세요!"></textarea>
+						<div class="sc-igwadP kufikJ">
+							
+						</div>
+						<div class="sc-ckYZGd fiKONI">
+							<span>혹시 <a href="https://help.bunjang.co.kr/notice/607"
+								target="_blank">카카오톡 ID</a>를 적으셨나요?
+							</span>
+							<div class="sc-eweMDZ jThRIx">0/2000</div>
+						</div>
+					</div></li>
+				<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG edsRwT">연관태그</div>
+					<div class="sc-jtHxuu kfgfBW">
+						<div class="sc-bvTASY eDywOX">
+							<div class="sc-koErNt iyRYQc">
+								<div class="sc-jRhVzh bXXMNm">
+									<input type="text" placeholder="연관태그를 입력해주세요. (최대 5개)" value="">
+								</div>
+							</div>
+						</div>
+						<ul class="sc-hZeNU hZCvWd">
+							<li><p>태그는 띄어쓰기로 구분되며 최대 9자까지 입력할 수 있습니다.</p></li>
+							<li><p>태그는 검색의 부가정보로 사용 되지만, 검색 결과 노출을 보장하지는 않습니다.</p></li>
+							<li><p>검색 광고는 태그정보를 기준으로 노출됩니다.</p></li>
+							<li><p>상품과 직접 관련이 없는 다른 상품명, 브랜드, 스팸성 키워드 등을 입력하면 노출이
+									중단되거나 상품이 삭제될 수 있습니다.</p></li>
+						</ul>
+					</div></li>
+				<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG drXtBZ">수량</div>
+					<div class="sc-jtHxuu kfgfBW">
+						<div class="sc-cnTzU ktoqkB">
+							<input type="text" class="sc-dXLFzO hLMOEE" value="1">개
+						</div>
+					</div></li>
+			</ul>
+			</div> <div class="sc-gMcBNU jeqdkH">
+			<div class="sc-hCbubC gYVYeR">
+				<h2>
+					빠른 판매
+					<div class="sc-hMjcWo qxbAL">
+						<p>내 상품에 안전결제 배지가 표시돼요</p>
+						<a href="https://m.bunjang.co.kr/banner/pay?utm_source=pay-filter&amp;utm_medium=product-register&amp;utm_campaign=pay-master-seller-2109#seller"
+							target="_blank">자세히</a>
+					</div>
+				</h2>
+				<ul class="sc-dYzWWc hOFNTa">
+					<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG fMDfrj">옵션</div>
+						<div class="sc-jtHxuu kfgfBW">
+							<div class="sc-bIKvTM emkahU">
+								<label for="bunPayFilter" class="sc-jPPmml jcLwXM"><input
+									id="bunPayFilter" type="checkbox"><span
+									class="sc-bLJvFH gGgCNF"><span>안전결제 환영</span> 
+									<svg width="60" height="24" viewBox="0 0 35 16"> 
+										<g fill="none" fill-rule="evenodd"> 
+											<rect fill="#D80C18" width="35" height="16" rx="2">
+											</rect>
+											<path d="m9.226 3.003-.56 4.563h2.325a.05.05 0 0 1 .036.083l-5.024 5.388c-.033.035-.091.008-.085-.04l.56-4.563H4.153a.05.05 0 0 1-.036-.083L9.14 2.963a.05.05 0 0 1 .085.04zm11.803.706v8.59h-1.306V3.71h1.306zm8.447 0v8.59h-1.345V3.71h1.345zm-10.265.048v8.38h-1.288V8.138h-.776V6.875h.776V3.757h1.288zm5.398-.02c.353 0 .677.05.97.149.294.099.548.25.763.455.214.203.385.458.511.765.126.306.199.663.218 1.071a30.552 30.552 0 0 1 0 3.052 3.16 3.16 0 0 1-.218 1.076 2.2 2.2 0 0 1-.511.76 2.037 2.037 0 0 1-.762.455 3.031 3.031 0 0 1-.971.148c-.714 0-1.291-.2-1.733-.602-.442-.402-.685-1.015-.73-1.837a95.334 95.334 0 0 1-.033-.785 19.155 19.155 0 0 1 0-1.483c.01-.248.021-.51.034-.784.044-.823.287-1.435.729-1.836.442-.403 1.02-.604 1.733-.604zm-7.084.182v1.187h-.531l-.016 5.075.614-.024v1.167l-4.47.192v-1.187l.624-.024-.017-5.2h-.531V3.92h4.327zm7.084 1.005c-.165 0-.312.027-.44.081a.814.814 0 0 0-.337.268c-.095.124-.17.288-.227.492-.057.205-.095.46-.114.766-.025.376-.038.767-.038 1.172 0 .405.013.796.038 1.172.02.306.057.561.114.765.057.204.132.368.227.493a.82.82 0 0 0 .336.268c.13.054.276.08.44.08.165 0 .312-.026.44-.08a.82.82 0 0 0 .337-.268c.095-.125.17-.289.228-.493.056-.204.094-.46.113-.765a17.748 17.748 0 0 0 0-2.343 3.805 3.805 0 0 0-.113-.767 1.454 1.454 0 0 0-.228-.492.814.814 0 0 0-.336-.268 1.127 1.127 0 0 0-.44-.081zm-8.894.182h-.707l.016 5.15.675-.026.016-5.124z"
+											fill="#FFF">
+											</path>
+											</g>
+										</svg>
+										</span>
+									</label>
+							</div>
+							<ul class="sc-eAudoH gXvvll">
+								<li>
+									<svg width="18" height="18" viewBox="0 0 20 20"fill="#ff5058"> 
+									<g fill="current" fill-rule="evenodd">
+									<g fill="current"> 
+									<g> 
+									<path d="M7.5 16.667c-.221 0-.433-.088-.59-.244l-5-5c-.21-.21-.292-.518-.215-.805.077-.288.302-.512.59-.59.287-.076.594.006.804.216l4.363 4.364 9.415-10.984c.3-.349.825-.39 1.175-.09.349.299.39.824.09 1.174l-10 11.666c-.15.177-.368.283-.6.292H7.5"
+										transform="translate(-308 -798) translate(308 798)">
+									</path>
+									</g>
+									</g>
+									</g>
+									</svg>
+									<p>
+										안전결제(번개페이) 요청을 거절하지 않는 대신 혜택을 받을 수 있어요.
+										<small>거절 시, 
+										<a href="https://help.bunjang.co.kr/faq/3/415" target="_blank">
+										이용 제재</a>가 있을 수 있으니 주의해 주세요.
+										</small>
+									</p>
+								</li>
+								<li><svg width="18" height="18" viewBox="0 0 20 20"
+										fill="#ff5058"> <g fill="current" fill-rule="evenodd">
+									<g fill="current"> <g> <path
+										d="M7.5 16.667c-.221 0-.433-.088-.59-.244l-5-5c-.21-.21-.292-.518-.215-.805.077-.288.302-.512.59-.59.287-.076.594.006.804.216l4.363 4.364 9.415-10.984c.3-.349.825-.39 1.175-.09.349.299.39.824.09 1.174l-10 11.666c-.15.177-.368.283-.6.292H7.5"
+										transform="translate(-308 -798) translate(308 798)"></path></g></g></g></svg>
+									<p>내 상품을 먼저 보여주는 전용 필터로 더 빠르게 판매할 수 있어요.</p></li>
+								<li><svg width="18" height="18" viewBox="0 0 20 20"
+										fill="#ff5058"> <g fill="current" fill-rule="evenodd">
+									<g fill="current"> <g> <path
+										d="M7.5 16.667c-.221 0-.433-.088-.59-.244l-5-5c-.21-.21-.292-.518-.215-.805.077-.288.302-.512.59-.59.287-.076.594.006.804.216l4.363 4.364 9.415-10.984c.3-.349.825-.39 1.175-.09.349.299.39.824.09 1.174l-10 11.666c-.15.177-.368.283-.6.292H7.5"
+										transform="translate(-308 -798) translate(308 798)"></path></g></g></g></svg>
+									<p>번개페이 배지로 더 많은 관심을 받을 수 있어요.</p></li>
+							</ul>
+							<div class="sc-hgzKov ccHHFe">* 번개페이 배지와 전용 필터 기능은 앱 또는 모바일
+								웹에서만 볼 수 있어요.</div>
+						</div></li>
+				</ul>
+			</div>
+			</div>
+			<div class="sc-jwKygS gSsteC">
+				<section class="sc-OxbzP cXiyBN"> <header>최근 지역
+				<button type="button" class="sc-lnrBVv drcDtl"></button>
+				</header>
+				<ul></ul>
+				</section>
+			</div>
+			<div class="sc-jwKygS gSsteC">
+				<section class="sc-bYnzgO eQqdHR"> <header>주소 검색
+				<button type="button" class="sc-cPuPxo iHukrm"></button>
+				</header>
+				<form class="sc-fvLVrH cSdWx">
+					<input type="text" placeholder="동(읍/면/리) 입력해주세요." value="">
+					<button type="submit" class="sc-hvvHee gfcTGG"></button>
+				</form>
+				</section>
+			</div>
+		</div>
+	</div>
+</form>
+</div>
+</body>
+</html>

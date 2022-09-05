@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{cmmn/adminLayout}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>로그인 화면</title>
+<script type="text/javascript" src="js/test.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+$("#firstcat").on("click","button",function() {
+	var $cat2ul = $("#secondcatul");
+	var $cat3ul = $("#thirdcatul");
+	var $selectcat1 = $("#selectcat1");
+	var $selectcat2 = $("#selectcat2");
+	var $selectcat3 = $("#selectcat3");
+	$selectcat1.empty();
+	$selectcat2.empty();
+	$selectcat3.empty();
+	
+	$("#category1").val("2");
+	
+	getOption2($(this).html());
+	
+	$cat2ul.empty();
+	$cat3ul.empty();
+	$cat2ul.append("<ul class='sc-hAXbOi hZiIqV' id='secondcat'></ul>");
+	$cat3ul.append("소분류 선택");
+});
+
+$("#secondcatul").on("click","button",function() {
+	
+	var $cat3ul = $("#thirdcatul");
+	var $selectcat2 = $("#selectcat2");
+	var $selectcat3 = $("#selectcat3");
+	$selectcat2.empty();
+	$selectcat3.empty();
+	getOption3($(this).html());
+	
+	$("#category2").val("2");
+	
+	$cat3ul.empty();
+	$cat3ul.append("<ul class='sc-hAXbOi hZiIqV' id='thirdcat'></ul>");
+});
+	
+$("#thirdcatul").on("click","button",function() {
+	var $selectcat3 = $("#selectcat3");
+	$selectcat3.empty();
+	$("#category3").val("2");
+	getOption4($(this).html());
+	});
+});
+function getOption2(option) {
+	$.ajax({
+		type : 'GET',
+		url : '/category',
+		data : {"category" : option},
+		dataType : 'json',
+		success : function(result) {
+			var $cat2 = $("#secondcat");
+			var $selectcat1 = $("#selectcat1");
+				$cat2.empty();
+				$.each(result,
+				function(index, el) {
+				console.log('element',index, el);
+				$cat2.append("<li class='sc-cCVOAp kJlieW'><button type='button' class='sc-cfWELz gNMaOW'>"+ el+ "</button></li>");
+				});
+				$selectcat1.append(option+"&nbsp;>&nbsp; "+"<input type='hidden' name='CATEGORY1' value="+option+">");
+		}
+		}).fail(function(error) {
+			alert("에러" + JSON.stringify(error));
+	})
+}
+
+function getOption3(option) {
+	$.ajax({
+	type : 'GET',
+	url : '/category',
+	data : {"category" : option},
+	dataType : 'json',
+	success : function(result) {
+		var $cat3 = $("#thirdcat");
+		var $selectcat2 = $("#selectcat2");
+		$cat3.empty();
+		$.each(
+				result,
+		function(index, el) {
+			console.log('element',index, el);
+			$cat3.append("<li class='sc-cCVOAp kJlieW'><button type='button' class='sc-cfWELz gNMaOW'>"+ el+ "</button></li>");
+		});
+		$selectcat2.append(option+"&nbsp;>&nbsp; "+"<input type='hidden' name='CATEGORY2' value="+option+">");
+		}
+	}).fail(function(error) {
+		alert("에러" + JSON.stringify(error));
+		})
+}
+function getOption4(option) {
+	var $selectcat3 = $("#selectcat3");
+	$selectcat3.append(option+"<input type='hidden'  name='CATEGORY3' value="+option+">");
+
+}
+</script>
+</head>
+<body>
+	<div class="sc-fMiknA Yqbwu">
+		<div class="sc-dVhcbM ijOTSi">
+			<div class="sc-eqIVtm frdEdR">
+				전체 카테고리<img
+					src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC"
+					width="6" height="9" alt="화살표 아이콘">
+			</div>
+			<div class="sc-fAjcbJ cROcun">
+				<a class="sc-caSCKo fpZyIv" href="/categories/310?&amp;req_ref=popular_category">여성의류</a>
+				<a class="sc-caSCKo cxSaWG" href="/categories/320?&amp;req_ref=popular_category">남성의류</a>
+				<a class="sc-caSCKo cxSaWG" href="/categories/405?&amp;req_ref=popular_category">신발</a>
+				<a class="sc-caSCKo cxSaWG" href="/categories/430?&amp;req_ref=popular_category">가방</a>
+				<a class="sc-caSCKo cxSaWG" href="/categories/420?&amp;req_ref=popular_category">시계/쥬얼리</a>
+			</div>
+		</div>
+		<div class="sc-dVhcbM ijOTSi">
+			<div class="sc-eqIVtm iYNSfN">여성의류
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC"
+						width="6" height="9" alt="화살표 아이콘">
+			</div>
+			<div class="sc-fAjcbJ cROcun">
+				<a class="sc-kjoXOD cEGydc" href="/categories/310090?&amp;req_ref=popular_category">
+					<div class="sc-cHGsZl eRwijt">패딩/점퍼</div>
+				</a>
+				<a class="sc-kjoXOD cEGydc" href="/categories/310110?&amp;req_ref=popular_category">
+					<div class="sc-cHGsZl bgqoXZ">코트</div>
+				</a>
+				<a class="sc-kjoXOD cEGydc" href="/categories/310240?&amp;order=date">
+					<div class="sc-cHGsZl bgqoXZ">맨투맨</div>
+				</a>
+				<a class="sc-kjoXOD cEGydc" href="/categories/310230?&amp;order=date">
+					<div class="sc-cHGsZl bgqoXZ">후드티/후드집업</div>
+				</a>
+			</div>
+		</div>
+		<div class="sc-dVhcbM ijOTSi">
+			<div class="sc-eqIVtm bJhWTa">패딩/점퍼</div>
+			<div class="sc-fAjcbJ cROcun">
+				<a class="sc-kjoXOD cEGydc" href="/categories/310090050?&amp;order=date">
+					<div class="sc-cHGsZl eRwijt">롱패딩</div>
+				</a>
+				<a class="sc-kjoXOD cEGydc" href="/categories/310090060?&amp;order=date">
+				<div class="sc-cHGsZl bgqoXZ">숏패딩</div>
+				</a>
+				<a class="sc-kjoXOD cEGydc" href="/categories/310090020?&amp;order=date">
+					<div class="sc-cHGsZl bgqoXZ">블루종/항공점퍼</div>
+				</a>
+				<a class="sc-kjoXOD cEGydc" href="/categories/310090999?&amp;order=date">
+					<div class="sc-cHGsZl bgqoXZ">기타(패딩/점퍼)</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

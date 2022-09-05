@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>상품 페이지</title>
+<head>
+	<th:block th:replace="/fragments/layouts/headerFragment.html :: headerFragment"></th:block>
+</head>
+<link rel="stylesheet" href="css/sellform.css">
+<link rel="stylesheet" href="css/detail.css">
+<script type="text/javascript" src="js/detail.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+    init();
+});
+</script>
+<body style="overflow: auto;">
+<th:block th:replace="/fragments/layouts/nav.html :: fragment-nav"></th:block>
+<div>
+<h1>디테일 화면</h1>
+<div id="container">         
+     <button class="prev">PREV</button>
+     <div th:each="product: ${productList}">
+       <div id="item" class="items"> 
+         <div class="item active" th:if="${product.image1 !=null}">
+           <img th:src="@{/image/}+${product.image1}"/>
+         </div>
+         <div class="item" th:if="${product.image2 !=null}">
+         <img th:src="@{/image/}+${product.image2}"/>
+         </div>
+         <div class="item" th:if="${product.image3 !=null}">
+         <img th:src="@{/image/}+${product.image3}"/>
+         </div>
+         <div class="item" th:if="${product.image4 !=null}">
+         <img th:src="@{/image/}+${product.image4}"/>
+         </div> 
+         <div class="item" th:if="${product.image5 !=null}">
+         <img th:src="@{/image/}+${product.image5}"/>
+         </div>
+         <h3 th:value="${product.P_TITLE}"></h3>       
+       </div>
+     </div>
+     <div class="stepper">
+     	<div class="step active-step"></div>
+     	<div class="step"></div>
+     	<div class="step"></div>
+     	<div class="step"></div>
+     	<div class="step"></div>			
+     </div>     
+     <div>
+     	<button class="next">NEXT</button>
+     </div>
+   </div>
+</div>		
+<th:block th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
+</body>
+</html>

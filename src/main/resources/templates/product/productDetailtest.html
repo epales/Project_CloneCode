@@ -1,0 +1,671 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>상품 페이지</title>
+<head>
+<th:block
+	th:replace="/fragments/layouts/headerFragment.html :: headerFragment"></th:block>
+</head>
+<link rel="stylesheet" th:href="@{/css/myshop.css}">
+<link rel="stylesheet" th:href="@{/css/sellform.css}">
+<link rel="stylesheet" th:href="@{/css/detail.css}">
+<script th:inline="javascript">
+$(document).ready(function () {
+	$(".mySlideDiv").not(".active").hide(); //화면 로딩 후 첫번째 div를 제외한 나머지 숨김
+	
+	var like = $("#likesChk");
+	const likeImg = document.getElementById("likeImg");
+	console.log("like.val=", like.val());
+	
+	// 좋아요 버튼을 클릭 시 실행되는 코드
+	$("#likesChk").on("click", function () {
+	
+		if(like.val() == 0) {
+			 $.ajax({
+	            url: '/product/likes',
+	            type: 'POST',
+	            data: {'rseq':[[${productList.P_ID}]]},
+	            success: function (data) {
+					if(data == 0){
+						alert("로그인 후 사용가능한 기능입니다.");
+						var url = "loginForm";
+						location.replace(url);	
+					}else{
+	     			console.log("추천 성공");
+	     			location.reload();
+	     			likeImg.val("1")   
+	               	like.val("1");
+					}
+	            }, error: function () {
+	                console.log('오류입니다.');
+	            }
+	        });
+			 $("#likeImg").css("src", "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGNzJGMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K");
+	         alert("추천이 완료되었습니다! d=(´▽｀)");
+		} else {
+			$.ajax({
+	            url: '/product/likes',
+	            type: 'POST',
+	            data: {'rseq':[[${productList.P_ID}]]},
+	            success: function (data) { 
+	            	if(data == 0){
+	            		alert("로그인 후 사용가능한 기능입니다.");
+						var url = "loginForm";
+						location.replace(url);
+					}else{
+	            	console.log("추천 취소");
+	            	location.reload();
+	            	likeImg.val("0")   
+	                like.val("0"); 
+	               
+					}
+	            }, error: function () {
+	                console.log('오류입니다.');
+	            }
+	        });
+			$("#likeImg").prop("src", "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGNzJGMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K");
+   			alert("추천이 취소되었습니다 ( ĭ˄ĭ)=p");
+		}
+	}); 
+	
+	var follow = $("#followChk");
+	const followImg = document.getElementById("followImg");
+	console.log("follow.val=", follow.val());
+	
+	// 좋아요 버튼을 클릭 시 실행되는 코드
+	$("#followChk").on("click", function () {
+	
+		if(follow.val() == 0) {
+			 $.ajax({
+	            url: '/member/follow',
+	            type: 'POST',
+	            data: {'email':[[${productList.email}]]},
+	            success: function (data) {
+					if(data == 0){
+						alert("로그인 후 사용가능한 기능입니다.");
+						var url = "loginForm";
+						location.replace(url);	
+					}else{
+	     			console.log("팔로우 성공");
+	     			location.reload();
+	     			followImg.val("1")   
+	               	follow.val("1");
+					}
+	            }, error: function () {
+	                console.log('오류입니다.');
+	            }
+	        });
+			  alert("팔로우 완료되었습니다! d=(´▽｀)");
+		} else {
+			$.ajax({
+	            url: '/member/follow',
+	            type: 'POST',
+	            data: {'email':[[${productList.email}]]},
+	            success: function (data) { 
+	            	if(data == 0){
+	            		alert("로그인 후 사용가능한 기능입니다.");
+						var url = "loginForm";
+						location.replace(url);
+					}else{
+	            	console.log("팔로우 취소");
+	            	location.reload();
+	            	followImg.val("0")   
+	                follow.val("0"); 
+	               
+					}
+	            }, error: function () {
+	                console.log('오류입니다.');
+	            }
+	        });
+			alert("팔로우 취소되었습니다 ( ĭ˄ĭ)=p");
+		}
+	}); 
+	
+});
+
+//이전 슬라이드
+function prevSlide() {
+	$(".mySlideDiv").hide(); //모든 div 숨김
+	var allSlide = $(".mySlideDiv"); //모든 div 객체를 변수에 저장
+	var currentIndex = 0; //현재 나타난 슬라이드의 인덱스 변수
+	
+	//반복문으로 현재 active클래스를 가진 div를 찾아 index 저장
+	$(".mySlideDiv").each(function(index,item){ 
+		if($(this).hasClass("active")) {
+			currentIndex = index;
+		}
+        
+	});
+	
+	//새롭게 나타낼 div의 index
+	var newIndex = 0;
+    
+	if(currentIndex <= 0) {
+		//현재 슬라이드의 index가 0인 경우 마지막 슬라이드로 보냄(무한반복)
+		newIndex = allSlide.length-1;
+	} else {
+		//현재 슬라이드의 index에서 한 칸 만큼 뒤로 간 index 지정
+		newIndex = currentIndex-1;
+	}
+
+	//모든 div에서 active 클래스 제거
+	$(".mySlideDiv").removeClass("active");
+    
+	//새롭게 지정한 index번째 슬라이드에 active 클래스 부여 후 show()
+	$(".mySlideDiv").eq(newIndex).addClass("active");
+	$(".mySlideDiv").eq(newIndex).show();
+
+}
+
+//다음 슬라이드
+function nextSlide() {
+	$(".mySlideDiv").hide();
+	var allSlide = $(".mySlideDiv");
+	var currentIndex = 0;
+	
+	$(".mySlideDiv").each(function(index,item){
+		if($(this).hasClass("active")) {
+			currentIndex = index;
+		}
+        
+	});
+	
+	var newIndex = 0;
+	
+	if(currentIndex >= allSlide.length-1) {
+		//현재 슬라이드 index가 마지막 순서면 0번째로 보냄(무한반복)
+		newIndex = 0;
+	} else {
+		//현재 슬라이드의 index에서 한 칸 만큼 앞으로 간 index 지정
+		newIndex = currentIndex+1;
+	}
+
+	$(".mySlideDiv").removeClass("active");
+	$(".mySlideDiv").eq(newIndex).addClass("active");
+	$(".mySlideDiv").eq(newIndex).show();
+	
+}
+
+function createTalk(){
+	
+	$.ajax({
+		type:'GET',
+        url:'createChat',
+        data:{product:[[${productList.P_ID}]]},
+        success:function(data){
+			if(data == "new"|| data == "exist"){
+           		var moveurl= "/talk";
+   	    		
+   	    		location.replace(moveurl);
+            }else if(date="loginForm"){
+            	alert("로그인 후 이용해주세요!")
+            	
+            	var url="/loginForm";
+            	location.replace(url);
+            }
+        }
+    });
+	
+}
+</script>
+<body style="overflow: auto;">
+	<th:block th:replace="/fragments/layouts/nav.html :: fragment-nav"></th:block>
+	<div>
+		<div class="sc-PLyBE dxroHS">
+			<div class="sc-dPNhBE fFEraQ">
+				<div class="sc-kkwfeq eEIJod">
+					<div class="sc-izvnbC eqkhhY">
+						<div class="sc-cbMPqi bdETmt">
+							<div class="sc-gMcBNU ftXnvr">
+								<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAkRJREFUSA3tlb9LHEEUx2/vzhQXESxsTau1aWxsFDkQA0ljEcv78RfY2EQbwT/hflU2KjGkCASRgI1FQEVstNU2QkD0YnXn5x03x7vZXXfnXGzMwPBm3pv5fubNj10vNUCpVCpDTNuibpfL5e8DSKTSrpME6nneDvOWqLv1en3RVUPGO4ENtN1uf2RukzrUarW+4l8QMZcSG2xBb9Lp9DSgdRbxBrtH5nkXsBdncAB0tlgsnstcYmuYL2z/A/UD/gPxR5VI8FNQI27g9P9lMpnFQqHwy8TC7JPgOFAjrOBNjmGBzA9NLMiGnrELVIR5VmuYdWqOc//Bmc/QDi2BGbtCtbrK/I5tz7PtRzpu2r6MnwMVUZX5ME/tZ6PRkNvvK30ZPxeq1VXmt/jnWdBvHe9lnCRUACrzEbr7ZP5egzsZW9AU7zFfKpX29cBB29Vq9Vv3S/cXjTkWdCpaWRsqTsA3Yk1hTI4nMmn6YZYzvUf4UseB/un2R9E9YCGzJHWWRXCF4DjOE6yI5/REaQsU0WPbb/dFA1/flqoxsqB7GJsk8jnLQ9/AITXFao4JTEk7pDQRv7BjzHmLb8L26z6LX4YlC+uUrGnEsQJlm3wZ1Wq1qTg7ohm9W62dL9H+D36JXe4wnC4Xt3eMi1SyV8fFemf7ovpOYMTGgVSiROPEY4GBydenGiXIc7uKGmPiscB8Bq+ZUDaTkrCv7zkFbjVn+kk+g0lsKS9hkuqTCgQzahW4b3CSjj4wt1J+2r0/SJKg7svoST4CXawe/d9nd+gAAAAASUVORK5CYII="
+									width="15" height="15" alt="홈 아이콘">홈
+							</div>
+							<div class="sc-iLVFha lcCQQz">
+								<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAUCAYAAAC58NwRAAAAAXNSR0IArs4c6QAAAaVJREFUKBWFUz1LA0EQde9DIjaxSBNIG2shnR9whYVgIQqnjURikhP/QDqLVPoL9KJJEUHIgYggSFCs7K2tU6ZIrAwa73zvyB6bM8GB3Ox782Z2Z3YjZmCe5832er2WruvVYrH4Rm6aaQz0+/0ruC3f99v1en1xmpi85rpuNQiCfQL41HA4fGo0GhniSaYJIRZigQySnpGUivEhFKgqLmHwhzEBe7Ecx/lQee4QlEqlMsgbNYD1En4PGMicyodNI8nPZrN5+Ds1iPUKBnKLPk3JhwkElmUNk8nkHpIeZZAeR92Au4YPtVECg7Ztf5mmuY2kF2LFdmu12jmxUMho2Ww25weDQRtVlyOSYiHOxnaQwUQi4UMcSKz6PzuwQVS6h55njwycWy6Xj8Z2gIiYDY6JwbUw+mNm6/xIS6fTF1jnJaZHZU7NzuVyP8QGPzRM4RSVeYGqvWLUO5jetyTDI0FcgbgiyZHn09iE+FPlBZp0QPAoqr3jPlYLhUJXJbnmDmsxsgPx+iSxTDgYNcYGu4ZhUNyJFYlgeA98kXhknqZpJ//9RX8BYkCa7Y9z0J0AAAAASUVORK5CYII="
+									width="6" height="10" alt="카테고리 선택 아이콘">
+								<div class="sc-dYzWWc kprMUy">
+									<div class="sc-iqzUVk hbAbwr">
+											<div class="dropdown">
+												<button class="dropbtn">
+											    	<span th:text="${productList.CATEGORY1}"></span>
+											    	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC"
+														width="10" height="6" alt="카테고리 화살표 아이콘">
+											    </button>
+											<div class="dropdown-content">
+												<a th:href="@{searchCategory1(CATEGORY1=@{'패션'})}">패션</a>
+												<a th:href="@{searchCategory1(CATEGORY1=@{'가전/디지털'})}">가전/디지털</a>
+												<a th:href="@{searchCategory1(CATEGORY1=@{'도서'})}">도서</a>
+												<a th:href="@{searchCategory1(CATEGORY1=@{'식품'})}">식품</a>	
+											</div>
+											</div>
+									</div>
+								</div>
+							</div>
+							<div class="sc-iLVFha lcCQQz">
+								<img
+									src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAUCAYAAAC58NwRAAAAAXNSR0IArs4c6QAAAaVJREFUKBWFUz1LA0EQde9DIjaxSBNIG2shnR9whYVgIQqnjURikhP/QDqLVPoL9KJJEUHIgYggSFCs7K2tU6ZIrAwa73zvyB6bM8GB3Ox782Z2Z3YjZmCe5832er2WruvVYrH4Rm6aaQz0+/0ruC3f99v1en1xmpi85rpuNQiCfQL41HA4fGo0GhniSaYJIRZigQySnpGUivEhFKgqLmHwhzEBe7Ecx/lQee4QlEqlMsgbNYD1En4PGMicyodNI8nPZrN5+Ds1iPUKBnKLPk3JhwkElmUNk8nkHpIeZZAeR92Au4YPtVECg7Ztf5mmuY2kF2LFdmu12jmxUMho2Ww25weDQRtVlyOSYiHOxnaQwUQi4UMcSKz6PzuwQVS6h55njwycWy6Xj8Z2gIiYDY6JwbUw+mNm6/xIS6fTF1jnJaZHZU7NzuVyP8QGPzRM4RSVeYGqvWLUO5jetyTDI0FcgbgiyZHn09iE+FPlBZp0QPAoqr3jPlYLhUJXJbnmDmsxsgPx+iSxTDgYNcYGu4ZhUNyJFYlgeA98kXhknqZpJ//9RX8BYkCa7Y9z0J0AAAAASUVORK5CYII="
+									width="6" height="10" alt="카태고리 선택 아이콘">
+								<div class="sc-dYzWWc kprMUy">
+									<div class="sc-iqzUVk hbAbwr">
+											<div class="dropdown">
+												<button class="dropbtn">
+												<span th:text="${productList.CATEGORY2}"></span>
+													<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC"
+													width="10" height="6" alt="카테고리 화살표 아이콘">
+											    </button>
+											<div class="dropdown-content">
+												<a th:each="category2 : ${categoryList2}" th:href="@{searchCategory2(CATEGORY2=${category2})}" th:text="${category2}"></a>
+												
+											</div>
+											</div>
+										
+									</div>
+								</div>
+							</div>
+							<div class="sc-iLVFha lcCQQz">
+								<img
+									src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAUCAYAAAC58NwRAAAAAXNSR0IArs4c6QAAAaVJREFUKBWFUz1LA0EQde9DIjaxSBNIG2shnR9whYVgIQqnjURikhP/QDqLVPoL9KJJEUHIgYggSFCs7K2tU6ZIrAwa73zvyB6bM8GB3Ox782Z2Z3YjZmCe5832er2WruvVYrH4Rm6aaQz0+/0ruC3f99v1en1xmpi85rpuNQiCfQL41HA4fGo0GhniSaYJIRZigQySnpGUivEhFKgqLmHwhzEBe7Ecx/lQee4QlEqlMsgbNYD1En4PGMicyodNI8nPZrN5+Ds1iPUKBnKLPk3JhwkElmUNk8nkHpIeZZAeR92Au4YPtVECg7Ztf5mmuY2kF2LFdmu12jmxUMho2Ww25weDQRtVlyOSYiHOxnaQwUQi4UMcSKz6PzuwQVS6h55njwycWy6Xj8Z2gIiYDY6JwbUw+mNm6/xIS6fTF1jnJaZHZU7NzuVyP8QGPzRM4RSVeYGqvWLUO5jetyTDI0FcgbgiyZHn09iE+FPlBZp0QPAoqr3jPlYLhUJXJbnmDmsxsgPx+iSxTDgYNcYGu4ZhUNyJFYlgeA98kXhknqZpJ//9RX8BYkCa7Y9z0J0AAAAASUVORK5CYII="
+									width="6" height="10" alt="카태고리 선택 아이콘">
+								<div class="sc-dYzWWc kprMUy">
+									<div class="sc-iqzUVk hbAbwr">
+											<div class="dropdown">
+												<button class="dropbtn">
+													<span th:text="${productList.CATEGORY3}"></span>
+													<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC"
+														width="10" height="6" alt="카테고리 화살표 아이콘">
+											    </button>
+											<div class="dropdown-content">
+												<a th:each="category3 : ${categoryList3}" th:href="@{searchCategory3(CATEGORY3=${category3})}" th:text="${category3}"></a>								
+											</div>
+											</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="sc-cgzHhG fjZGgi">
+						<div class="sc-jtHxuu cDXZob">
+							<div class="sc-blIhvV hGQimY">
+								<div class="sc-RcBXQ lngbvx">
+									<div class="sc-cooIXK mLrWJ"> 
+									<div th:each="product: ${productList}">
+									<div class="slideshow-container">
+											<div class="mySlideDiv fade active" th:if="${product.image1!=null}">
+												<img th:src="@{/image/}+${product.image1}">
+											</div>
+											<div class="mySlideDiv fade" th:if="${product.image2!=null}">
+												<img th:src="@{/image/}+${product.image2}"/>
+											</div>
+											<div class="mySlideDiv fade" th:if="${product.image3!=null}">
+												<img th:src="@{/image/}+${product.image3}" />
+											</div>
+											<div class="mySlideDiv fade" th:if="${product.image4!=null}">
+												<img th:src="@{/image/}+${product.image4}" />
+											</div> 
+											<div class="mySlideDiv fade" th:if="${product.image5!=null}">
+												<img th:src="@{/image/}+${product.image5}" />
+											</div>
+											<a class="prev" onclick="prevSlide()">&#10094;</a>
+								    		<a class="next" onclick="nextSlide()">&#10095;</a>
+									</div>
+								</div>
+									</div>
+									<div class="sc-clNaTc hAcCYE"></div>
+									<button direction="prev" class="sc-gmeYpB cCIatJ">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAsCAYAAAB/nHhDAAAAAXNSR0IArs4c6QAAARZJREFUWAntl9ENgkAMhpF32IFBYAwHYB7dBjdxCyfw6fx+c0dOSIghLQZDk6ZE49drf0qxKJzt5MUPITSwzy584C3+wIN5Apg9/hQcG8wSACvxi6jRrsTSJAGgCr9FsE7fm4AFAdbg9whX3ztL+ChmTKI7x8YA5mKqPbUJGdAh5ryTtGW/Ymoak+13Mtu5Kis/oRebilmtPOfnzzi1JtNHTKUC7vOYTXWQQKbHrJ2YCU602TgZcHbJyQeVgNluopQJ8FRk7VX7yoBOF4jNbZoqUSRJh7/fZ4jas3YrMCUSNMIJTncX4Bp3n49D/CTrdxFN/ld8u12dN5OWHZOfN2T5+leTv434y7Wv/JaWje9X+/wjnhf+Ap3Avf1JQDIIAAAAAElFTkSuQmCC"
+											width="12" height="22" alt="이전 페이지 이동 버튼 아이콘">
+									</button>
+									<button class="sc-kZmsYB eboIhv">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAqBJREFUWAntlk9LFlEUxp0yyFRERKjADxC5CIncpIuWQUHt2pQfIFolEi3cuPMD1DcIWkRBS/FdFNIiWvUF7I9F0R/KQjKdfo+eA/O+c2fmzuvYygeeuddzn/PcM3+85016SpCm6RDLF+FleBqehAPwI3wHW/BJkiQvGZsDGw/AefgTxuAFouluKkg6kzCaIPYYjmXWPjDX3equ1+FxeApOwV7ouM/kFk9k0wO1Rja/BH9BxzKTKZgrVMbEh+Es/AodLSb9tTY2swkSffMN5jOxJmhH4BJ0PGISLDroiVjv/I1la/Pa75OcXvjQPDTMBTcLBRHPK8MwE9LExMjvg6/M5wfjaGUeoiHoX/tyZUKFAK9J6FiskO98SNdczXi+MiFCgM9T81ytlCN8YOI1xvgPp8QZnxvmqeFMibTnEIs64YQW/7/p7nTP1+yrdP+gqQrQ8SrokGkKaxhtm9mJMlMVoLNd0AnXCHiSWxhtmJn7B71VgBqLoOO1EfDeBzE6ZmbuH/RWAf7odbY3hazX+zJTFaAmI+jMH96d7vmq9i38hc92ZkUXNj0LHbNFutg4RkfhWzNcispDrH4uqKuNRCUViMi/IyPDlQJZexjxtGcwqqtle3y7uOQv8/ljXisl0vwSSfcsUYO6Wl9eVRxBr5v4AoV1OF6sDqyQcAS2oENdbTIgbQuh0TvXY/c732b+HdYrQK4k9UP9mMhCjeU6HIOHTTfI/BxcgP7BMU1/62L4xNhVEQmJc1D9vBNbBPxXU+faCoFxeDez0F0RdpejGC3C1Yxh53STgD7aq8px8Hd0EVHtF0O1VHU1NRad7TpedcI959z/xpiDiiC4YAufGS+gfZ0T7megzpPYtzoOivBHe/AkCp7ETY//19Fex21t+g8EN1dBluPf8gAAAABJRU5ErkJggg=="
+											width="16" height="16" alt="확대 버튼 아이콘">확대
+									</button>
+									<button direction="next" class="sc-gmeYpB WaGLk">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAsCAYAAAB/nHhDAAAAAXNSR0IArs4c6QAAAQVJREFUWAntl9EJg0AQRMV/7SGFaDE2kSaSbkwn6SIV+HV5Q7IgeiCRXcFwC8PJobPrzK3nVVV0pJSu4BKWB3LFC3QhSSAelYGYwOCeBNIa3IHFjYs6ItEAsd5C8QBNRJIeYvmheAJ/80X6JWcIMh/iFkgmRTF/e60gUzF/Wya7A7mWna+vQOl8E2g9Is//dv4x5q9FdZiZd77/+v0UmBzqzFNQ/XxnHPN37ZhVNwPt5xZ+JsPYgJgNCuJlo/U7BMg/AnkHYn4SIJ6bKXnafBk/zkJUzFxrhiznNVPdaHHezvQ7+aDFoWb6HECoWp0ZY6ZWPOQxn1lrJxIoQo+xsQdxe5Oo8Q2tG8U3KxMfPwAAAABJRU5ErkJggg==" 
+										width="12" height="22" alt="다음 페이지 이동 버튼 아이콘">
+										</button>
+									<!-- <div th:each="product: ${productList}">
+       								<div id="item" class="items"> 
+										<div class="sc-iSDuPN jApHsL">
+											<div class="item active" th:if="${product.image1 !=null}">
+												<button class="sc-fZwumE kdMoxt" disabled=""></button>
+											</div>
+											<div class="item" th:if="${product.image2 !=null}">
+												<button class="sc-fZwumE cGhHtl"></button>
+											</div>
+											<div class="item" th:if="${product.image3 !=null}">
+												<button class="sc-fZwumE cGhHtl"></button>
+											</div>
+											<div class="item" th:if="${product.image4 !=null}">
+												<button class="sc-fZwumE cGhHtl"></button>
+											</div>
+											<div class="item" th:if="${product.image5 !=null}">
+												<button class="sc-fZwumE cGhHtl"></button>
+											</div>
+										</div>
+										</div>
+									</div>-->
+									<div class="sc-jwKygS fuybda">
+										<div class="sc-dEoRIm hNRMSq">
+											<button type="button" class="sc-jtggT dtjEFD">
+												<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAABACAYAAACjgtGkAAAAAXNSR0IArs4c6QAAAolJREFUeAHl20tSxCAQANCJW12ql3DtKTxE9GQ6h/AU7j2EutT12J1qUowhCZ/+AFLFgIEU9pvApjPDAcrpdLqH5gHqJ9TjMAzf0HZfIO4rCHKEegP1FeJ+u6Co36H9oIGRJtJQn80fDIwdDQ6DCxcmXEIftW6hdv2kBDBwV/ygxQyCf/wHlC2MBUjvKHsYQZBeUWIwVkF6Q4nF2ATpBSUFYxekdZRUjCiQVlFyMKJBWkPJxUgCaQWlBCMZpHaUUowskFpRODCyQWpD4cIoAqkFhROjGMQahRuDBcQKRQKDDUQbRQqDFUQLRRKDHUQaRRpDBEQKRQNDDIQbRQtDFIQLRRNDHKQURRtDBSQXxQJDDSQVxQpDFSQWxRJDHWQPxRrDBGQNBa9DcYlnzLXO6cVpROnjLJWptOa0DDwNfi75i9a+htYMA/8HMxBcnFCeoIsQWBDm2SWepyvKH+51COVl5+VCX0jo2nyDdMcMxDtA8enAJwMr9kcag65+Mfk2PAx8c2c6Myh08/dT1EFCGO7MgDH/oDV5aUcVZAvDbQ5rFDWQGIwaUFRAUjCsUcRBcjAsUURBSjCsUMRAODAsUERAODG0UdhBJDA0UVhBJDG0UNhANDA0UFhANDGkUYpBLDAkUYpALDGkULJBasCQQMkCqQmDGyUZpEYMTpQkkJoxuFCiQVrA4ECJAmkJoxRlF6RFjBKUTZCWMXJRVkF6wMhBCSaqesJAFEpzHKGLOSDMBY0QI6Y8FmUBQhNdFt7lRqYf+S7ubuiCh4IxIcpjCOVsy9CER7oBb3xxSSTod1H2YpxB9iZ2oUFBbMU6gWxN6AnCj2UtZneG3MFk3FddbhMfwvUDZwoaHH4B+xHVOFecBB4AAAAASUVORK5CYII="
+													width="34" height="32" alt="닫기 버튼 아이콘">
+											</button>
+											<div class="sc-ebFjAB jLohDd">
+												<div class="sc-jKVCRD guUaHz" th:text="${productList.P_TITLE}"></div>
+												<div class="sc-kaNhvL cmDjD">
+													<div class="sc-LKuAh jiIEQD">
+														<img
+															src="https://media.bunjang.co.kr/product/194933402_1_1659148705_w1100.jpg"
+															alt="리뷰 이미지">
+														<div class="sc-chbbiW eFYGXq"></div>
+														<div class="sc-kxynE ieWpyX"></div>
+													</div>
+													<div class="sc-LKuAh jiIEQD">
+														<img
+															src="https://media.bunjang.co.kr/product/194933402_2_1659148705_w1100.jpg"
+															alt="리뷰 이미지">
+														<div class="sc-chbbiW eFYGXq"></div>
+														<div class="sc-kxynE ieWpyX"></div>
+													</div>
+												</div>
+												<div class="sc-iBEsjs eGHyuN">
+													<button class="sc-hzNEM gvMHLx"></button>
+													<button class="sc-hzNEM egPZZQ"></button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sc-bYTsla kcyTze">
+								<div class="sc-eXNvrr beIRgv">
+									<div class="sc-kQsIoO jSwNvd">
+										<div class="sc-gPzReC hNMJas">
+											<div class="sc-jrIrqw deihsD" th:text="${productList.P_TITLE}"></div>
+											<div class="sc-hjRWVT IwtfS">
+												<div class="sc-iQtOjA beRPoY">
+												<span style="font-size:1em;"th:text="${productList.PRICE}"></span>
+												<span>원</span>
+												</div>
+											</div>
+										</div>
+										<div class="sc-fyjhYU dRDSys">
+											<div class="sc-ugnQR bHzOsq">
+												<div class="sc-eIHaNI kvuSXN">
+													<div class="sc-eTpRJs jbRTcu">
+														<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAjhJREFUWAnFl1uPKUEUhbdCxF2Iu7h78f9/ixdexANeSNxCkJnz1ZwSRncrM0OvhK6ufVmrdiu1O/DxD/INq9VKFouFbDYbOR6PEggEJBKJSDqdlkKhIKFQ6FvE1+3pdJL5fC7EHw4HIXU4HJZEIiHZbFZSqdRdXOBaAEHj8VjW6/Wdo5kIBoNSLBalVCppYcxDNJvNNPn5fDaud9dkMimNRkMvxhgvAna7nQyHQ2EVNmBV3W5Xu45GI10tmziq1+v1JBaLaXctANLBYKDLbZPE+MTjcT3cbrdmyurKY+n3+/pRKiImk8nT5MRB/Cw5cfyu4ARqv9/LcrnUN+/8ghNuxcBhI7xcC5xwK7aMX4BbsfX8AtzKa9++Whjcij8WvwC3Yk/6BbiV+TPxQwTcKpPJ+MGtOeFWHBB+PAY44VYctZxu7waccOuzIJ/Pv7UKrB5OoAUopfQ5/a4q0BPAeRHAgG4nl8vpyVd+wQGXwZeM/3f1el2i0aix/fmV3HBc40YAZel0Oq4933Xgs2M6IXKb0pv4GwFM0ny22+1Lv2ccf3Pl195qtW56QZPvTgAG9mez2fwTEZCTy6kjhstRAAba6FqtxvBXIAe53OAqgADeASqVilvsw3liyeEFTwEElstl/fFK4mSzjXsogOSshBcRW+BrWzkrARBXq1UrEZDjawtrAUYEpXXDs+TkeUoAAZTWScRPyMnn/JqLxQPm+U6nU+2FIDPnEeZourycOlofTF4LeODqav4EUxqvNxGf2nsAAAAASUVORK5CYII="
+															width="16" height="16" alt="상품 상태 아이콘">
+														<div class="sc-dxZgTM eVVlYD"><span th:text="${productList.likesCount}"></span></div>
+													</div>
+													<div class="sc-eTpRJs jbRTcu">
+														<img
+															src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAuRJREFUWAnFV01rE1EUzUwSMWATENpFRNyIi0YI+eiui4LoogWFgkvBH6Dgpip+dONKgivdC3XlpkWELkTQRVw1H4QwWQmhLrKwq1IwxHyM54zvDck4mc6bTO3AY97MO/eeM/e9d+c+LeLzqlQq8Wg0ujIajW6ZprkIs7SmaRfQN9HvsOG5pev6h+Fw+LVYLPb9uNaOAzUajYXBYPAcPHeATR2HF+OHEPMuFou9yGazP71spgowDONMt9t9BOMNtDkvJx5jRxgrJRKJl5lM5rcbzlVArVabR6i3YbDsZhTgXRlTs57P5w+ctv8IAPkiwr2LdskJnuUZU7KPtgoRrXE/EwL45SDeC5tcEgoRS+OR0OUg55xhPyly8tA3OcgleW0BYsEpzTnm9THaknTm874suCy4JYBbDU9c7UoXvugzwllRMvoL3hCcEUsA9zneB91qAfgjc4IzojPD4UuYZP7rRU5y60yvYPab4cIUmSK3ztweplcVX+TWEYqMilGYWHJzEabDdKroK60jO52aAHLbiUhReShwTIHJNcBiYqYLX/IxoIMOIxBYANLweRIXCoWb2FJrEPJdUUiHa8BQNLLh2EY7+IM+a7fbZ3O53G4ymbwKf08B+GWDPDrAtrR6vX4dNdwnD5yfoR9w9hCReE9ws9m82Ov1XqF728sYUbuhMR0CxEoljGz4DdPyQP6gqtXqXayxt1NEHOL9vFWQAPgawHtTgEqvEQm4Mrcg5An6VxDdL24OMPYGEbtvCeCvsd/vcwGF+UdkZRyFmHMuAo7i8fhlVsxWHhClc8kFOMur1BRy+izJct1ORCydMVCehdGnbVlwWXBbAOt2zNs6wrbv05EyjL7JMX5GsAXQG6tVgFZPQgR90vd4RUzOCQFCRAtAFpphTkeZPkE+cSZwFSBEHGCerqG/icbjVdCLtpv05fxy6dDahvLB7X5qh1OnGMfxnFUUj+dWLYHtJo/nBhaZ0vH8D6NELRJSWvu9AAAAAElFTkSuQmCC"
+															width="16" height="16" alt="상품 상태 아이콘"><span th:text="${productList.P_DATE}"></span>
+													</div>
+												</div>
+											</div>
+											<div class="sc-dvCyap exixMl">
+												<div class="sc-iFMziU gUIgSj">
+													<div class="sc-keVrkP fOykTJ">상품상태</div>
+													<div class="sc-gVLVqr goYkVa" th:if="${productList.CONDITION == 0}">
+													<span >중고</span>
+													</div>
+													<div class="sc-gVLVqr goYkVa" th:unless="${productList.CONDITION == 0}">
+													<span >새 상품</span>
+													</div>
+												</div>
+												<div class="sc-iFMziU gUIgSj">
+												<div class="sc-keVrkP fOykTJ">교환여부</div>
+													<div class="sc-gVLVqr goYkVa" th:if="${productList.EXCHANGE == 0}">
+													<span >교환 불가능</span>
+													</div>
+													<div class="sc-gVLVqr goYkVa" th:unless="${productList.EXCHANGE == 0}">
+													<span >교환 가능</span>
+													</div>
+												</div>
+												<div class="sc-iFMziU gUIgSj">
+												<div class="sc-keVrkP fOykTJ">배송비</div>
+													<div class="sc-gVLVqr goYkVa" th:if="${productList.SHIPPINGPEE == 'N'}">
+													<span >배송비 별도</span>
+													</div>
+													<div class="sc-gVLVqr goYkVa" th:unless="${productList.SHIPPINGPEE == 'N'}">
+													<span >배송비 포함</span>
+													</div>
+												</div>
+												<div class="sc-iFMziU gUIgSj">
+													<div class="sc-keVrkP fOykTJ">거래지역</div>
+													<div class="sc-gVLVqr bRMnTQ">
+														<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAeCAYAAAA2Lt7lAAAAAXNSR0IArs4c6QAAA0VJREFUSA2tVktoE0EYnmwejUlDCYUcJD3YGooJGA1RYgJtKh6KtJ6q+EAvvQn25EnEHjx56qGgCJ5EPCqIBxE1j/YmiFJSYkvQBiExqRRJNNGkid+/uMvsdjZJtQOT+Z/fN/+/M7sxsQ4jkUgcNJlMV9rtdhTrEEK9mD8x85ifYX/qcrmehMNhsgmHSWRNpVKHkHwXMy7y8zYQVyjW6/XO+3y+X7yP5B0EyWRyDvY7SLLrgzvpIFrBvDQ+Pr7Cx2kI0JKbcN7mA3Yjg2ALG4tOTExklTyVADu/DOdDxfGvK0g+2e32E5FI5CthSPSzvLy8H8t9kv93YJMH6vX6ooIjEzQajVtw7FOMe7DOpNPpEOFIODFDKGt2D0BVCGzW1Gq15mUCKJOYFtW7C6Gvr48NDw8zbFCUdSqTydgI+KTI281GoH6/nw0MDMgEuVxOk4JNO0ql0nEJwlGNp0dlZGREBscDZRsbG8IsbOKwhB+ryEs7xHETuZjH42G4uQx9ZmgDazabwjgY21SBWe9Vyg+FQszpdGrcDoeDjY6Oyrb19XVWqVQ0fl4BzjYd0y+8kZdtNhsLBoMqidlsZoFAgNFaLBZZoVDgw3fIIMhRi1J6D6piq6urrFwuM56Edk4VVatVtra2pk/T6MCtDg4OLlGLEhrPX0VPQu2i3lO/qe/U/y7jFar9LcXj8TcI/CgK5kmoLTSy2Syr1WqicI1NkqRHZKAWtaDc0Hg5hSfJ5/Nsc3OT8xqKH3AYnpFXvYJ4mz4G2AWjFGyEEVm3gbgtq9V6LBaLyTdPftlREh7mLJxvjQB6BG+iG2cVcMJSCaLRaA0gZ0CSNyLpwT43Njb2mo9TCciIL1ERBFOYxreHz+Zk5CziwNzjTLKoPgPegU/nJPTnmDtuOR+nyAB/iW/xaazbik1ZNRUoRlTyAsHXFL3Tirhsf3//ORE45QkJyEHlImmB5A7jG07MFP4XfTeKMSSgBJR9HSTyedYDwN6AbYY/MfoY0jsSAKTldrsvYn2nT8aJu4pWJvV2vd6RgILxNv1hsVimQaK+dSEvAPyBHkykC0+RKBAn6wiAl+BLo3VE2PVtRzhdK1DIsOP3aMs0qjnfKzjl/gFgkydRSXu9AAAAAABJRU5ErkJggg=="
+															width="12" height="15" alt="지역 아이콘">
+														<span th:text="${productList.REGION}"></span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="sc-exkUMo kzMKbs">
+										<div class="sc-kcDeIU eFcZOs">
+											<button class="sc-bFADNz iJsbWz"  id="likesChk" name="likesChk" th:value="${likes}" th:if="${likes == 0}">
+												<div class="likeImage" th:if="${likes == 0}">
+													<img id="likeImg" name="likeImg" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K" width="16" height="16" alt="찜 아이콘">
+													<span>찜</span>
+													<span th:text="${productList.likesCount}"></span>
+												</div>
+											</button>
+											<button class="sc-bFADNz iJsbWz"  id="likesChk" name="likesChk" th:value="${likes}" th:if="${likes == 1}" style="background-color: black">
+												<div class="likeImage" th:if="${likes == 1}" >
+													<img id="likeImg" name="likeImg" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGNzJGMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K" width="16" height="16" alt="찜 아이콘">
+													<span>찜</span>
+													<span th:text="${productList.likesCount}"></span>
+												</div>
+											</button>
+										</div>
+										<button class="sc-cqpYsc gKnWUi" onclick="createTalk()">
+											<img 
+												src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAy1JREFUWAndmM1LFVEYxp2bVxDsA0GhIoygAo2I7EKLoKJsYZG7iDYG/QNCUZvctSkIAqVFCze1toIWrkqynUaJ0VKUSkr7okubpG6/J+Zc5w7jzJ1zxnulFx7O1/s+7zMzZ86cOV5DlVYqlfK4HgN9oBNsA9tBC4izIoMLPt5SPgbjnuctU7obwtrBEPgOsjJxibPdWiHBTWAQ/ABrZeJWjqZUQgloAxOgVqZcbVWJxLETzNVKWSCPcmpuV5gXbOGgq5gEHcH+GtbnyVXgBVoyOXOmgjjNg1FQL3GSotyjvha1G8oCqV8DR9SZsc3C9y0FpzRIy4qhWEvJWrytY/AOgLQmLStLEA2tSVnbTQhbwUdL4qF/t5DgPMhyEf4J33mRU94BtiZNeZH02DJExGmpOOCL20d9OcInTVePXhJ9W7OwCUgOsUS89smGKRsdifsksMuRROEj4CTiPqvBLdIjPqq6o3XpCrUrsbU/BF5F2O0QwR7a90J9+2kfDvUlNbfqaotpJkXAV0vB6aQMGsfvHNDLk9aKCraxWYISpwY+Hrhhk8DEiOALF9lazZ0I+IS/DtM85kuBcV34RtoPwNlgf8r6VxHNGLUO5fFgYnh2gTcOfCZ0Rm+xtuMu9oi798wQwHyC+iRInAImJqZckMCpGIekoV84XDFOiBugPgbSThlDES6n9IgL5n5alLfESFwzuG8RnxRS0EuiTes7oD+0NLaI826wBTwEB0GW9gGyHTnmT4mKPktpbZCAbvASZC1OWoZ9beVH9D7pfgfGp6lfBq6bgQBlRVVamqWybHT0V7jEN+bih51H+8vCghVoR5yp3Qm08Yg2uPWz/sI9hzWDcsf/xOOgbfpT6xT2gcpZ3fqJYyO4a58rdaRypd/cEtQLsvhWr6ZY3L3RE67KXghy4CJ4Dn4DVxOHuMSpT22sVRx9xHoyCKGORs4AnaFoJy5oW7UXrHZOOM6YNiSCzgefsAAvUdbOEH4dRJkOL+tvKNsM5iMUfqq/Ol8B4rpB+BRBn8IN60lkB4LCb/2FdSNQQhCovaEOjF4B2SI4ta5EGjEIawE7wSbT99+VfwFl/vSZOTmkgQAAAABJRU5ErkJggg=="
+												width="20" height="19" alt="번개톡 버튼 아이콘">번개톡
+										</button>
+										<button class="sc-hBbWxd cPHXdO">바로구매</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="sc-fFTYTi knItJQ">
+						<div class="sc-glUWqk jtLlsK">
+							<div class="sc-gFXMyG cQEunL">
+								<div class="sc-drKuOJ gyqZJH">
+									<div class="sc-gRnDUn jpjbho">상품정보</div>
+									<div class="sc-cmjSyW lltUYs">
+										<div class="sc-iYUSvU jQRHnE"></div>
+										<div class="sc-sdtwF gpezND">
+											<div th:text="${productList.P_EXPLAIN}"></div>
+										</div>
+										<div class="sc-fnwBNb eXjoAI">
+											<div class="sc-iNhVCk bKoNsT">
+												<div class="sc-eAKXzc czKZLE">
+													<img
+														src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAiCAYAAABIiGl0AAAAAXNSR0IArs4c6QAAA6xJREFUWAm1l01IVFEUx51xNAtxIcEENuQIrqTxO8OEmj5IAncVUS2E2kS0axO4C5KiFi0lXIh9QBC1kKgwclNGjaNOSUEapVRiUSHoTOo4/c743vjem/vGp8xcuHPu+Z//Of9778y9740rz0EbGxsrjsViQait9JpEIuF1uVzbGCfo0/jT2GGwx6WlpQN+vz+Gn7G5MkXD4fAOil6C047dlImrxxCfg9tVUFBwtbq6ekbHrVYpzAoLo9FoJ+QL9AJrkkN/3u12d9bW1l5hMsvWnDTh4eHh8uXl5fvMutFK3qD/jLxTDQ0Nv4z5JuHR0VH/4uLiKwjy/WWtseJPLKTZKO7Wq4dCoa1LS0tP8bMqKvURrcT0TU1NbRZfWkqYWXVrhJVI9j+bZmZmbuplk1s9NDR0GNEnOpgrKz8ydBrZ8rBHRHCur0MsCvc1Pazl1GF301PbqOFpBh3Z4Rv0oIvVBgBG01hqYKCwsPBMIBD4bAxHIpGKhYWFbrB9RtxuzDEr9yB6zI5gwV/U19cfYLvktjI1mQh19rOI5wSCpqDC4bgelaXvUcRMEGJzAO0qUZ2oxdrx53XMzsI9KMJldgQDPsgPYtLgK4fCoeigMmgA2R2fCG83YMohxCFlQAHCDSlgE8Tkytx8yDZmbHCKMxIMQSdcJueWFU8Y8pRDiA3KgAJ0yJ1wJMwqGrlSWxQ6Jkg4wjWBamfCzQzfqmOrqGwNXo/c56uoeaTFejSuOWjxmNx7KXiHwYIlpnIr4I1xVo9TPF8nyFgwiYFV6LidhZfgJaFXv6vvUeCEHVmBy7UZ0fAAds3rUq+BcD8X0SFZcR5XWJcecGhFqEnrjkW12rfEJoV5PRlgJg+1QM4MGqG6uroHKWEZsNXnCfzNmWpe3iL1z9LjJmGuux+AF3MlTO1rrDb1FExutS5GQB5tj3Q/WxbRSElJyWVjPZOwBLxe70mI8sKXrTaZn59/pLKy8p+xYJqwz+eLFhUVtUH6aCRuZMwC/tBba2pqvlnz04SFUFVV9Zsj1krSd2vCOvwYNdo4sx9UOUphIfJ9f8XsRXxclbgGNiuiHNOXdjxbYUlgtuMINzN8Y1dAgU+BtTDxfkUsBWUUFhYFfmKCTKAvlWU/kDfPJo7mO3vKSiR5V69Fkrg8DPj32IHtwE2+FhvzmFivx+M5xz/ENV8sJM+xsC4yMjKyKx6P32YC8rdE2iz9HKu8m/QcfqxbWOry7N2CkRfznZzR0/yIvjBeV/sPFdozA8TD8zUAAAAASUVORK5CYII="
+														width="16" height="18" alt="거래지역 아이콘">거래지역
+												</div>
+												<div class="sc-dRFtgE cYNcTj">
+													<div th:text="${productList.REGION}"></div>
+												</div>
+											</div>
+											<div class="sc-iNhVCk bKoNsT">
+												<div class="sc-eAKXzc czKZLE">
+													<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAAAXNSR0IArs4c6QAAANJJREFUWAntWEEKxCAMjGJ70h/4Aq/+/wm99gX9gTcVujsLe1pQoWj2kJyERCeZkNCOut9WSqHruiilRDjPtH3fyVpL3nvato1Uzvk+z5NqrTNxf942xlAIgTQqXw2ObIAJbA3auQzYenbPW8UBW7cCVvgkAXYGTK/PMcZeSNN/HEfT//8M9CpoljfgZGdAEhAGZA90GZA9MLDMHoXIGLIz0J0C+R6QPfBoyAcus08BfwL4R+cyaAXaOceF/xEqNJQKiAWrDZjAVqslGrQcrH8lmhfQ0lJsYYep+gAAAABJRU5ErkJggg=="
+														width="16" height="18" alt="카테고리 아이콘">카테고리
+												</div>
+												<div class="sc-dRFtgE cYNcTj">
+													<!--  <a href="/categories/910800008?order=date&amp;page=1">-->
+													<span class="sc-gbOuXE kRzWCP" th:text="${productList.CATEGORY3}"></span></a>
+												</div>
+											</div>
+											<div class="sc-iNhVCk bKoNsT">
+												<div class="sc-eAKXzc czKZLE">
+													<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAkCAYAAACaJFpUAAAAAXNSR0IArs4c6QAAAbpJREFUSA3tVzFSwkAU3c2EggKK1BxAoRAmXIKjYAkztsYDaCk34Ara6QEIVKAdDWoFDQUFDPF9hgxZJOEFRhvzZ3aS3f/ef5v3N0zQKmX0er0LrfWD0IIgaNXr9fc0JTQLHg6HzmKxuAX+GsPe8la4Pubz+btKpTLbriVejgriKezBYNBcr9ceKjkx1WaWZXm1Wq2Dp5dNxEaiYL/fb0DwHuMytkIkAbE3TFuu6z5Hlo3bg4K+74uACDUMNDmB8BOgbQjLBowwBLd98oBoYoR9MggpJmJtB/31ov3dCJJ9SqFlQI3+6rR9MkqlmEh/Mdoa71XA8nK5nCqVSqpQKGwo8/lcTSYTtVwu2RJ8n0SsXC4r29611nEcVSwW1Wg0okUtdmvyZFGxkCdrkmODFgxtPFQ4KbePpwX3iafOaUE5IHGRlNvn0IJyGlernz+TsiY5NnZH7ghDjr6cxj97LWQ/Ijoej49sLTlNW5pchs9mgrxXJDKzlDSKh2WW8l6RyMxS0ige9j8s/eINOQ+JD+FPsfTlvDI8G38pXi18V96AMuVpJyOnomVVq9UP3FyhTBfjN+yVml3REK1volCeXrtQ40gAAAAASUVORK5CYII="
+														width="15" height="18" alt="상품태그 아이콘">상품태그
+												</div>
+												<div class="sc-dRFtgE cYNcTj">
+													<a class="sc-bfYoXt jAoFdX" th:text="${productList.P_TAG}"></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="sc-bTiqRo cnvWAm">
+							<div class="sc-gQNndl ciZTiS">
+								<div class="sc-gAmQfK iNYjOK">
+									<div class="sc-cCVOAp eyrPOm">상점정보</div>
+									<div class="sc-cfWELz LktPy">
+										<div class="sc-kAdXeD iUZayF">
+											<a class="sc-hCaUpS hETnQo" th:href="@{/shop/}+${productList.email}">
+											<img src="https://media.bunjang.co.kr/images/crop/841260263_w96.jpg"
+												width="48" height="48" alt="판매자 프로필 이미지"></a>
+											<div class="sc-bvTASY kPSgtk">
+												<a class="sc-koErNt iFrtND" th:href="@{/shop/}+${productList.email}"><span th:text="${User.username}"></span><span>의 상점</span></a>
+												<div class="sc-gJqsIT cFKvJM">
+													<a class="sc-kDhYZr dVnjfA" href="/shop/79636123/products">상품62</a><a
+														class="sc-kDhYZr dVnjfA" href="/shop/79636123/followers">팔로워10</a>
+												</div>
+											</div>
+										</div>
+										
+										<button id="followChk" name="followChk" class="sc-hARARD dvasCz" th:value="${following}" th:if="${following == 0}">
+											<img id="followImg" name="followImg" th:if="${following == 0}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAcCAYAAAATFf3WAAAAAXNSR0IArs4c6QAAAfZJREFUWAntVrFOAkEQ5VYjjZ9gjKWcP0BNYeIPkFjYaWHUxo6CC4GCzkpiY2dhwg+YUEBBox8gWBo+wMoGizvn4WKysLN3c3diwybHZmfem3nM7d6sV0g4ms3mQRiGpwQ/pGdX0yY095RS90EQvGpbrpMXF63b7W6Nx+ObKIrOCasYfOh53l2pVLquVqtfDMZqbjQaERw0W7VwCWfBIG40Gj2RuAsyuLAKGGDBmZFz+nElLaBylKciyFXRHAHFDWUFYs/p1+qOsOAFB9wFc+olK1AfCNbvyKg01wFJ7nIJwGlNO7JwjZybxspczD8lpjXZaok7P60cnfO7KsjFWqndVcEJKfFTqgHXGNx3bl45zu+qYM/IIFtk4RqZWIFoX4QMDXSyRai5ydAxKFYgeivaVwx/yQ1Onn2ZFYjM6K009ZdU8Ia+5vAIoccpEI3f9/0jqkqH4rpeNy4LHWCll4U4vdYbhI30X9ctm5a1TVKB31dMtxDVarUuqdGfUIB9erYlgSzYT7K90SfnoV6v39Iede1hC/3HNBPYbrf3ptPpI5nKLDKb47lYLB7XarV3aRjchNUfi4OmMnIgl1TgBo0rIp5JiSnwO8Ph8GMwGLxIuLhcYs+tZKTJhZLjQKxqiHNBYNbTKvlz4lziTStRkwd2LTBrFb8B8aSntyo1wCwAAAAASUVORK5CYII="
+												width="20" height="14" alt="화이트 테마 언팔로우 버튼 아이콘">팔로우
+										</button>
+										<button id="followChk" name="followChk" class="sc-cmUJln jUHKmP" th:value="${following}" th:if="${following == 1}">
+											<img id="followImg" name="followImg" th:if="${following == 1}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAcCAYAAAAX4C3rAAAAAXNSR0IArs4c6QAAAyRJREFUWAntVs9LFHEUf9/vqpDpbLegIDr0i4pOHTp0UjQikCwS1p1dpUSQlDAIii57CLpEhBehJHQbtz+goCy0Q7cOHaKI7MehU3WI3VlNXN15vTfTyLDOd2fWUezgwvL9znufz/t+5vu+3/dGQMhfsafniFWy+kBgOyLuYZoQ4jugeCEb5FjzxMSHkKHWBBNBLMxkGszZz3dJ1gAJlH54EmwB4Kh2YP9VkcmU/DBRbb4Lu0FZZOHTl2eIcFklkrHsY4yNJY7Ljzri8PA2N0ZVoc5OYosLDh6xxeEEI4MQBV1PFH7++vgnnd7NWKVQPpOc7qCAq/1iwOGu9oS1mAm9DywwBIhdS8t4lHlKoXxxqqVbtShz7EunAgTYC936FQS8DwhLQshz8dyjKaYohfLtDoipdvtwsb+/UU1wPPlE8ia96D0qJ4sQg7PaZPapy1EKJYJdglxgLWMl10wmO83i/Ld8KnVcFcdMpm6T7xb9F6i2dMQN47kXqxTqBUWdoyUuIMBOKOO0mUif9MajlxKFRGrEsqzrtJPzMRE7s8MwXnoxPFcKtYt5JTrkcyVX6+xI0cUwqI5plrCm8rrexqGo/MlCd3oMwRqixzkp4XRzLvvKbxmlUO44foRQtgqu6Ooqawf39dCOjZHYRlGGJ8WEfp5KWQ7Aukh2U0KsXTOM16r4ys5kt8yl8jtKjfplfKJyl5L1sWN+LZXTTGdxhMbBFaoQeQHyVDyXfbNi85koRTgL4agPJ8CEo34imUQvgfGcMUSTO/YzwO96Ca1BIhmrFMpO7t0Ufobn4X5ixuFUR+/IGdcIcSMWEy3bDeNtdbTjVabeJf8vHyWBQl3Bm/2Z5+rYGtdrB1ZSz8XXnP06SHUuRR8Fh2iBpoiLzNEtf08X/YE2OfkwYiywhS709u4tlZYfU307ETWgL1+I6bqGOr1pfPyHrz+EUfJObqhIFoHYWl5cznLBD6HJF2Kne8N20rMkHae2op7u85hqmko+kzUxIoDRwktrpct/F2et/Jp4lPjDNRE8YG6hUW+3J1zAFLE5AKF0V+31StYmOLaErvem/wV6ElIsklNjOAAAAABJRU5ErkJggg=="
+											 width="21" height="14" alt="팔로우 버튼 아이콘">팔로잉
+										</button>
+										
+										<div class="sc-sPYgB bGvQBG">
+											<div class="sc-dHIava cDIveb">
+												<a data-pid="194933402" class="sc-RbTVP JMDJI"
+													href="/products/194933402?ref=%EC%83%81%ED%92%88%EB%82%B4%EC%83%81%EC%A0%90%EC%83%81%ED%92%88">
+													<img src="https://media.bunjang.co.kr/product/194933402_1_1659148705_w240_h192.jpg"
+													width="120" height="96" alt="상품 이미지">
+													<div class="sc-hMrMfs epyWUV">
+															<span>7,000</span>원
+													</div>
+														<div class="sc-drlKqa cUjesI"></div>
+												</a>
+											</div>
+											<div class="sc-dHIava cDIveb">
+												<a data-pid="195499488" class="sc-RbTVP JMDJI"
+													href="/products/195499488?ref=%EC%83%81%ED%92%88%EB%82%B4%EC%83%81%EC%A0%90%EC%83%81%ED%92%88"><img
+													src="https://media.bunjang.co.kr/product/195499488_1_1659668281_w240_h192.jpg"
+													width="120" height="96" alt="상품 이미지">
+													<div class="sc-hMrMfs epyWUV">
+															<span>7,000</span>원
+													</div>
+														<div class="sc-drlKqa cUjesI"></div>
+												</a>
+											</div>
+										</div>
+										<div class="sc-jhaWeW gSZSpK">
+											<a class="sc-guztPN imRUwG" href="/shop/79636123/products">
+											<span class="sc-hAXbOi hfQwPP" th:text=${count}+@{개}></span>상품 더보기</a>
+										</div>
+										<div class="sc-cFlXAS hJvCHs">
+											<div class="sc-hcnlBt lglfSE">
+												상점후기<span class="sc-hAXbOi hfQwPP">10</span>
+											</div>
+											<div class="sc-hkbPbT jgPUAb">
+												<div class="sc-jQMNup epaVqM">
+													<a class="sc-TuwoP dysEba" href="/shop/77346991/products"><img
+														src="https://media.bunjang.co.kr/images/crop/827012814_w64.jpg"
+														width="32" height="32" alt="리뷰 쓴 사람 프로필 이미지"></a>
+													<div class="sc-hlILIN fciPeP">
+														<div class="sc-bJHhxl SlocT">
+															<a class="sc-fQkuQJ bOCpdX"
+																href="/shop/77346991/products">sxan</a>
+															<div class="sc-epGmkI dXEevS">1주 전</div>
+														</div>
+														<div class="sc-dphlzf gjNBxh">
+															<div class="sc-ccLTTT fpuvMV">
+																
+															</div>
+														</div>
+														<div class="sc-fCPvlr bLToPt">💕 너무 귀여워요 ㅠ.ㅠ 역시 춘배에요
+															배려해주셔서 감사합니당 예쁘게 ...</div>
+													</div>
+												</div>
+												<div class="sc-jQMNup epaVqM">
+													<a class="sc-TuwoP dysEba" href="/shop/79743249/products"><img
+														src="https://media.bunjang.co.kr/images/crop/862251036_w64.jpg"
+														width="32" height="32" alt="리뷰 쓴 사람 프로필 이미지"></a>
+													<div class="sc-hlILIN fciPeP">
+														<div class="sc-bJHhxl SlocT">
+															<a class="sc-fQkuQJ bOCpdX"
+																href="/shop/79743249/products">크루벨라</a>
+															<div class="sc-epGmkI dXEevS">1주 전</div>
+														</div>
+														<div class="sc-dphlzf gjNBxh">
+															<div class="sc-ccLTTT fpuvMV">
+															
+															</div>
+														</div>
+														<div class="sc-fCPvlr bLToPt">너무 귀여운 우리 춘배를
+															데려왔어요!!!!!!😆 진짜 얘는 실물로 봐야...</div>
+													</div>
+												</div>
+											</div>
+											<div class="sc-bSbAYC fOZHiN">
+												<a class="sc-guztPN imRUwG" href="/shop/79636123/reviews">상점후기
+													더보기</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="sc-RmnOB hacYbq">
+									<button class="sc-jPPmml cEzZLN">
+										<img
+											src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAy1JREFUWAndmM1LFVEYxp2bVxDsA0GhIoygAo2I7EKLoKJsYZG7iDYG/QNCUZvctSkIAqVFCze1toIWrkqynUaJ0VKUSkr7okubpG6/J+Zc5w7jzJ1zxnulFx7O1/s+7zMzZ86cOV5DlVYqlfK4HgN9oBNsA9tBC4izIoMLPt5SPgbjnuctU7obwtrBEPgOsjJxibPdWiHBTWAQ/ABrZeJWjqZUQgloAxOgVqZcbVWJxLETzNVKWSCPcmpuV5gXbOGgq5gEHcH+GtbnyVXgBVoyOXOmgjjNg1FQL3GSotyjvha1G8oCqV8DR9SZsc3C9y0FpzRIy4qhWEvJWrytY/AOgLQmLStLEA2tSVnbTQhbwUdL4qF/t5DgPMhyEf4J33mRU94BtiZNeZH02DJExGmpOOCL20d9OcInTVePXhJ9W7OwCUgOsUS89smGKRsdifsksMuRROEj4CTiPqvBLdIjPqq6o3XpCrUrsbU/BF5F2O0QwR7a90J9+2kfDvUlNbfqaotpJkXAV0vB6aQMGsfvHNDLk9aKCraxWYISpwY+Hrhhk8DEiOALF9lazZ0I+IS/DtM85kuBcV34RtoPwNlgf8r6VxHNGLUO5fFgYnh2gTcOfCZ0Rm+xtuMu9oi798wQwHyC+iRInAImJqZckMCpGIekoV84XDFOiBugPgbSThlDES6n9IgL5n5alLfESFwzuG8RnxRS0EuiTes7oD+0NLaI826wBTwEB0GW9gGyHTnmT4mKPktpbZCAbvASZC1OWoZ9beVH9D7pfgfGp6lfBq6bgQBlRVVamqWybHT0V7jEN+bih51H+8vCghVoR5yp3Qm08Yg2uPWz/sI9hzWDcsf/xOOgbfpT6xT2gcpZ3fqJYyO4a58rdaRypd/cEtQLsvhWr6ZY3L3RE67KXghy4CJ4Dn4DVxOHuMSpT22sVRx9xHoyCKGORs4AnaFoJy5oW7UXrHZOOM6YNiSCzgefsAAvUdbOEH4dRJkOL+tvKNsM5iMUfqq/Ol8B4rpB+BRBn8IN60lkB4LCb/2FdSNQQhCovaEOjF4B2SI4ta5EGjEIawE7wSbT99+VfwFl/vSZOTmkgQAAAABJRU5ErkJggg=="
+											width="20" height="19" alt="번개톡 버튼 아이콘">번개톡
+									</button>
+									<button class="sc-dNoQZL loOuLY">바로구매</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+					<div class="sc-jwKygS gSsteC">
+						<div class="sc-fvLVrH gjsPAc">
+							<h2 class="sc-dXfzlN krTAri">
+								<img
+									src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3MiIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDcyIDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZmlsbD0iI0ZGNTA1OCIgZD0iTTEwLjYzLjI0MmMuNTg0LS4zMjIgMS4yOTMtLjMyMyAxLjg3OCAwbDkuNTcgNS4yNjRjLjcwOC4zODggMS4xIDEuMTcuOTkgMS45Ny0uNDY2IDMuNDM5LTIuNDYyIDExLjc2My0xMC42OTUgMTUuNzA4LS41MS4yNDUtMS4xMDUuMjU2LTEuNjI2LjAzNEMyLjAwMyAxOS40OC4zMyAxMC44OS4wMSA3LjQzNGMtLjA3My0uNzc4LjMxOS0xLjUyNiAxLjAwNC0xLjkwM3ptNC4wNzggNi4wNzdoLTQuNTI1Yy0uMTU3IDAtLjI5NS4wODItLjMzNi4yMzNsLTEuOTE1IDYuOTRjLS4wMjguMTA0LS4wMDcuMjIyLjA2LjMwOS4wNjUuMDg2LjE2OC4xNDguMjc2LjE0OGgyLjQ4MWwtMS40MiA0LjQwN2MtLjA1LjE1Ny4wMTUuMzE1LjE1OC4zOTcuMDU0LjAzMS4xMTQuMDQ2LjE3My4wNDYuMDk2IDAgLjE5MS0uMDQuMjYtLjExNWw2LjI2NC02Ljk2MmMuMDkzLS4xMDIuMTE2LS4xOTYuMDYtLjMyMS0uMDU2LS4xMjYtLjE4LS4xNTQtLjMxOC0uMTU0aC0yLjc3OWwxLjg4LTQuNDI4Yy4wNDctLjEwOC4wMzYtLjI3MS0uMDI5LS4zNjktLjA2NC0uMDk4LS4xNzMtLjEzLS4yOS0uMTN6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLjIpIi8+CiAgICAgICAgPHBhdGggZmlsbD0iIzFFMUQyOSIgZD0iTTM1LjgxMSA0LjMyNGMxLjU1NiAwIDIuODY2LjYyOCAzLjg5NSAxLjg2NiAxLjAzNSAxLjI0NyAxLjU2IDIuNzM2IDEuNTYgNC40MjUgMCAxLjgzNC0uNTIgMy4zODUtMS41NDQgNC42MS0xLjAxOCAxLjIxOS0yLjM1NSAxLjgzNi0zLjk3MyAxLjgzNi0xLjczNSAwLTIuOTU0LS40OTktMy42MjMtMS40ODNsLS4yNjktLjM5Ni0uMDYzIDYuNWMtLjAwMS4wODEtLjA2OS4xNDgtLjE1LjE0OGgtMi40MDdjLS4wODMgMC0uMTUtLjA2OC0uMTUtLjE1VjQuODc3YzAtLjA4My4wNjctLjE1LjE1LS4xNWgyLjQwNGMuMDgyIDAgLjE1LjA2Ny4xNS4xNXYxLjIybC4yNjMtLjMwOGMuODMzLS45NzIgMi4wOTctMS40NjUgMy43NTctMS40NjV6bTIyLjg2Mi40MDNjLjA2IDAgLjExNC4wMzUuMTM4LjA5bDMuMjQ1IDcuNDY3IDMuNDA0LTcuNDdjLjAyNC0uMDUzLjA3OC0uMDg3LjEzNy0uMDg3aDIuNzI4Yy4wNzYgMCAuMTE0LjA1LjEyOC4wNy4wMTMuMDIyLjA0LjA4LjAwNi4xNDdsLTguMzcgMTYuNzRjLS4wMjYuMDUyLS4wNzcuMDg0LS4xMzUuMDg0aC0yLjY1NmMtLjA3NyAwLS4xMTYtLjA1MS0uMTI5LS4wNzMtLjAxMy0uMDIyLS4wNC0uMDgtLjAwMy0uMTQ4bDMuNTc2LTYuNjI1LTQuOTg5LTkuOTc4Yy0uMDM0LS4wNjgtLjAwNy0uMTI1LjAwNi0uMTQ2LjAxNC0uMDIxLjA1Mi0uMDcxLjEyOC0uMDcxem0tMTAuOTQtLjQwMmMxLjY4IDAgMi45NjQuNTAzIDMuODE4IDEuNDk2bC4yNjQuMzA1di0xLjI1YzAtLjA4Mi4wNjctLjE1LjE1LS4xNWgyLjM0MmMuMDgzIDAgLjE1LjA2OC4xNS4xNXYxMS43ODJoLTIuNjQydi0xLjM3bC0uMjY0LjMwOGMtLjgzMy45NzItMi4wOTcgMS40NjUtMy43NTcgMS40NjUtMS42NTYgMC0yLjk5Ny0uNjQ3LTMuOTg0LTEuOTI0LS45OTYtMS4yODgtMS41MDItMi44Mi0xLjUwMi00LjU1MyAwLTEuNzMuNTE1LTMuMjI0IDEuNTMtNC40NCAxLjAwNy0xLjIwNyAyLjMxNy0xLjgyIDMuODk1LTEuODJ6bS0xMi40NTggMi4zYy0xLjAxMyAwLTEuODY1LjQxNS0yLjUzMiAxLjIzMi0uNjU5LjgxLS45OTMgMS43NTItLjk5MyAyLjgwNSAwIDEuMDUzLjM1NSAyLjAwOCAxLjA1NyAyLjgzNy43MDguODM2IDEuNTM4IDEuMjYgMi40NjggMS4yNiAxLjA5NSAwIDEuOTY4LS4zOTMgMi41OTMtMS4xNy42MTktLjc2Ny45MzItMS43NDcuOTMyLTIuOTEyIDAtMS4wODItLjMxMy0yLjAzNS0uOTMtMi44MzItLjYyNi0uODEtMS40OTktMS4yMi0yLjU5NS0xLjIyem0xMy4wMSAwYy0xLjA0MiAwLTEuOTAzLjM3Ny0yLjU2IDEuMTItLjY1LjczNi0uOTgyIDEuNzIzLS45ODIgMi45MzIgMCAxLjIxLjMzNiAyLjIwMi45OTggMi45NDguNjY2Ljc1MyAxLjUzNyAxLjEzNSAyLjU5IDEuMTM1IDEuMDUxIDAgMS45MTItLjM3MiAyLjU1OC0xLjEwNC42NDEtLjcyNi45NjctMS43MjkuOTY3LTIuOTc5IDAtMS4xNjctLjMzNi0yLjE0Mi0uOTk3LTIuOS0uNjY3LS43NjQtMS41MzQtMS4xNTEtMi41NzUtMS4xNTF6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLjIpIi8+CiAgICA8L2c+Cjwvc3ZnPgo="
+									width="78" height="26" alt="">안전결제<a
+									href="https://m.bunjang.co.kr/banner/pay?utm_source=pay&amp;utm_medium=product-detail-btn&amp;utm_campaign=pay-master-buyer-2109#buyer"
+									target="_blank" rel="noopener noreferrer">번개페이란?</a>
+							</h2>
+							<div class="sc-OxbzP jIiOrw">
+								<a data-order-type="shipping" class="sc-lnrBVv geTZKN"><div
+										class="sc-eSePXt bxwKFb">
+										<h3 class="sc-cPuPxo hmQHIx">택배거래</h3>
+										<span class="sc-aewfc gErUTq">안전하게 상품을 받을 때까지,<br>번개페이가
+											결제금액을 보관해요
+										</span>
+									</div></a><a data-order-type="in_person" class="sc-hvvHee ctlkBe"><div
+										class="sc-eSePXt bxwKFb">
+										<h3 class="sc-cPuPxo hmQHIx">직거래</h3>
+										<span class="sc-aewfc gErUTq">직거래도 현금없이 간편하게 결제할 수 있어요</span>
+									</div></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="sc-igwadP gDEQrh">
+				<div class="sc-ckYZGd hTQReO"></div>
+			</div>
+		</div>
+		<th:block
+			th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
+</body>
+</html>

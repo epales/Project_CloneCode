@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>메인 페이지</title>
+<head>
+	<th:block th:replace="/fragments/layouts/headerFragment.html :: headerFragment"></th:block>
+</head>
+<link rel="stylesheet" href="css/product.css">
+<script>
+  		$(function(){
+			$('.slider-wrap').slick({
+				slide: 'div',		//슬라이드 되어야 할 태그 ex) div, li 
+				infinite : true, 	//무한 반복 옵션	 
+				slidesToShow : 1,		// 한 화면에 보여질 컨텐츠 개수
+				slidesToScroll : 1,		//스크롤 한번에 움직일 컨텐츠 개수
+				speed : 800,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+				arrows : true, 		// 옆으로 이동하는 화살표 표시 여부
+				dots : false, 		// 스크롤바 아래 점으로 페이지네이션 여부
+				autoplay : true,			// 자동 스크롤 사용 여부
+				autoplaySpeed : 3000, 		// 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+				pauseOnHover : true,		// 슬라이드 이동시 마우스 호버하면 슬라이더 멈추게 설정
+				vertical : false,		// 세로 방향 슬라이드 옵션
+				prevArrow : "<button type='button' class='slick-prev'></button>",		// 이전 화살표 모양 설정
+				nextArrow : "<button type='button' class='slick-next'></button>",		// 다음 화살표 모양 설정
+				dotsClass : "slick-dots", 	//아래 나오는 페이지네이션(점) css class 지정
+				draggable : false, 	//드래그 가능 여부 
+			
+			});
+  		})
+
+</script>
+<body style="overflow: auto;">
+<!-- 본문 글 -->
+<th:block th:replace="/fragments/layouts/nav.html :: fragment-nav"></th:block>
+<div id = "main_class">
+	<div class="slider-wrap">
+	    <div class="cont">
+	    <img src="image/849662045_w2058.jpg">
+		</div>
+	    <div class="cont">
+	    <img src="image/852789386_w2058.jpg">
+		</div>
+	    <div class="cont">
+	    <img src="image/851486296_w2058.jpg">
+		</div>
+	    <div class="cont">
+	    <img src="image/851514807_w2058.jpg">
+	    </div>
+	    <div class="cont">
+	    <img src="image/852181136_w3087.jpg">
+	    </div>
+	</div>
+	
+	<div class="banner">
+		<img src="image/appdownload-banner.75b0fd5a.png">
+		<div class="bannerImage">
+			<img src="/image/qr.png">
+		</div>
+	</div>
+	<br>
+<section class="productSession">
+	<div>
+		<h2>오늘의 상품 추천</h2>
+	</div>
+	<br>
+<div class="clear">
+<div class="mainform">
+	<div class="productform" th:each="product : ${productList}">
+	<a class="aClass" th:href="@{product_detail(P_ID=${product.P_ID})}" target="_blank" rel="noopener noreferrer">
+		<div class="imageBlock">
+			<img th:src="@{/image/}+${product.image1}" class="imageClass" width="194" height="194" alt="상품 이미지">
+			<div class="middleBlock"></div>
+		</div>
+		<div class="titleBlock">
+			<div class="titleText"><p th:text="${product.P_TITLE}"></p></div>
+				<div class="priceBlock">
+					<div class="priceText"><b th:text="${product.PRICE}"></b></div>
+						<div class="timeStamp">
+							<span th:text="${product.P_DATE}"></span>
+						</div>
+				</div>
+				
+		</div>
+	</a>
+	</div>
+</div>
+</div>
+</section>
+</div>
+<th:block th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
+</body>
+</html>

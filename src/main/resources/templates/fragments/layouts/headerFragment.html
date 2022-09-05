@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>메인 페이지</title>
+<th:block th:fragment="headerFragment">
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/footer.css}">
+<link rel="stylesheet" th:href="@{/css/category.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/slick/slick.css}"/>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script type="text/javascript" th:src="@{/slick/slick.js}"></script>
+<script type="text/javascript" th:src="@{/slick/slick.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+</th:block>
+</html>

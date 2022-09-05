@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>아이디 비밀번호 찾기</title>
+<link rel="stylesheet" href="css/loginForm.css">
+<script type="text/javascript" src="js/member.js"></script> 
+</head>
+<style>
+*{
+	margin:0 auto;
+	text-align:center;
+}
+</style>
+<script type="text/javascript">
+function formclose(){
+  self.close();
+}
+</script>
+<body>
+<div id="wrap">
+  <h1>ID 찾기 결과</h1>
+  <form method=post name=formm style="margin-right:0 "
+  		action="find_id_form" >
+  		<br>
+    User ID : <span th:text="${id}"></span> 
+    <div style="margin-top: 20px">   
+      <div th:if="${message == 1}">
+             요청하신 ID는 <span th:text="${id}"></span>입니다.
+      </div>
+      <div th:if="${message == -1}">
+             가입하지 않은 ID입니다.
+      </div>
+      <br>
+    </div>
+    	 <input type="button" value="확인" class="cancel" onclick="formclose()">
+    </form>
+</div>
+</body>
+</html>

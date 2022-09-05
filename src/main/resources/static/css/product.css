@@ -1,0 +1,90 @@
+@charset "UTF-8";
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+.mainform {
+    display: flex;
+    flex-wrap: wrap;
+}
+.productform {
+    width: 196px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.productform:nth-child(5n) {
+    margin-right: 0px;
+}
+.aClass {
+    border: 1px solid rgb(238, 238, 238);
+    background: rgb(255, 255, 255);
+    display: block;
+}
+
+.aClass {
+    color: rgb(33, 33, 33);
+    text-decoration: none;
+    cursor: pointer;
+}
+.aClass {
+    background-color: transparent;
+}
+.imageBlock {
+    position: relative;
+    width: 100%;
+    height: 194px;
+}
+.imageClass {
+    vertical-align: bottom;
+}
+.imageClass {
+    border-style: none;
+}
+.middleBlock {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+.titleBlock {
+    padding: 15px 10px;
+    height: 80px;
+    background: rgb(255, 255, 255);
+}
+.titleText {
+    position: relative;
+    font-size: 14px;
+    padding-bottom: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.priceBlock {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 20px;
+}
+.priceText {
+    font-size: 16px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.priceText::after {
+    content: "원";
+    font-size: 13px;
+    margin-left: 3px;
+}
+.timeStamp {
+    font-size: 12px;
+    color: rgb(136, 136, 136);
+}
+
+.productSession {
+    width: 1024px;
+    margin: auto;
+}

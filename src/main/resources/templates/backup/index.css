@@ -1,0 +1,479 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'neon';
+    src: url('../ttf/Binggrae.ttf') format('truetype');
+}
+*{
+	font-family: 'neon';
+	margin: 0px;
+	padding:0px;
+
+}
+html {
+    text-size-adjust: 100%;
+}
+img {
+    vertical-align: bottom;
+    border-style: none;
+}
+body {
+	min-width: 1236px;
+	text-align: center;
+	font-size: 14px;
+	 	
+}
+body, input, textarea, select, button {
+    -webkit-font-smoothing: antialiased;
+    direction: ltr;
+    text-align: left;
+    color: rgb(33, 33, 33);
+    outline: 0px;
+    border: 0px;
+}
+#header01{
+	display: flex;
+	-webkit-box-pack: center;
+    justify-content: center;	
+    border-bottom: 1px solid rgb(238, 238, 238);
+    height: 40px;
+    background: rgb(255, 255, 255);
+	
+}
+
+.center{
+	width:1024px;
+	display: flex;
+	-webkit-box-pack: center;
+    justify-content: space-between;	
+    
+}
+
+.a{
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.a a{
+	padding:0px 10px;
+	text-decoration: none;
+	color: rgb(33, 33, 33);
+	font-size: 14px;
+	line-height: 1.4;
+	font-weight: 700;
+	position: relative;
+	
+}
+
+.b{	
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+	
+}
+
+.b a{
+	padding:0px 10px;
+	text-decoration: none;
+	color: rgb(33, 33, 33);
+	font-size: 14px;
+	position: relative;
+	font-weight: 700;
+	
+}
+
+.c{
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.c a{
+	margin-right: 50px;
+	position: relative;
+}
+
+.d{
+	margin-right: 50px;
+	padding:5px 0px;
+	border:2px solid rgb(255, 0 ,0);
+	outline: 0px;
+	width:460px;
+	display: flex;
+    -webkit-box-align: center;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 10px;
+    
+}
+
+.e{
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    
+}
+
+.e a::after{
+	margin:10px;content:"|"
+	
+}
+
+.e a{
+	cursor:pointer;
+    position: relative;
+	text-decoration: none;
+	color: rgb(33, 33, 33);
+	font-size: 14px;
+	font-weight: 700;
+	
+}
+
+.e_button1{
+	
+	border:0px;
+	text-transform: none;
+	overflow: visible;
+	appearance: none;
+    position: relative;
+	background-color: transparent;
+    cursor: pointer;
+    outline: none;
+	color: rgb(33, 33, 33);
+	font-size: 14px;
+	padding: 0px 10px;
+	font-weight: 700;
+	
+}
+.e_button2{
+	
+	border:0px;
+	text-transform: none;
+	overflow: visible;
+	appearance: none;
+    position: relative;
+	background-color: transparent;
+    cursor: pointer;
+    outline: none;
+	color: rgb(33, 33, 33);
+	font-size: 14px;
+	padding-right:10px;
+	font-weight: 700;
+	
+}
+
+.e img{
+	width:23px;
+	height: 24px;
+	margin-right:5px;
+}
+
+.f{
+	position: absolute;
+    top: 102px;
+    right: calc(50% - 617px);
+    z-index: 20;
+}
+.f1{
+	width:90px;
+	
+}
+#topButton{
+	cursor: pointer;
+}
+.f2{
+	
+    width: 100%;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    margin-bottom: 6px;
+}
+.f2 img{
+	background-color: white;
+	box-shadow: rgb(0 0 0 / 12%) 0px 0px 7px 0px;
+    margin: 16px auto 6px;
+    width: 55px;
+    height: 55px;
+    padding: 8px;
+}
+.f3{
+	padding: 10px;
+	font-size: 12px;
+    font-weight: 600;
+    color: rgb(102, 102, 102);
+    text-align: center;
+}
+.search{
+	border:0px;
+	outline: 0px;
+	flex-grow: 1;
+}
+
+#header02{
+	position: sticky;
+    display: flex;
+    width: 100%;
+    -webkit-box-pack: center;
+    background: rgb(255, 255, 255);
+    z-index: 100;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    top: 0px;
+    left: 0px;
+    padding:30px 0px;
+    justify-content: center;
+
+}
+
+#main_class h1{
+	font-weight:500;
+	font-size:100px;
+	color:green;
+	
+}
+
+footer{
+	background-color: black;
+	padding: 10px 0px;
+	
+}
+
+footer h3{
+	color:white;
+	
+}
+
+
+.slider-wrap{
+ 	position: relative;
+    max-width: 1024px;
+    margin: 0px auto;
+    background: white;
+    display: block;
+    
+}
+
+.slick-prev, .slick-next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  border:0px;
+}
+
+/* Position the "next button" to the right */
+.slick-next {
+  right: calc(50% - 500px);
+  border-radius: 3px 0 0 3px;
+  background-image: url(../image/right.png);
+  z-index: 1;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 15px;
+  height: 30px;
+}
+.slick-prev {
+    left: calc(50% - 500px);
+    z-index:10;
+    border-radius: 3px 0 0 3px;
+    background-image: url(../image/left.png);
+	z-index: 1;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 15px;
+    height: 30px;
+}
+
+.cont img{
+	height: 298.25px;
+    margin: 0px auto;
+}
+/* On hover, add a black background color with a little bit see-through */
+
+.banner{
+ 	position: relative;
+    margin: 16px auto 0px;
+    max-width: 1024px;
+    height: 200px;
+}
+.banner img{
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+}
+.banner .bannerImage img{
+	position: absolute;
+    width: 94px;
+    height: 94px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 0px 7px 0px;
+    padding: 8px;
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+    top: 53px;
+    left: 155px;
+    bottom: 53px;
+}
+
+/* 로그인 modal css*/
+button{
+	background-color: transparent;
+	cursor: pointer;
+	outline: none;
+}
+.btn-box .btn-open {
+	display: block;
+	width: 200px;
+	height: 50px;
+	margin: 80px auto 0;
+	line-height: 50px;
+	background: #333;
+	text-align: center;
+}
+.btn-box .btn-open span {
+	color: #fff;
+}
+
+/* 팝업 스타일 */
+.modal-bg {
+	display:none;
+	width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+.modal-wrap {
+	display:none;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	z-index:1000; 
+	background: rgb(247, 247, 247);
+	width: 420px;
+	border-radius: 4px;
+	overflow: hidden;
+	box-shadow: rgb(0 0 0 / 10%) 0px 6px 50px 0px;
+	position: absolute;
+}
+.modal-wrap img{
+	display: block;
+	margin: auto auto 10px;
+}
+.modal-close{
+	position: absolute;
+    top: 20px;
+    right: 20px;
+    border:0px;
+}
+.main1{
+	padding-top:40px;
+}
+.text1{
+	font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+.text2{
+	line-height: 1.5;
+    margin-bottom: 35px;
+    text-align: center;
+}
+.kakaoLogin{
+	padding: 0px 70px;
+}
+.moveKakao{
+	width: 100%;
+    height: 38px;
+    box-shadow: rgb(0 0 0 / 5%) 0px 1px 7px 0px;
+    background: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    position: relative;
+    border:0px;
+}
+.kakaoIcon{
+	background-image: url(../image/7bf83f72cf54461af573.png);
+	position: absolute;
+    top: calc(50% - 12px);
+    left: 35px;
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.fackbookIcon{
+	background-image: url(../image/fc95a45c5428930755c1.png);
+	position: absolute;
+    top: calc(50% - 12px);
+    left: 35px;
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.naverIcon{
+	background-image: url(../image/46a186687d81b27fc2c9.png);
+	position: absolute;
+    top: calc(50% - 12px);
+    left: 35px;
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.register{
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: 38px;
+    box-shadow: rgb(0 0 0 / 5%) 0px 1px 7px 0px;
+    background: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    position: relative;
+}
+.moveKakao a{
+	color: rgb(33, 33, 33);
+	text-decoration: none;
+ 	cursor: pointer;
+}
+.explainFooter{
+	padding: 3.5rem 2rem 1.5rem;
+	font-size: 12px;
+	line-height: 1.5;
+	color: rgb(153, 153, 153);
+}
+.explainFooter p{
+	width: 100%;
+	border-top: 1px solid rgb(229, 229, 229);
+	padding-top: 1rem;
+}
+.explainFooter a{
+	font-weight: normal;
+	text-decoration: underline;
+	color: rgb(102, 102, 102);
+}

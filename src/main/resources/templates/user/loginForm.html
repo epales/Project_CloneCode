@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>로그인 화면</title>
+<th:block th:replace="/fragments/layouts/headerFragment.html :: headerFragment"></th:block>
+<link rel="stylesheet" href="css/loginForm.css">
+<script type="text/javascript" src="js/member.js"></script>
+</head>
+<body style="overflow: auto;">
+<!-- 헤더 영역 -->
+<th:block th:replace="/fragments/layouts/nav.html :: fragment-nav"></th:block>
+
+<!-- 본문 글 -->
+<div id = "main">
+	<h1> 본인인증 로그인 화면 </h1>
+<form method="post" action="loginAction" id="theform">
+	<div id="login">
+		<label>User ID</label>
+			<input class="login1" name="id" type="text" th:value="${id}"><br> 
+		<label>Password</label> 
+			<input class="login1" name="password" type="password"><br> 
+	</div>
+	        
+	<div class="clear"></div>
+	
+	<div id="buttons">
+		<input type="submit" value="로그인" class="submit">
+		<input type="button" value="회원가입" class="cancel"
+		     onclick="location='joinform'">
+		<input type="button" value="아이디 비밀번호 찾기" class="submit"
+		     onclick="find_id_form()">     
+	</div>
+</form>
+</div>
+<th:block th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
+</body>
+</html>

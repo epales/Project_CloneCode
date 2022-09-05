@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>메인 페이지</title>
+<head>
+	<th:block th:replace="/fragments/layouts/headerFragment.html :: headerFragment"></th:block>
+</head>
+<link rel="stylesheet" th:href="@{/css/product.css}">
+<body style="overflow: auto;">
+<!-- 본문 글 -->
+<th:block th:replace="/fragments/layouts/nav.html :: fragment-nav"></th:block>
+<div>상품 관리</div>
+<th:block th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
+</body>
+</html>
