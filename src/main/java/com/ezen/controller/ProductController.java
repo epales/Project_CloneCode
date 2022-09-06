@@ -194,33 +194,36 @@ public class ProductController {
 	
 	
 	@GetMapping("/searchCategory1")
-	public String searchCategory1(@RequestParam("CATEGORY1") String title, Model model) {
-		System.out.println("타이틀 값 :"+title);
-		List<Product> productList = productService.searchProductByCategory1(title);
-		System.out.println(productList);
+	public String searchCategory1(@RequestParam("CATEGORY1") String CATEGORY1, Model model) {
+		System.out.println("타이틀 값1 :"+CATEGORY1);
+		List<Product> productList = productService.searchProductByCategory1(CATEGORY1);
+		System.out.println("리스트:"+productList);
 		model.addAttribute("productList", productList);
+		model.addAttribute("message", CATEGORY1);
 		
-		return "product/searchProduct";
+		return "product/searchCategoryProduct";
 	}
 	
 	@GetMapping("/searchCategory2")
-	public String searchCategory2(@RequestParam("CATEGORY2") String title, Model model) {
-		System.out.println("타이틀 값 :"+title);
-		List<Product> productList = productService.searchProductByCategory2(title);
-		System.out.println(productList);
+	public String searchCategory2(@RequestParam("CATEGORY2") String CATEGORY2, Model model) {
+		System.out.println("타이틀 값2 :"+CATEGORY2);
+		List<Product> productList = productService.searchProductByCategory2(CATEGORY2);
+		System.out.println("리스트:"+productList);
 		model.addAttribute("productList", productList);
+		model.addAttribute("message", CATEGORY2);
 		
-		return "product/searchProduct";
+		return "product/searchCategoryProduct";
 	}
 	
 	@GetMapping("/searchCategory3")
-	public String searchCategory3(@RequestParam("CATEGORY3") String title, Model model) {
-		System.out.println("타이틀 값 :"+title);
-		List<Product> productList = productService.searchProductByCategory3(title);
-		System.out.println(productList);
+	public String searchCategory3(@RequestParam("CATEGORY3") String CATEGORY3, Model model) {
+		System.out.println("타이틀 값3 :"+CATEGORY3);
+		List<Product> productList = productService.searchProductByCategory3(CATEGORY3);
+		System.out.println("리스트:"+productList);
 		model.addAttribute("productList", productList);
+		model.addAttribute("message", CATEGORY3);
 		
-		return "product/searchProduct";
+		return "product/searchCategoryProduct";
 	}
 	
 	
