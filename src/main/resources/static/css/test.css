@@ -182,7 +182,7 @@ textarea{
 textarea::placeholder{
   color:#ddd;
 }
-img{
+.chatTop img{
   height:30px;
   cursor:pointer;
 }
