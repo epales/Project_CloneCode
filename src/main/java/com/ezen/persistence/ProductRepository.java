@@ -59,4 +59,9 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	@Query("SELECT b FROM Product b WHERE b.CATEGORY1=?1 OR b.CATEGORY2=?1 OR b.CATEGORY3=?1 ORDER BY b.P_ID DESC")
 	Page<Product> findProductByOrderByCategoryDesc(String category, Pageable pageable);
 	
+	@Query(value="SELECT count(*) FROM Product WHERE Category2=?1", nativeQuery = true)
+	int findCategoriesCountByName(String name);
+	
+	@Query(value="SELECT count(*) FROM Product WHERE Category3=?1", nativeQuery = true)
+	int findCategoriesCount2ByName(String name);
 }
