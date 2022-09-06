@@ -79,4 +79,8 @@ public class ProductService {
 	public Page<Product> findProductByOrderBytitleDesc(Pageable pageable,String title){
 		return proRepo.findProductByOrderBytitleDesc(title,pageable);
 	}
+	
+	public Page<Product> findProductByOrderByCategoryDesc(Pageable pageable,String category){
+		return proRepo.findProductByOrderByCategoryDesc(category,pageable);
+	}
 }

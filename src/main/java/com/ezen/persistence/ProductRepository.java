@@ -56,4 +56,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	@Query("SELECT b FROM Product b WHERE b.P_TITLE LIKE %?1% OR b.P_EXPLAIN LIKE %?1% ORDER BY b.P_ID DESC")
 	Page<Product> findProductByOrderBytitleDesc(String title, Pageable pageable);
 	
+	@Query("SELECT b FROM Product b WHERE b.CATEGORY1=?1 OR b.CATEGORY2=?1 OR b.CATEGORY3=?1 ORDER BY b.P_ID DESC")
+	Page<Product> findProductByOrderByCategoryDesc(String category, Pageable pageable);
+	
 }
