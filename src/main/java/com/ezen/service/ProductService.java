@@ -83,4 +83,10 @@ public class ProductService {
 	public Page<Product> findProductByOrderByCategoryDesc(Pageable pageable,String category){
 		return proRepo.findProductByOrderByCategoryDesc(category,pageable);
 	}
+	public int getCountByCateName(String name) {
+    	return proRepo.findCategoriesCountByName(name);
+    }
+	public int getCountByCate2Name(String name) {
+    	return proRepo.findCategoriesCount2ByName(name);
+    }
 }

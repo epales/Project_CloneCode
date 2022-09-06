@@ -1,6 +1,7 @@
 package com.ezen.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ezen.dto.Categories;
 import com.ezen.dto.Follow;
 import com.ezen.dto.Likes;
 import com.ezen.dto.LoginUser;
@@ -49,10 +51,10 @@ public class ProductController {
 	
 	@ResponseBody
 	@GetMapping(value = "/category", produces = "application/json; charset=UTF-8")
-	public String[] readCategory(String category) {
+	public List<String> readCategory(String category) {
 		Long id = testService.getCategoryId(category);
 		
-		String[] CategoryNames = testService.getCategoryName(id);
+		List<String> CategoryNames = testService.getCategoryName(id);
 		
 		for(String name : CategoryNames) {
 		System.out.println("배열 값 : "+ name);
@@ -71,10 +73,10 @@ public class ProductController {
 	
 	@ResponseBody
 	@GetMapping(value = "/categoryTap1", produces = "application/json; charset=UTF-8")
-	public String[] readCategoryTap1(String category) {
+	public List<String> readCategoryTap1(String category) {
 		
 		Long id = testService.getCategoryId(category);
-		String[] categoryTapNames = testService.getCategoryName(id);
+		List<String> categoryTapNames = testService.getCategoryName(id);
 		
 		for(String name : categoryTapNames) {
 			System.out.println("배열 값 : "+ name);
@@ -101,10 +103,10 @@ public class ProductController {
 		
 		long categoryId1 = testService.getCategoryId(vo.getCATEGORY1());
 		
-		String[] category2 = testService.getCategoryName(categoryId1);
+		List<String> category2 = testService.getCategoryName(categoryId1);
 		
 		long categoryId2 = testService.getCategoryId(vo.getCATEGORY2());
-		String[] category3 = testService.getCategoryName(categoryId2);
+		List<String> category3 = testService.getCategoryName(categoryId2);
 		
 		Optional<Likes> likes = null;
 		likes = Likesservice.findLikesByRseqAndId(vo.getP_ID(), (String)session.getAttribute("userId"));
@@ -197,21 +199,69 @@ public class ProductController {
 	public String searchCategory1(@RequestParam("CATEGORY1") String CATEGORY1, Model model) {
 		System.out.println("타이틀 값1 :"+CATEGORY1);
 		List<Product> productList = productService.searchProductByCategory1(CATEGORY1);
-		System.out.println("리스트:"+productList);
+		
+		Categories category = testService.getCategoryByName(CATEGORY1);
+		
+		List<String> category2List = testService.getCategoryNameById(category.getCategoryId());
+		int countCategory2 = 0;
+		
+		ArrayList<Integer> al = new ArrayList<Integer>(); 
+		for(String category2Name :category2List) {
+			countCategory2 = productService.getCountByCateName(category2Name);
+			al.add(countCategory2);
+		}
+		Integer[] array = al.toArray(new Integer[al.size()]);
+
+		
 		model.addAttribute("productList", productList);
+		model.addAttribute("categoryNameList2", category2List);
+		model.addAttribute("countCategory2", array);
+		
 		model.addAttribute("message", CATEGORY1);
 		
+		model.addAttribute("category1", category);
+		model.addAttribute("Category", 0);
 		return "product/searchCategoryProduct";
 	}
 	
 	@GetMapping("/searchCategory2")
 	public String searchCategory2(@RequestParam("CATEGORY2") String CATEGORY2, Model model) {
 		System.out.println("타이틀 값2 :"+CATEGORY2);
-		List<Product> productList = productService.searchProductByCategory2(CATEGORY2);
-		System.out.println("리스트:"+productList);
+		List<Product> productList = productService.searchProductByCategory2(CATEGORY2); // 카테고리 검색 상품목록
+		
+		Long category2 = testService.getParentId(CATEGORY2);                            // 카테고리 검색어의 상위 카테고리 아이디 
+		
+		List<String> category2List = testService.getCategoryName(category2);            // 상위 카테고리 이름 리스트 여성남성등등
+		
+		Categories category1 = testService.getCategoryByCateId(category2);                  // 상위 카테고리 전체 리스트 
+		Categories category2Name = testService.getCategoryByName(CATEGORY2);
+		
+		List<String> category3List = testService.getCategoryNameById(category2Name.getCategoryId());
+		
+		System.out.println("스트링 리스트: " + category3List);
+		int countCategory3 = 0;
+		
+		ArrayList<Integer> all = new ArrayList<Integer>(); 
+		
+		for(String category3Name : category3List) {
+			countCategory3 = productService.getCountByCate2Name(category3Name);
+			all.add(countCategory3);
+		}
+		
+		Integer[] array1 = all.toArray(new Integer[all.size()]);
+		
 		model.addAttribute("productList", productList);
+		model.addAttribute("categoryList2", category2List);
+		
 		model.addAttribute("message", CATEGORY2);
 		
+		model.addAttribute("category2", category2Name);
+		model.addAttribute("categoryNameList3", category3List);
+		
+		model.addAttribute("countCategory3", array1);
+		
+		model.addAttribute("category1", category1);
+		model.addAttribute("Category", 1);
 		return "product/searchCategoryProduct";
 	}
 	
@@ -219,9 +269,33 @@ public class ProductController {
 	public String searchCategory3(@RequestParam("CATEGORY3") String CATEGORY3, Model model) {
 		System.out.println("타이틀 값3 :"+CATEGORY3);
 		List<Product> productList = productService.searchProductByCategory3(CATEGORY3);
-		System.out.println("리스트:"+productList);
-		model.addAttribute("productList", productList);
-		model.addAttribute("message", CATEGORY3);
+
+		Long category3 = testService.getParentId(CATEGORY3);
+		
+		Categories category2 = testService.getCategoryByCateId(category3);
+		
+		Long category1Id = testService.getParentId(category2.getCategoryName());
+		
+		
+		Categories category1 = testService.getCategoryByCateId(category1Id);
+		
+		List<String> category3List = testService.getCategoryName(category3);
+		List<String> category2List = testService.getCategoryName(category2.getParentId());
+		
+		
+
+		model.addAttribute("productList", productList);                            // 상품 목록
+		
+		model.addAttribute("message", CATEGORY3);                                  // 상품 검색용 파라미터
+		model.addAttribute("category3", CATEGORY3);  							   // 셀렉트 박스 이름
+		
+		model.addAttribute("category1", category1);                                // 최상위 카테고리 리스트
+		model.addAttribute("category2", category2);                                // 상위 카테고리 리스트
+		
+		model.addAttribute("categoryList2", category2List);                        // 셀렉트 박스 리스트
+		model.addAttribute("categoryList3", category3List); 
+		// 셀렉트 박스 리스트
+		model.addAttribute("Category", 2);
 		
 		return "product/searchCategoryProduct";
 	}
