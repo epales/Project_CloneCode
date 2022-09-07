@@ -15,7 +15,7 @@
 		<div class="jplYmU">
 	<br>
 	<div class="productSession">
-		<h2>검색 결과</h2>
+		<h2 th:text="@{'['}+${message}+@{']'}+@{&nbsp;&nbsp;}+@{'의 검색결과'}" ></h2>
 	</div>
 	<br>
 <div class="main">
@@ -171,7 +171,6 @@
 
     </script>
 		</div>
-	<th:block
-		th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
+<th:block th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
 </body>
 </html>

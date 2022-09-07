@@ -53,7 +53,7 @@ public class Product {
 	
 	private String COUNT;
 	
-	@Column(insertable=true, updatable=true, columnDefinition="date default current_date")
+	@Column(insertable=false, updatable=true, columnDefinition="date default current_date")
 	private Date P_DATE;
 	
 	private String email;
@@ -62,4 +62,3 @@ public class Product {
 
 	private Long likesCount;
 }
-

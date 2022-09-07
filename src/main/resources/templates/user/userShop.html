@@ -10,6 +10,62 @@
 </head>
 <body style="overflow: auto;">
 <th:block th:replace="/fragments/layouts/nav.html :: fragment-nav"></th:block>
+<script th:inline="javascript">
+
+var follow = $("#followCheck");
+const followImg = document.getElementById("followImage");
+
+console.log("follow.val=", follow.val());
+
+function cancelFollow(myName) {
+	
+		$.ajax({
+            url: '/member/follow',
+            type: 'POST',
+            data: {'email': myName},
+            success: function (data) { 
+            	if(data == 0){
+            		alert("로그인 후 사용가능한 기능입니다.");
+					var url = "loginForm";
+					location.replace(url);
+				}else{
+            	console.log("팔로우 취소");
+            	location.reload();
+            	followImg.val("0")   
+                follow.val("0"); 
+               
+				}
+            }, error: function () {
+                console.log('오류입니다.');
+            }
+        });
+		alert("팔로우 취소되었습니다 ( ĭ˄ĭ)=p");
+	}; 
+function Follow(userName) {
+		
+		$.ajax({
+            url: '/member/follow',
+            type: 'POST',
+            data: {'email': userName},
+            success: function (data) { 
+            	if(data == 0){
+            		alert("로그인 후 사용가능한 기능입니다.");
+					var url = "loginForm";
+					location.replace(url);
+				}else{
+            	console.log("팔로우 취소");
+            	location.reload();
+            	followImg.val("0")   
+                follow.val("0"); 
+               
+				}
+            }, error: function () {
+                console.log('오류입니다.');
+            }
+        });
+		alert("팔로우 되었습니다 d=(´▽｀)");
+	}; 
+</script>
 <!-- 본문 글 -->
 <div class="mainPage1">
 	<div class="mainPage2">
@@ -38,33 +94,6 @@
 						</div>
 						<div class="mainPageTopRightContentSuccess">본인인증 완료</div>
 					</div>
-					<div class="mainPageTopRightMiddle">
-						<div class="mainPageTopRightMiddleContent">
-							<img
-								src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAfBJREFUSA3tU79rFFEQntkcuBesDF5pdyRFrjNaiJBgERA0pEh1P4yCC4rWFiH/gIWN1W4iIclZeKRIlS6gSZkUQQsbOwtBwUp2n4f3xm827LK32eICd90NHDvvm+/N9+bHMcGioHEkInfVH7Yx86ey155n2WlWTCQ/hMQZtojmY6ae67gVxxhaGpWIConQhBFzH1XYZQVGaWL5obbr3ihFNDcTLVLoN06KhICfdTdbt/IxE9SfG7/xLI93/ebtKGi+y+N6DoPGTwfD+iNbq26WIAcvr+AV1Z6V6SyuvhDVLNMFvEdSw6xrF/jIzUKfIcR7pvvvjXQ6E3EiEY6+/36NS5OY3yvZbk0ll8PNR3dI+DEe8eSvvzqT4JHfugF/HZOfMxtNL8E1p+ZWDdyJS3vLIovYxVM8WV82m5CB/QL2EcRrxDKvW6QxJg5R3eG5Lwvwr2bunID/DcI3QfxQ9t6vlzSIsr5YkRcIVFNy4ohch7uCRHHfUjiumB7k4PMwKgN/Tg8lLu3rdyR/Uk2ct7FQviMDn+NlyLOxUW12+DiLW2v95Ix1PcavnZzzX7Gyhs3VlU+tWAgi7tPdIGXBCf16KoR1/+p6/fE+blD3wOkTGi9DtkOX8gtnpIPvm8mlUhaTxzMq7ssA6Lh1AzSpmPIfjjO10v2iE7IAAAAASUVORK5CYII="
-								width="14" height="13" alt="상점오픈일 아이콘">상점오픈일
-							<div class="mainPageTopRightMiddleContentCount">100 일 전</div>
-						</div>
-						<div class="mainPageTopRightMiddleContent">
-							<img
-								src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAQBJREFUSA1jZCASNOz/z3L34Z1aBkaGZLCW/wxzleVVmhscGf8QYwQLMYpAakCW/GdgqGMAElBQBxQDMethAvhoJnySKHIwnyALYhNDlkdiE28RkiZymMRbBIwTDAuwiWEogggQHUegiAfHCSy4oIkBh7kjQJgxdtHtUIZ/jJP+M/yXoIV/GRkYXzAw/c9joqUlIIeDPQD0CPGpjkLvMoG8BfYehQbh0g4LOkZcCkDiMQtuIwocfAqhcksSVHGaR8egI8Kl1FAy6iOyQ5HoQhVkA3qqIiVVjsYR2XE0woIOubBFZsPCD1kMmQ2TR6bxBx20ZAcbAmQjawSzCckjaQAAJL9HBV3GwxoAAAAASUVORK5CYII="
-								width="14" height="13" alt="상점방문수 아이콘">상점방문수
-							<div class="mainPageTopRightMiddleContentCount">0 명</div>
-						</div>
-						<div class="mainPageTopRightMiddleContent">
-							<img
-								src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAl1JREFUSA21Vc9PE1EQnnktW2yIFy9GiCduSki4QjSGwA3qj248q/HCwQtnwg//CxKrMd4WMO2RQrxwkbQmBI0XExMxqQk3TTAt7Q4zu91l231btrq85KWz33wz39v3vn0F6HOYO7nHMvssA+ynwPxgXrebjc9So9LGbeue9StuvYpLFJ592lgHomsynbiP4thC+XLuCQDN8Rb8limxi8VTi7V1Ztm8SVQ/JICriPhUWhNRwRHFzJg1Y/24SO7CN+KGSNAotEVKGzPF1zJZsCSYk2POfwvld+8vsNg0dzq+klXPvYYSCyY54Xh41G/PlbDLRu3T+gEXZ1UKH1rTxffBRuZu7oHdoi3GTtRAZpxd+C2YD8aRW7dCK4pF3jA5y9v0tltEmggmOeEIV2oE143IxJedT4tcMAmARwjGC12xYG4Oj4TbrtFSMV+e/0kEw9psYiDWFBDuJ9YvohEiVWXrPkbkk4QrSim69DcCTFXV0CBUENBOcvndvQYNrKrCVOkPXyhfu5OhZ4SmAlxWqcyIMzlmyzVDvBCAtXd3tmppB0c2BNGtECcAKMKX1mxxLQCtmds5sIFWA1goFCMI6H5HGMMQKeNVqIsOC5Gg4gvxfXV5hmAj+EJj6YlDvkr+hhcTQFqNZ4EnN9RhXSQxgkD+pfpoe36Pn/nKiRhiBj4n8LaLRWykJSBwz1lbhrXN2eINSfkkfqN93sJoIW7oHHyrfn74/IfUa3hGEI5/qWIcQ/Tqqs85RugQggEjeUO0jdAhZN21vvOBHesX9m+oZ4QOIaeVfLiJDfdG8NqdARu11RN7gt5lAAAAAElFTkSuQmCC"
-								width="14" height="13" alt="상품판매 아이콘">상품판매
-							<div class="mainPageTopRightMiddleContentCount">0 회</div>
-						</div>
-						<div class="mainPageTopRightMiddleContent">
-							<img
-								src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAQlJREFUSA1jZEACoceOcf5k+HqV4T+DIpIwnMnEzGyywcLpLEgg4MQ+439//56BSyIzGBnuszNwa6+2svoOE2aCMUD0r/9fq3FZgqyOIBvoULBZSArhFvmd3qfOwMhQiiRHGRNoFthMqClwixh//536/z8DG2WmI3SDzAKZCRMBWxRwbG8kUMIZJkgtGmQmyGyQeUzRJ07w/WP430ctw9HNAZkNsoPly9+vLQwM/yXQFVCN//+/BMgOFkZWpnmM/xgXEmOwGAvfdZg6EPsVwycTGB8vzcT4F6/8kJRkDDi2J40eLmf59///THpYBM+wtLZs1CKyQ3g06EaDDh4Co4kBHhSkMoZf0AEAMN1RWGgFcjgAAAAASUVORK5CYII="
-								width="14" height="13" alt="상퓸발송 아이콘">택배발송
-							<div class="mainPageTopRightMiddleContentCount">0 회</div>
-						</div>
-					</div>
-					<div class="mainPageTopRightMiddleBlock"></div>
 				</div>
 			</div>
 		</div>
@@ -74,11 +103,11 @@
 					<a class="rightselectMenu" href="#tab01" >상품&nbsp;
 						<span class="sc-dKEPtC iwPSFv" th:text="${count}"></span>
 					</a>
-					<a class="rightselectMenu" href="#tab03">팔로잉
-						<span class="sc-dKEPtC iwPSFv">0</span>
+					<a class="rightselectMenu" href="#tab03">팔로잉&nbsp;
+						<span class="sc-dKEPtC iwPSFv" th:text="${followingCount}"></span>
 					</a>
-					<a class="rightselectMenu" href="#tab04">팔로워
-						<span class="sc-dKEPtC iwPSFv">0</span>
+					<a class="rightselectMenu" href="#tab04">팔로워&nbsp;
+						<span class="sc-dKEPtC iwPSFv" th:text="${followerCount}"></span>
 					</a>
 				</div>
 			</div>
@@ -89,7 +118,7 @@
 						<div class="clear">
 						<div class="mainform">
 							<div class="productform" th:each="product : ${productList}">
-						<a class="aClass" th:href="@{product_detail(P_ID=${product.P_ID})}" target="_blank" rel="noopener noreferrer">
+						<a class="aClass" th:href="@{/product_detail(P_ID=${product.P_ID})}" target="_blank" rel="noopener noreferrer">
 							<div class="imageBlock">
 								<img th:src="@{/image/}+${product.image1}" class="imageClass" width="194" height="194" alt="상품 이미지">
 								<div class="middleBlock"></div>
@@ -113,23 +142,40 @@
 		      <div id="tab03">
 		      		<div class="sc-jbWsrJ duDzEA">
 						<div class="sc-dBAPYN ukhwt">
-							<div>
-								팔로잉<span class="sc-hqGPoI bBhBvp">0</span>
+							<div class="sc-dNoQZL etnqDb">
+								<div class="sc-gQNndl klVXcn">
+										<div class="sc-MYvYT cFagDy" th:each="follow : ${followers}">
+											<div class="sc-cgzHhG iSMChO" id="followingCheck" th:value=${follow.following}>
+												<a class="sc-bTiqRo cGZvRs" th:href="@{/shop/}+${follow.following}">
+													<img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxjaXJjbGUgZmlsbD0iI0ZBRkFGQSIgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIi8+CiAgICAgICAgPHBhdGggZD0iTTM2LjIxNiA0MS42ODNjLjI0OC0xLjkzMS40OTgtMy44NjIuNzUtNS43OTRoNi43OWwtLjI4MyA1LjUzN2MwIC4wMTcuMDA3LjAzNC4wMDcuMDUxLS4wMDIuMDEtLjAwMi4wMi0uMDAyLjAzLS4wOTggMS44NzYtMS44OTcgMy4zOTItNC4wMzUgMy4zOTItMS4wNjYgMC0yLjAxOC0uMzktMi42MTUtMS4wNzItLjUxLS41ODUtLjcyMi0xLjMyNS0uNjEyLTIuMTQ0em04Ljg4OCA0LjA3OGMxLjIyNCAxLjI4OSAzLjAwOSAyLjAyOCA0Ljg5IDIuMDI4IDEuODkgMCAzLjY3NC0uNzQgNC45LTIuMDMzLjEwNy0uMTEyLjIwNy0uMjI4LjMwNC0uMzQ1IDEuMjggMS40NDcgMy4yMTcgMi4zNzggNS4zNSAyLjM3OC4xMTIgMCAuMjE2LS4wMjcuMzI4LS4wMzJWNjMuNkgzOS4xMTVWNDcuNzU3Yy4xMTIuMDA1LjIxNS4wMzIuMzI4LjAzMiAyLjEzMyAwIDQuMDcxLS45MzEgNS4zNTEtMi4zOC4wOTkuMTIxLjIuMjM4LjMxLjM1MnptMS41NDUtOS44NzJoNi42OThsLjI4MiA1LjYxOWMwIC4wMTUtLjAwNy4wMjctLjAwNy4wNGwuMDA0LjA4NmEyLjkzOSAyLjkzOSAwIDAgMS0uODI2IDIuMTMyYy0xLjM2NyAxLjQ0LTQuMjMzIDEuNDQxLTUuNjA0LjAwM2EyLjk1IDIuOTUgMCAwIDEtLjgzLTIuMTQybC4wMDQtLjA3OGMwLS4wMTYtLjAwOC0uMDMtLjAwOC0uMDQ4bC4yODctNS42MTJ6bTE2LjM3NiAwYy4yNTIgMS45MzMuNTAyIDMuODY1Ljc1MyA1LjgwNC4xMDkuODEtLjEwNCAxLjU0Ny0uNjE0IDIuMTMyLS41OTYuNjgzLTEuNTUgMS4wNzQtMi42MTYgMS4wNzQtMi4xMzcgMC0zLjkzMi0xLjUxNC00LjAzNC0zLjM4OGEuMzU5LjM1OSAwIDAgMC0uMDAzLS4wNDRjMC0uMDE1LjAwNi0uMDI3LjAwNi0uMDRsLS4yNzgtNS41MzhoNi43ODZ6TTM2LjIyNiA0Ni45NDZ2MTguMDk4YzAgLjc5OC42NDYgMS40NDUgMS40NDQgMS40NDVoMjQuNjVjLjc5OSAwIDEuNDQ1LS42NDcgMS40NDUtMS40NDVWNDYuOTQ2Yy41OS0uMzI4IDEuMTM3LS43MTkgMS41NzUtMS4yMiAxLjA2MS0xLjIxNCAxLjUyMi0yLjc4NSAxLjMwMS00LjQxLS4zLTIuMzU1LS42MDctNC43MDctLjkxOC03LjA2YTEuNDQzIDEuNDQzIDAgMCAwLTEuNDMxLTEuMjU3SDM1LjY5OWMtLjcyNCAwLTEuMzM4LjUzOC0xLjQzMSAxLjI1Ny0uMzExIDIuMzU0LS42MTcgNC43MDctLjkxNiA3LjA1LS4yMjEgMS42MzcuMjQgMy4yMDggMS4zIDQuNDIxLjQzOS41MDIuOTg0Ljg5MyAxLjU3NCAxLjIyeiIgZmlsbD0iI0NDQyIvPgogICAgPC9nPgo8L3N2Zz4K" width="60" height="60" alt="팔로워 프로필 이미지">
+												</a>
+												<a class="sc-jtHxuu jnsWmN" th:href="@{/shop/}+${follow.following}"><span th:text="${follow.followingName}"></span></a>
+											</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="sc-ZUflv hpxrsh">아직 팔로우한 사람이 없습니다.</div>
 					</div>
 		      </div>
 		      <div id="tab04">
 		      		<div class="sc-exdmVY llQzap">
 						<div class="sc-dBAPYN ukhwt">
-							<div>
-								팔로워<span class="sc-evWYkj jEWXmx">0</span>
+							<div class="sc-dNoQZL etnqDb">
+								<div class="sc-gQNndl klVXcn">
+										<div class="sc-MYvYT cFagDy" th:each="follower : ${followings}">
+											<div class="sc-cgzHhG iSMChO">
+											<a class="sc-bTiqRo cGZvRs" th:href="@{/shop/}+${follower.follower}">
+											<img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxjaXJjbGUgZmlsbD0iI0ZBRkFGQSIgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIi8+CiAgICAgICAgPHBhdGggZD0iTTM2LjIxNiA0MS42ODNjLjI0OC0xLjkzMS40OTgtMy44NjIuNzUtNS43OTRoNi43OWwtLjI4MyA1LjUzN2MwIC4wMTcuMDA3LjAzNC4wMDcuMDUxLS4wMDIuMDEtLjAwMi4wMi0uMDAyLjAzLS4wOTggMS44NzYtMS44OTcgMy4zOTItNC4wMzUgMy4zOTItMS4wNjYgMC0yLjAxOC0uMzktMi42MTUtMS4wNzItLjUxLS41ODUtLjcyMi0xLjMyNS0uNjEyLTIuMTQ0em04Ljg4OCA0LjA3OGMxLjIyNCAxLjI4OSAzLjAwOSAyLjAyOCA0Ljg5IDIuMDI4IDEuODkgMCAzLjY3NC0uNzQgNC45LTIuMDMzLjEwNy0uMTEyLjIwNy0uMjI4LjMwNC0uMzQ1IDEuMjggMS40NDcgMy4yMTcgMi4zNzggNS4zNSAyLjM3OC4xMTIgMCAuMjE2LS4wMjcuMzI4LS4wMzJWNjMuNkgzOS4xMTVWNDcuNzU3Yy4xMTIuMDA1LjIxNS4wMzIuMzI4LjAzMiAyLjEzMyAwIDQuMDcxLS45MzEgNS4zNTEtMi4zOC4wOTkuMTIxLjIuMjM4LjMxLjM1MnptMS41NDUtOS44NzJoNi42OThsLjI4MiA1LjYxOWMwIC4wMTUtLjAwNy4wMjctLjAwNy4wNGwuMDA0LjA4NmEyLjkzOSAyLjkzOSAwIDAgMS0uODI2IDIuMTMyYy0xLjM2NyAxLjQ0LTQuMjMzIDEuNDQxLTUuNjA0LjAwM2EyLjk1IDIuOTUgMCAwIDEtLjgzLTIuMTQybC4wMDQtLjA3OGMwLS4wMTYtLjAwOC0uMDMtLjAwOC0uMDQ4bC4yODctNS42MTJ6bTE2LjM3NiAwYy4yNTIgMS45MzMuNTAyIDMuODY1Ljc1MyA1LjgwNC4xMDkuODEtLjEwNCAxLjU0Ny0uNjE0IDIuMTMyLS41OTYuNjgzLTEuNTUgMS4wNzQtMi42MTYgMS4wNzQtMi4xMzcgMC0zLjkzMi0xLjUxNC00LjAzNC0zLjM4OGEuMzU5LjM1OSAwIDAgMC0uMDAzLS4wNDRjMC0uMDE1LjAwNi0uMDI3LjAwNi0uMDRsLS4yNzgtNS41MzhoNi43ODZ6TTM2LjIyNiA0Ni45NDZ2MTguMDk4YzAgLjc5OC42NDYgMS40NDUgMS40NDQgMS40NDVoMjQuNjVjLjc5OSAwIDEuNDQ1LS42NDcgMS40NDUtMS40NDVWNDYuOTQ2Yy41OS0uMzI4IDEuMTM3LS43MTkgMS41NzUtMS4yMiAxLjA2MS0xLjIxNCAxLjUyMi0yLjc4NSAxLjMwMS00LjQxLS4zLTIuMzU1LS42MDctNC43MDctLjkxOC03LjA2YTEuNDQzIDEuNDQzIDAgMCAwLTEuNDMxLTEuMjU3SDM1LjY5OWMtLjcyNCAwLTEuMzM4LjUzOC0xLjQzMSAxLjI1Ny0uMzExIDIuMzU0LS42MTcgNC43MDctLjkxNiA3LjA1LS4yMjEgMS42MzcuMjQgMy4yMDggMS4zIDQuNDIxLjQzOS41MDIuOTg0Ljg5MyAxLjU3NCAxLjIyeiIgZmlsbD0iI0NDQyIvPgogICAgPC9nPgo8L3N2Zz4K"
+												width="60" height="60" alt="프로필 이미지">
+											</a>
+											<a class="sc-jtHxuu jnsWmN" th:href="@{/shop/}+${follower.follower}"><span th:text="${follower.followerName}"></span></a>			
+											</div>
+										</div>
+									</div>
+								</div>		
 							</div>
 						</div>
-						<div class="sc-iKpIOp mPnEf">아직 이 상점을 팔로우한 사람이 없습니다.</div>
 					</div>
-		      </div>
 		    </div>
 		</div>
 	</div>

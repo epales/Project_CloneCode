@@ -9,6 +9,9 @@ body{
 }
 .chatTop {
 	text-align: center;
+	display: flex;
+	-webkit-box-pack: center;
+    justify-content: space-between;	
 }
 .chatListContainer{
   width:750px;
@@ -90,17 +93,8 @@ h2,h3{
   display:inline-block;
   vertical-align:top;
 }
-.chatTop img:first-child{
-  border-radius:50%;
-}
-.chatTop img:last-child{
 
-  margin-top:8px;
-}
-.chatTop div{
-  margin-left:10px;
- 
-}
+
 .name_container{
   font-size:16px;
   margin-bottom:5px;
@@ -183,7 +177,7 @@ textarea::placeholder{
   color:#ddd;
 }
 .chatTop img{
-  height:30px;
+
   cursor:pointer;
 }
 main footer a{

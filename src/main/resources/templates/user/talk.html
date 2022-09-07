@@ -74,14 +74,12 @@ function play() {
     <div class="chatContainer display-none">
         <div class="chatTop">
             <div class="floatLeft" id="loginOn">
-                <img class="profile_img" id="setPic"><!-- src 사진 경로 동적 생성 -->
+                <img class="profile_img" id="setPic" width="30" height="30"><!-- src 사진 경로 동적 생성 -->
             </div>
             <div class="name_container font_noto" id="setName"><!-- 이름 동적 생성 --></div>
             <div class="floatRight">
-                <img th:src="@{/image/left.png}" class="btnImg close">
-            </div>
-            <div class="floatRight">
-                <img th:src="@{/image/ee442d3dd827628bc5fe.png}" class="btnImg down">
+                <img th:src="@{/image/left.png}" class="btnImg close" width="20" height="20" style="padding-right: 5px;">
+                <img th:src="@{/image/ee442d3dd827628bc5fe.png}" class="btnImg down" width="25" height="25">
             </div>
         </div>
         <div class="chatMiddle">

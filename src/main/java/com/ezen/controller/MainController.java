@@ -40,11 +40,16 @@ public class MainController {
     private FollowService followService;
     
 	@GetMapping("/index")
-	public String index(Model model) {
+	public String index(Model model, HttpSession session) {
 		
 		List<Product> product = productService.findAllProduct();
 		model.addAttribute("productList", product);
 		
+		String loginUser = (String)session.getAttribute("userId");
+		if(loginUser != null) {
+			int likesCount = likeService.findLikesCountById(loginUser);
+			model.addAttribute("likesCount", likesCount);
+		}
 		return "index";
 	}
 	
@@ -128,6 +133,8 @@ public class MainController {
 				model.addAttribute("following", 1);
 			}
 			
+			model.addAttribute("Myfollower", follower);
+			
 			List<Product> likeProduct = new ArrayList<Product>();
 			
 			
@@ -138,6 +145,7 @@ public class MainController {
 			}
 			
 			System.out.println("팔로워:" + follower);
+			
 			model.addAttribute("followings",following);
 			model.addAttribute("followers",follower);
 			

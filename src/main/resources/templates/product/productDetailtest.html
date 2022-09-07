@@ -528,13 +528,13 @@ function createTalk(){
 									<div class="sc-cfWELz LktPy">
 										<div class="sc-kAdXeD iUZayF">
 											<a class="sc-hCaUpS hETnQo" th:href="@{/shop/}+${productList.email}">
-											<img src="https://media.bunjang.co.kr/images/crop/841260263_w96.jpg"
+											<img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxjaXJjbGUgZmlsbD0iI0ZBRkFGQSIgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIi8+CiAgICAgICAgPHBhdGggZD0iTTM2LjIxNiA0MS42ODNjLjI0OC0xLjkzMS40OTgtMy44NjIuNzUtNS43OTRoNi43OWwtLjI4MyA1LjUzN2MwIC4wMTcuMDA3LjAzNC4wMDcuMDUxLS4wMDIuMDEtLjAwMi4wMi0uMDAyLjAzLS4wOTggMS44NzYtMS44OTcgMy4zOTItNC4wMzUgMy4zOTItMS4wNjYgMC0yLjAxOC0uMzktMi42MTUtMS4wNzItLjUxLS41ODUtLjcyMi0xLjMyNS0uNjEyLTIuMTQ0em04Ljg4OCA0LjA3OGMxLjIyNCAxLjI4OSAzLjAwOSAyLjAyOCA0Ljg5IDIuMDI4IDEuODkgMCAzLjY3NC0uNzQgNC45LTIuMDMzLjEwNy0uMTEyLjIwNy0uMjI4LjMwNC0uMzQ1IDEuMjggMS40NDcgMy4yMTcgMi4zNzggNS4zNSAyLjM3OC4xMTIgMCAuMjE2LS4wMjcuMzI4LS4wMzJWNjMuNkgzOS4xMTVWNDcuNzU3Yy4xMTIuMDA1LjIxNS4wMzIuMzI4LjAzMiAyLjEzMyAwIDQuMDcxLS45MzEgNS4zNTEtMi4zOC4wOTkuMTIxLjIuMjM4LjMxLjM1MnptMS41NDUtOS44NzJoNi42OThsLjI4MiA1LjYxOWMwIC4wMTUtLjAwNy4wMjctLjAwNy4wNGwuMDA0LjA4NmEyLjkzOSAyLjkzOSAwIDAgMS0uODI2IDIuMTMyYy0xLjM2NyAxLjQ0LTQuMjMzIDEuNDQxLTUuNjA0LjAwM2EyLjk1IDIuOTUgMCAwIDEtLjgzLTIuMTQybC4wMDQtLjA3OGMwLS4wMTYtLjAwOC0uMDMtLjAwOC0uMDQ4bC4yODctNS42MTJ6bTE2LjM3NiAwYy4yNTIgMS45MzMuNTAyIDMuODY1Ljc1MyA1LjgwNC4xMDkuODEtLjEwNCAxLjU0Ny0uNjE0IDIuMTMyLS41OTYuNjgzLTEuNTUgMS4wNzQtMi42MTYgMS4wNzQtMi4xMzcgMC0zLjkzMi0xLjUxNC00LjAzNC0zLjM4OGEuMzU5LjM1OSAwIDAgMC0uMDAzLS4wNDRjMC0uMDE1LjAwNi0uMDI3LjAwNi0uMDRsLS4yNzgtNS41MzhoNi43ODZ6TTM2LjIyNiA0Ni45NDZ2MTguMDk4YzAgLjc5OC42NDYgMS40NDUgMS40NDQgMS40NDVoMjQuNjVjLjc5OSAwIDEuNDQ1LS42NDcgMS40NDUtMS40NDVWNDYuOTQ2Yy41OS0uMzI4IDEuMTM3LS43MTkgMS41NzUtMS4yMiAxLjA2MS0xLjIxNCAxLjUyMi0yLjc4NSAxLjMwMS00LjQxLS4zLTIuMzU1LS42MDctNC43MDctLjkxOC03LjA2YTEuNDQzIDEuNDQzIDAgMCAwLTEuNDMxLTEuMjU3SDM1LjY5OWMtLjcyNCAwLTEuMzM4LjUzOC0xLjQzMSAxLjI1Ny0uMzExIDIuMzU0LS42MTcgNC43MDctLjkxNiA3LjA1LS4yMjEgMS42MzcuMjQgMy4yMDggMS4zIDQuNDIxLjQzOS41MDIuOTg0Ljg5MyAxLjU3NCAxLjIyeiIgZmlsbD0iI0NDQyIvPgogICAgPC9nPgo8L3N2Zz4K"
 												width="48" height="48" alt="판매자 프로필 이미지"></a>
 											<div class="sc-bvTASY kPSgtk">
 												<a class="sc-koErNt iFrtND" th:href="@{/shop/}+${productList.email}"><span th:text="${User.username}"></span><span>의 상점</span></a>
 												<div class="sc-gJqsIT cFKvJM">
-													<a class="sc-kDhYZr dVnjfA" href="/shop/79636123/products">상품62</a><a
-														class="sc-kDhYZr dVnjfA" href="/shop/79636123/followers">팔로워10</a>
+													<a class="sc-kDhYZr dVnjfA" th:href="@{/shop/}+${productList.email}"><span th:text=@{상품&nbsp;}+${count}></span></a>
+													<a class="sc-kDhYZr dVnjfA" th:href="@{/shop/}+${productList.email}"><span th:text=@{팔로워&nbsp;}+${followerCount}></span></a>
 												</div>
 											</div>
 										</div>
@@ -548,30 +548,21 @@ function createTalk(){
 											 width="21" height="14" alt="팔로우 버튼 아이콘">팔로잉
 										</button>
 										
-										<div class="sc-sPYgB bGvQBG">
-											<div class="sc-dHIava cDIveb">
-												<a data-pid="194933402" class="sc-RbTVP JMDJI" href="">
-													<img src="https://media.bunjang.co.kr/product/194933402_1_1659148705_w240_h192.jpg"
+										<div class="sc-sPYgB bGvQBG" >
+											<div class="sc-dHIava cDIveb" th:each="limitPro : ${limit}">
+												<a data-pid="194933402" class="sc-RbTVP JMDJI" th:href="@{/shop/}+${limitPro.email}">
+													<img th:src="@{/image/}+${limitPro.image1}"
 													width="120" height="96" alt="상품 이미지">
 													<div class="sc-hMrMfs epyWUV">
-															<span>7,000</span>원
+															<span th:text="${limitPro.PRICE}+@{&nbsp;원}"></span>
 													</div>
 														<div class="sc-drlKqa cUjesI"></div>
 												</a>
 											</div>
-											<div class="sc-dHIava cDIveb">
-												<a data-pid="195499488" class="sc-RbTVP JMDJI" href="">
-													<img src="https://media.bunjang.co.kr/product/195499488_1_1659668281_w240_h192.jpg"
-														width="120" height="96" alt="상품 이미지">
-													<div class="sc-hMrMfs epyWUV">
-															<span>7,000</span>원
-													</div>
-													<div class="sc-drlKqa cUjesI"></div>
-												</a>
-											</div>
+											
 										</div>
 										<div class="sc-jhaWeW gSZSpK">
-											<a class="sc-guztPN imRUwG" href="/shop/79636123/products">
+											<a class="sc-guztPN imRUwG" th:href="@{/shop/}+${productList.email}">
 											<span class="sc-hAXbOi hfQwPP" th:text=${count}+@{개}></span>상품 더보기</a>
 										</div>
 									</div>

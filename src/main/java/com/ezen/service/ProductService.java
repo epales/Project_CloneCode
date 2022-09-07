@@ -1,6 +1,5 @@
 package com.ezen.service;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,4 +102,8 @@ public class ProductService {
 	public int getCountByCate2Name(String name) {
     	return proRepo.findCategoriesCount2ByName(name);
     }
+	
+	public List<Product> limitProduct2(String email){
+		return proRepo.findTop2ByEmailOrderByLikesCountDesc(email);
+	}
 }
