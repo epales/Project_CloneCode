@@ -117,6 +117,7 @@ function previewImage(targetObj, View_area) {
             continue;
         }
     }
+    console.log(filesArr);
    $("#input_file").val("");
 }
 
@@ -281,6 +282,89 @@ function registerAction(){
    	      type: "POST",
    	   	  enctype: "multipart/form-data",
    	      url: "/file-upload",
+       	  data : formData,
+       	  processData: false,
+   	      contentType: false,
+   	      success: function (data) {
+   	    	if(JSON.parse(data)['result'] == "OK"){
+   	    		alert("파일업로드 성공");
+   	    		var moveurl= "/index";
+   	    		location.replace(moveurl);
+			} else
+				alert("최소 한 개의 이미지를 추가해주세요!");
+   	      },
+   	      error: function (xhr, status, error) {
+   	    	alert("최소 한 개의 이미지를 추가해주세요!");
+   	     return false;
+   	      }
+   	    });
+   	    return false;
+	}
+
+function updateAction(){
+	
+	var title      = document.getElementById("P_TITLE").value; 
+	
+	var category1      = document.getElementById("category1");
+	var category2      = document.getElementById("category2");
+	var category3      = document.getElementById("category3");
+	
+	var price      = document.getElementById("price").value;
+	
+	var explain    = document.getElementById("explain").value;
+	
+	var count      = document.getElementById("count").value; 
+	
+	
+	if(title == ""){
+		alert("제목을 입력해주세요!")
+		return false;
+	} else if(category1.value == "1"){
+		alert("카테고리 대분류를 선택해주세요!")
+		return false;
+	} else if(category2.value == "1"){
+		alert("카테고리 중분류를 선택해주세요!")
+		return false;
+	} else if(category3.value == "1"){
+		alert("카테고리 소분류를 선택해주세요!")
+		return false;
+	} else if(price == ""){
+		alert("가격을 입력해주세요!")
+		return false;
+	} else if(explain == ""){
+		alert("설명을 입력해주세요!")
+		return false;
+	} else if(count == ""){
+		alert("수량을 입력해주세요!")
+		return false;
+	} 
+	
+	
+	if((count.keyCode > 48 && count.keyCode < 57 ) 
+      || count.keyCode == 8 //backspace
+      || count.keyCode == 37 || count.keyCode == 39 //방향키 →, ←
+      || count.keyCode == 46 
+      || count.keyCode == 39){
+   	}else{
+ 	 count.returnValue=false;
+   	}
+	
+	var form = $("#dataForm")[0];        
+ 	var formData = new FormData(form);
+		for (var x = 0; x < filesArr.length; x++) {
+			// 삭제 안한것만 담아 준다. 
+			if(!filesArr[x].is_delete){
+				 formData.append("article_file", filesArr[x]);
+			}
+		}
+   /*
+   * 파일업로드 multiple ajax처리
+   */    
+   console.log(form);
+	$.ajax({
+   	      type: "POST",
+   	   	  enctype: "multipart/form-data",
+   	      url: "/updateFile-upload",
        	  data : formData,
        	  processData: false,
    	      contentType: false,

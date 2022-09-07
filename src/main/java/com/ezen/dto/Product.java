@@ -53,7 +53,7 @@ public class Product {
 	
 	private String COUNT;
 	
-	@Column(insertable=false, updatable=false, columnDefinition="date default current_date")
+	@Column(insertable=true, updatable=true, columnDefinition="date default current_date")
 	private Date P_DATE;
 	
 	private String email;

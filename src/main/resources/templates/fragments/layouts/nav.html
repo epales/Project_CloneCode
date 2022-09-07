@@ -20,6 +20,8 @@
 
 			}
 		});
+		
+		
 	</script>
 <script type="text/javascript" th:inline="javascript">
 $(document).ready(function() {
@@ -69,7 +71,7 @@ $(".ijOTSi").mouseenter(function() {
 		var $third = $("#thirdcate");
 		$third.empty();
 	
-		getOption2($(this).html());
+		Option2($(this).html());
 	});
 	
 	$(".sc-caSCKo").mouseleave(function() {
@@ -82,7 +84,7 @@ $(".ijOTSi").mouseenter(function() {
 		
 		$(this).css("background-color","black");
 		$("#thirdcatediv").css("display", "inline-block");
-		getOption3($(this).html());
+		Option3($(this).html());
 	});
 	
 	$(".cROcuna").on("mouseleave","a",function() {
@@ -103,7 +105,7 @@ $(".ijOTSi").mouseenter(function() {
 
 
 
-function getOption2(option) {
+function Option2(option) {
 	$.ajax({
 		type : 'GET',
 		url : '/categoryTap1',
@@ -125,7 +127,7 @@ function getOption2(option) {
 	})
 }
 
-function getOption3(option) {
+function Option3(option) {
 	$.ajax({
 	type : 'GET',
 	url : '/categoryTap1',
@@ -196,9 +198,7 @@ function getOption3(option) {
 					<a href="/index"><img src="/image/logo.jpg"></a>
 				</div>
 				<div class="d">
-					<input type="text" name="title" placeholder="상품명 입력" id="search"
-						class="search" value="" autocomplete="off"> <a href="#"><img
-						src="/image/searchImage.png"></a>
+					<input type="text" name="title" placeholder="상품명 입력" id="search" class="search" value="" autocomplete="off"> <a href="#"><img src="/image/searchImage.png"></a>
 				</div>
 				<div class="e">
 					<div th:if="${session.userId == null}" class="e_myshop">

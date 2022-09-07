@@ -1,5 +1,6 @@
 package com.ezen.persistence;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -19,6 +20,9 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	@Query("SELECT b FROM Product b")
 	List<Product> findAllProduct();
 	
+	//@Query("SELECT b FROM Product b WHERE b.email=?1 ORDER BY P_ID DESC limit 2")
+	//List<Product> findProductCount2ByEmail(String email);
+	
 	@Query("SELECT b FROM Product b WHERE b.email=?1")
 	List<Product> findProductByEmail(String email);
 	
@@ -30,6 +34,9 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	
 	@Query("SELECT b FROM Product b WHERE b.P_TITLE LIKE %?1% OR b.P_EXPLAIN LIKE %?1%")
 	List<Product> searchProductByTitle(String title);
+	
+	@Query("SELECT b FROM Product b WHERE b.P_TITLE LIKE %?1% ORDER BY b.P_ID DESC")
+	List<Product> searchProductByOnlyTitle(String title);
 	
 	@Query("SELECT b FROM Product b WHERE b.CATEGORY1=?1")
 	List<Product> searchProductByCategory1(String title);
@@ -64,4 +71,9 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	
 	@Query(value="SELECT count(*) FROM Product WHERE Category3=?1", nativeQuery = true)
 	int findCategoriesCount2ByName(String name);
+	
+	@Transactional
+	@Modifying
+	@Query(value="DELETE FROM Product WHERE P_ID=?1", nativeQuery=true)
+	void deleteProduct(Long id);	
 }

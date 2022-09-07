@@ -1,5 +1,6 @@
 package com.ezen.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,17 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository proRepo;
+	
+	public void updateProduct1(Product vo) {
+		java.util.Date utilDate = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		vo.setP_DATE(sqlDate);
+		proRepo.save(vo);
+	}
+	
+	public void deleteProduct(Long id) {
+		proRepo.deleteProduct(id);
+	}
 	
 	public void insertProduct(Product vo) {
 		vo.setLikesCount(0L);
@@ -62,7 +74,9 @@ public class ProductService {
 	public List<Product> searchProduct(String title){
 		return proRepo.searchProductByTitle(title);
 	}
-	
+	public List<Product> searchProductOnlyTitle(String title){
+		return proRepo.searchProductByOnlyTitle(title);
+	}
 	public List<Product> searchProductByCategory1(String title){
 		return proRepo.searchProductByCategory1(title);
 	}

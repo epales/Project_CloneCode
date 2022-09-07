@@ -193,7 +193,44 @@ public class ProductController {
 		
 		return strResult;
 	}
-	
+	@ResponseBody
+	@RequestMapping(value = "/updateFile-upload", method = RequestMethod.POST)
+	public String updateFileUpload(Product vo, @RequestParam("article_file") List<MultipartFile> multipartFile
+			, HttpServletRequest request) {
+		System.out.println("입력 값:"+vo);
+		String strResult = "{ \"result\":\"FAIL\" }";
+		
+		try {
+			// 파일이 있을때 탄다.
+			if(multipartFile.size()>0) {
+				for(MultipartFile file: multipartFile) {
+					String originFileName = file.getOriginalFilename(); 
+					String image_path = System.getProperty("user.dir") + "/src/main/resources/static/image/";
+		            String safeFile = image_path  + originFileName;
+		            
+		            if(vo.getImage1()==null) {
+		            	vo.setImage1(originFileName);
+		            } else if(vo.getImage2()==null) {
+		            	vo.setImage2(originFileName);
+			        } else if(vo.getImage3()==null) {
+				        vo.setImage3(originFileName);
+				    } else if(vo.getImage4()==null) {
+				        vo.setImage4(originFileName);
+				    } else if(vo.getImage5()==null) {
+				        vo.setImage5(originFileName);
+				    }
+				file.transferTo(new File(safeFile));
+				}	
+				strResult = "{ \"result\":\"OK\" }";
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		productService.updateProduct1(vo);
+		
+		return strResult;
+	}
 	
 	@GetMapping("/searchCategory1")
 	public String searchCategory1(@RequestParam("CATEGORY1") String CATEGORY1, Model model) {

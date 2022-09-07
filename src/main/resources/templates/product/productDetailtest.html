@@ -444,7 +444,7 @@ function createTalk(){
 											</div>
 										</div>
 									</div>
-									<div class="sc-exkUMo kzMKbs">
+									<div class="sc-exkUMo kzMKbs" th:if=${productList.email!=userId}>
 										<div class="sc-kcDeIU eFcZOs">
 											<button class="sc-bFADNz iJsbWz"  id="likesChk" name="likesChk" th:value="${likes}" th:if="${likes == 0}">
 												<div class="likeImage" th:if="${likes == 0}">
@@ -462,11 +462,15 @@ function createTalk(){
 											</button>
 										</div>
 										<button class="sc-cqpYsc gKnWUi" onclick="createTalk()">
-											<img 
-												src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAy1JREFUWAndmM1LFVEYxp2bVxDsA0GhIoygAo2I7EKLoKJsYZG7iDYG/QNCUZvctSkIAqVFCze1toIWrkqynUaJ0VKUSkr7okubpG6/J+Zc5w7jzJ1zxnulFx7O1/s+7zMzZ86cOV5DlVYqlfK4HgN9oBNsA9tBC4izIoMLPt5SPgbjnuctU7obwtrBEPgOsjJxibPdWiHBTWAQ/ABrZeJWjqZUQgloAxOgVqZcbVWJxLETzNVKWSCPcmpuV5gXbOGgq5gEHcH+GtbnyVXgBVoyOXOmgjjNg1FQL3GSotyjvha1G8oCqV8DR9SZsc3C9y0FpzRIy4qhWEvJWrytY/AOgLQmLStLEA2tSVnbTQhbwUdL4qF/t5DgPMhyEf4J33mRU94BtiZNeZH02DJExGmpOOCL20d9OcInTVePXhJ9W7OwCUgOsUS89smGKRsdifsksMuRROEj4CTiPqvBLdIjPqq6o3XpCrUrsbU/BF5F2O0QwR7a90J9+2kfDvUlNbfqaotpJkXAV0vB6aQMGsfvHNDLk9aKCraxWYISpwY+Hrhhk8DEiOALF9lazZ0I+IS/DtM85kuBcV34RtoPwNlgf8r6VxHNGLUO5fFgYnh2gTcOfCZ0Rm+xtuMu9oi798wQwHyC+iRInAImJqZckMCpGIekoV84XDFOiBugPgbSThlDES6n9IgL5n5alLfESFwzuG8RnxRS0EuiTes7oD+0NLaI826wBTwEB0GW9gGyHTnmT4mKPktpbZCAbvASZC1OWoZ9beVH9D7pfgfGp6lfBq6bgQBlRVVamqWybHT0V7jEN+bih51H+8vCghVoR5yp3Qm08Yg2uPWz/sI9hzWDcsf/xOOgbfpT6xT2gcpZ3fqJYyO4a58rdaRypd/cEtQLsvhWr6ZY3L3RE67KXghy4CJ4Dn4DVxOHuMSpT22sVRx9xHoyCKGORs4AnaFoJy5oW7UXrHZOOM6YNiSCzgefsAAvUdbOEH4dRJkOL+tvKNsM5iMUfqq/Ol8B4rpB+BRBn8IN60lkB4LCb/2FdSNQQhCovaEOjF4B2SI4ta5EGjEIawE7wSbT99+VfwFl/vSZOTmkgQAAAABJRU5ErkJggg=="
+											<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAy1JREFUWAndmM1LFVEYxp2bVxDsA0GhIoygAo2I7EKLoKJsYZG7iDYG/QNCUZvctSkIAqVFCze1toIWrkqynUaJ0VKUSkr7okubpG6/J+Zc5w7jzJ1zxnulFx7O1/s+7zMzZ86cOV5DlVYqlfK4HgN9oBNsA9tBC4izIoMLPt5SPgbjnuctU7obwtrBEPgOsjJxibPdWiHBTWAQ/ABrZeJWjqZUQgloAxOgVqZcbVWJxLETzNVKWSCPcmpuV5gXbOGgq5gEHcH+GtbnyVXgBVoyOXOmgjjNg1FQL3GSotyjvha1G8oCqV8DR9SZsc3C9y0FpzRIy4qhWEvJWrytY/AOgLQmLStLEA2tSVnbTQhbwUdL4qF/t5DgPMhyEf4J33mRU94BtiZNeZH02DJExGmpOOCL20d9OcInTVePXhJ9W7OwCUgOsUS89smGKRsdifsksMuRROEj4CTiPqvBLdIjPqq6o3XpCrUrsbU/BF5F2O0QwR7a90J9+2kfDvUlNbfqaotpJkXAV0vB6aQMGsfvHNDLk9aKCraxWYISpwY+Hrhhk8DEiOALF9lazZ0I+IS/DtM85kuBcV34RtoPwNlgf8r6VxHNGLUO5fFgYnh2gTcOfCZ0Rm+xtuMu9oi798wQwHyC+iRInAImJqZckMCpGIekoV84XDFOiBugPgbSThlDES6n9IgL5n5alLfESFwzuG8RnxRS0EuiTes7oD+0NLaI826wBTwEB0GW9gGyHTnmT4mKPktpbZCAbvASZC1OWoZ9beVH9D7pfgfGp6lfBq6bgQBlRVVamqWybHT0V7jEN+bih51H+8vCghVoR5yp3Qm08Yg2uPWz/sI9hzWDcsf/xOOgbfpT6xT2gcpZ3fqJYyO4a58rdaRypd/cEtQLsvhWr6ZY3L3RE67KXghy4CJ4Dn4DVxOHuMSpT22sVRx9xHoyCKGORs4AnaFoJy5oW7UXrHZOOM6YNiSCzgefsAAvUdbOEH4dRJkOL+tvKNsM5iMUfqq/Ol8B4rpB+BRBn8IN60lkB4LCb/2FdSNQQhCovaEOjF4B2SI4ta5EGjEIawE7wSbT99+VfwFl/vSZOTmkgQAAAABJRU5ErkJggg=="
 												width="20" height="19" alt="번개톡 버튼 아이콘">번개톡
 										</button>
-										<button class="sc-hBbWxd cPHXdO">바로구매</button>
+									</div>
+									<div class="sc-exkUMo kzMKbs" th:unless=${productList.email!=userId}>
+										<button class="sc-cqpYsc gKnWUi" onclick="location.href='/shop/product/manage'">
+											<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAy1JREFUWAndmM1LFVEYxp2bVxDsA0GhIoygAo2I7EKLoKJsYZG7iDYG/QNCUZvctSkIAqVFCze1toIWrkqynUaJ0VKUSkr7okubpG6/J+Zc5w7jzJ1zxnulFx7O1/s+7zMzZ86cOV5DlVYqlfK4HgN9oBNsA9tBC4izIoMLPt5SPgbjnuctU7obwtrBEPgOsjJxibPdWiHBTWAQ/ABrZeJWjqZUQgloAxOgVqZcbVWJxLETzNVKWSCPcmpuV5gXbOGgq5gEHcH+GtbnyVXgBVoyOXOmgjjNg1FQL3GSotyjvha1G8oCqV8DR9SZsc3C9y0FpzRIy4qhWEvJWrytY/AOgLQmLStLEA2tSVnbTQhbwUdL4qF/t5DgPMhyEf4J33mRU94BtiZNeZH02DJExGmpOOCL20d9OcInTVePXhJ9W7OwCUgOsUS89smGKRsdifsksMuRROEj4CTiPqvBLdIjPqq6o3XpCrUrsbU/BF5F2O0QwR7a90J9+2kfDvUlNbfqaotpJkXAV0vB6aQMGsfvHNDLk9aKCraxWYISpwY+Hrhhk8DEiOALF9lazZ0I+IS/DtM85kuBcV34RtoPwNlgf8r6VxHNGLUO5fFgYnh2gTcOfCZ0Rm+xtuMu9oi798wQwHyC+iRInAImJqZckMCpGIekoV84XDFOiBugPgbSThlDES6n9IgL5n5alLfESFwzuG8RnxRS0EuiTes7oD+0NLaI826wBTwEB0GW9gGyHTnmT4mKPktpbZCAbvASZC1OWoZ9beVH9D7pfgfGp6lfBq6bgQBlRVVamqWybHT0V7jEN+bih51H+8vCghVoR5yp3Qm08Yg2uPWz/sI9hzWDcsf/xOOgbfpT6xT2gcpZ3fqJYyO4a58rdaRypd/cEtQLsvhWr6ZY3L3RE67KXghy4CJ4Dn4DVxOHuMSpT22sVRx9xHoyCKGORs4AnaFoJy5oW7UXrHZOOM6YNiSCzgefsAAvUdbOEH4dRJkOL+tvKNsM5iMUfqq/Ol8B4rpB+BRBn8IN60lkB4LCb/2FdSNQQhCovaEOjF4B2SI4ta5EGjEIawE7wSbT99+VfwFl/vSZOTmkgQAAAABJRU5ErkJggg=="
+												width="20" height="19" alt="번개톡 버튼 아이콘">내 상점 관리
+										</button>
 									</div>
 								</div>
 							</div>
@@ -546,8 +550,7 @@ function createTalk(){
 										
 										<div class="sc-sPYgB bGvQBG">
 											<div class="sc-dHIava cDIveb">
-												<a data-pid="194933402" class="sc-RbTVP JMDJI"
-													href="/products/194933402?ref=%EC%83%81%ED%92%88%EB%82%B4%EC%83%81%EC%A0%90%EC%83%81%ED%92%88">
+												<a data-pid="194933402" class="sc-RbTVP JMDJI" href="">
 													<img src="https://media.bunjang.co.kr/product/194933402_1_1659148705_w240_h192.jpg"
 													width="120" height="96" alt="상품 이미지">
 													<div class="sc-hMrMfs epyWUV">
@@ -557,14 +560,13 @@ function createTalk(){
 												</a>
 											</div>
 											<div class="sc-dHIava cDIveb">
-												<a data-pid="195499488" class="sc-RbTVP JMDJI"
-													href="/products/195499488?ref=%EC%83%81%ED%92%88%EB%82%B4%EC%83%81%EC%A0%90%EC%83%81%ED%92%88"><img
-													src="https://media.bunjang.co.kr/product/195499488_1_1659668281_w240_h192.jpg"
-													width="120" height="96" alt="상품 이미지">
+												<a data-pid="195499488" class="sc-RbTVP JMDJI" href="">
+													<img src="https://media.bunjang.co.kr/product/195499488_1_1659668281_w240_h192.jpg"
+														width="120" height="96" alt="상품 이미지">
 													<div class="sc-hMrMfs epyWUV">
 															<span>7,000</span>원
 													</div>
-														<div class="sc-drlKqa cUjesI"></div>
+													<div class="sc-drlKqa cUjesI"></div>
 												</a>
 											</div>
 										</div>
@@ -572,98 +574,26 @@ function createTalk(){
 											<a class="sc-guztPN imRUwG" href="/shop/79636123/products">
 											<span class="sc-hAXbOi hfQwPP" th:text=${count}+@{개}></span>상품 더보기</a>
 										</div>
-										<div class="sc-cFlXAS hJvCHs">
-											<div class="sc-hcnlBt lglfSE">
-												상점후기<span class="sc-hAXbOi hfQwPP">10</span>
-											</div>
-											<div class="sc-hkbPbT jgPUAb">
-												<div class="sc-jQMNup epaVqM">
-													<a class="sc-TuwoP dysEba" href="/shop/77346991/products"><img
-														src="https://media.bunjang.co.kr/images/crop/827012814_w64.jpg"
-														width="32" height="32" alt="리뷰 쓴 사람 프로필 이미지"></a>
-													<div class="sc-hlILIN fciPeP">
-														<div class="sc-bJHhxl SlocT">
-															<a class="sc-fQkuQJ bOCpdX"
-																href="/shop/77346991/products">sxan</a>
-															<div class="sc-epGmkI dXEevS">1주 전</div>
-														</div>
-														<div class="sc-dphlzf gjNBxh">
-															<div class="sc-ccLTTT fpuvMV">
-																
-															</div>
-														</div>
-														<div class="sc-fCPvlr bLToPt">💕 너무 귀여워요 ㅠ.ㅠ 역시 춘배에요
-															배려해주셔서 감사합니당 예쁘게 ...</div>
-													</div>
-												</div>
-												<div class="sc-jQMNup epaVqM">
-													<a class="sc-TuwoP dysEba" href="/shop/79743249/products"><img
-														src="https://media.bunjang.co.kr/images/crop/862251036_w64.jpg"
-														width="32" height="32" alt="리뷰 쓴 사람 프로필 이미지"></a>
-													<div class="sc-hlILIN fciPeP">
-														<div class="sc-bJHhxl SlocT">
-															<a class="sc-fQkuQJ bOCpdX"
-																href="/shop/79743249/products">크루벨라</a>
-															<div class="sc-epGmkI dXEevS">1주 전</div>
-														</div>
-														<div class="sc-dphlzf gjNBxh">
-															<div class="sc-ccLTTT fpuvMV">
-															
-															</div>
-														</div>
-														<div class="sc-fCPvlr bLToPt">너무 귀여운 우리 춘배를
-															데려왔어요!!!!!!😆 진짜 얘는 실물로 봐야...</div>
-													</div>
-												</div>
-											</div>
-											<div class="sc-bSbAYC fOZHiN">
-												<a class="sc-guztPN imRUwG" href="/shop/79636123/reviews">상점후기
-													더보기</a>
-											</div>
-										</div>
 									</div>
 								</div>
 								<div class="sc-RmnOB hacYbq">
-									<button class="sc-jPPmml cEzZLN">
-										<img
-											src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAy1JREFUWAndmM1LFVEYxp2bVxDsA0GhIoygAo2I7EKLoKJsYZG7iDYG/QNCUZvctSkIAqVFCze1toIWrkqynUaJ0VKUSkr7okubpG6/J+Zc5w7jzJ1zxnulFx7O1/s+7zMzZ86cOV5DlVYqlfK4HgN9oBNsA9tBC4izIoMLPt5SPgbjnuctU7obwtrBEPgOsjJxibPdWiHBTWAQ/ABrZeJWjqZUQgloAxOgVqZcbVWJxLETzNVKWSCPcmpuV5gXbOGgq5gEHcH+GtbnyVXgBVoyOXOmgjjNg1FQL3GSotyjvha1G8oCqV8DR9SZsc3C9y0FpzRIy4qhWEvJWrytY/AOgLQmLStLEA2tSVnbTQhbwUdL4qF/t5DgPMhyEf4J33mRU94BtiZNeZH02DJExGmpOOCL20d9OcInTVePXhJ9W7OwCUgOsUS89smGKRsdifsksMuRROEj4CTiPqvBLdIjPqq6o3XpCrUrsbU/BF5F2O0QwR7a90J9+2kfDvUlNbfqaotpJkXAV0vB6aQMGsfvHNDLk9aKCraxWYISpwY+Hrhhk8DEiOALF9lazZ0I+IS/DtM85kuBcV34RtoPwNlgf8r6VxHNGLUO5fFgYnh2gTcOfCZ0Rm+xtuMu9oi798wQwHyC+iRInAImJqZckMCpGIekoV84XDFOiBugPgbSThlDES6n9IgL5n5alLfESFwzuG8RnxRS0EuiTes7oD+0NLaI826wBTwEB0GW9gGyHTnmT4mKPktpbZCAbvASZC1OWoZ9beVH9D7pfgfGp6lfBq6bgQBlRVVamqWybHT0V7jEN+bih51H+8vCghVoR5yp3Qm08Yg2uPWz/sI9hzWDcsf/xOOgbfpT6xT2gcpZ3fqJYyO4a58rdaRypd/cEtQLsvhWr6ZY3L3RE67KXghy4CJ4Dn4DVxOHuMSpT22sVRx9xHoyCKGORs4AnaFoJy5oW7UXrHZOOM6YNiSCzgefsAAvUdbOEH4dRJkOL+tvKNsM5iMUfqq/Ol8B4rpB+BRBn8IN60lkB4LCb/2FdSNQQhCovaEOjF4B2SI4ta5EGjEIawE7wSbT99+VfwFl/vSZOTmkgQAAAABJRU5ErkJggg=="
+									<button class="sc-jPPmml cEzZLN" onclick="createTalk()" th:if=${productList.email!=userId}>
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAy1JREFUWAndmM1LFVEYxp2bVxDsA0GhIoygAo2I7EKLoKJsYZG7iDYG/QNCUZvctSkIAqVFCze1toIWrkqynUaJ0VKUSkr7okubpG6/J+Zc5w7jzJ1zxnulFx7O1/s+7zMzZ86cOV5DlVYqlfK4HgN9oBNsA9tBC4izIoMLPt5SPgbjnuctU7obwtrBEPgOsjJxibPdWiHBTWAQ/ABrZeJWjqZUQgloAxOgVqZcbVWJxLETzNVKWSCPcmpuV5gXbOGgq5gEHcH+GtbnyVXgBVoyOXOmgjjNg1FQL3GSotyjvha1G8oCqV8DR9SZsc3C9y0FpzRIy4qhWEvJWrytY/AOgLQmLStLEA2tSVnbTQhbwUdL4qF/t5DgPMhyEf4J33mRU94BtiZNeZH02DJExGmpOOCL20d9OcInTVePXhJ9W7OwCUgOsUS89smGKRsdifsksMuRROEj4CTiPqvBLdIjPqq6o3XpCrUrsbU/BF5F2O0QwR7a90J9+2kfDvUlNbfqaotpJkXAV0vB6aQMGsfvHNDLk9aKCraxWYISpwY+Hrhhk8DEiOALF9lazZ0I+IS/DtM85kuBcV34RtoPwNlgf8r6VxHNGLUO5fFgYnh2gTcOfCZ0Rm+xtuMu9oi798wQwHyC+iRInAImJqZckMCpGIekoV84XDFOiBugPgbSThlDES6n9IgL5n5alLfESFwzuG8RnxRS0EuiTes7oD+0NLaI826wBTwEB0GW9gGyHTnmT4mKPktpbZCAbvASZC1OWoZ9beVH9D7pfgfGp6lfBq6bgQBlRVVamqWybHT0V7jEN+bih51H+8vCghVoR5yp3Qm08Yg2uPWz/sI9hzWDcsf/xOOgbfpT6xT2gcpZ3fqJYyO4a58rdaRypd/cEtQLsvhWr6ZY3L3RE67KXghy4CJ4Dn4DVxOHuMSpT22sVRx9xHoyCKGORs4AnaFoJy5oW7UXrHZOOM6YNiSCzgefsAAvUdbOEH4dRJkOL+tvKNsM5iMUfqq/Ol8B4rpB+BRBn8IN60lkB4LCb/2FdSNQQhCovaEOjF4B2SI4ta5EGjEIawE7wSbT99+VfwFl/vSZOTmkgQAAAABJRU5ErkJggg=="
 											width="20" height="19" alt="번개톡 버튼 아이콘">번개톡
 									</button>
-									<button class="sc-dNoQZL loOuLY">바로구매</button>
+					
+									<button class="sc-cqpYsc gKnWUi" onclick="location.href='/shop/product/manage'" th:unless=${productList.email!=userId}>
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAy1JREFUWAndmM1LFVEYxp2bVxDsA0GhIoygAo2I7EKLoKJsYZG7iDYG/QNCUZvctSkIAqVFCze1toIWrkqynUaJ0VKUSkr7okubpG6/J+Zc5w7jzJ1zxnulFx7O1/s+7zMzZ86cOV5DlVYqlfK4HgN9oBNsA9tBC4izIoMLPt5SPgbjnuctU7obwtrBEPgOsjJxibPdWiHBTWAQ/ABrZeJWjqZUQgloAxOgVqZcbVWJxLETzNVKWSCPcmpuV5gXbOGgq5gEHcH+GtbnyVXgBVoyOXOmgjjNg1FQL3GSotyjvha1G8oCqV8DR9SZsc3C9y0FpzRIy4qhWEvJWrytY/AOgLQmLStLEA2tSVnbTQhbwUdL4qF/t5DgPMhyEf4J33mRU94BtiZNeZH02DJExGmpOOCL20d9OcInTVePXhJ9W7OwCUgOsUS89smGKRsdifsksMuRROEj4CTiPqvBLdIjPqq6o3XpCrUrsbU/BF5F2O0QwR7a90J9+2kfDvUlNbfqaotpJkXAV0vB6aQMGsfvHNDLk9aKCraxWYISpwY+Hrhhk8DEiOALF9lazZ0I+IS/DtM85kuBcV34RtoPwNlgf8r6VxHNGLUO5fFgYnh2gTcOfCZ0Rm+xtuMu9oi798wQwHyC+iRInAImJqZckMCpGIekoV84XDFOiBugPgbSThlDES6n9IgL5n5alLfESFwzuG8RnxRS0EuiTes7oD+0NLaI826wBTwEB0GW9gGyHTnmT4mKPktpbZCAbvASZC1OWoZ9beVH9D7pfgfGp6lfBq6bgQBlRVVamqWybHT0V7jEN+bih51H+8vCghVoR5yp3Qm08Yg2uPWz/sI9hzWDcsf/xOOgbfpT6xT2gcpZ3fqJYyO4a58rdaRypd/cEtQLsvhWr6ZY3L3RE67KXghy4CJ4Dn4DVxOHuMSpT22sVRx9xHoyCKGORs4AnaFoJy5oW7UXrHZOOM6YNiSCzgefsAAvUdbOEH4dRJkOL+tvKNsM5iMUfqq/Ol8B4rpB+BRBn8IN60lkB4LCb/2FdSNQQhCovaEOjF4B2SI4ta5EGjEIawE7wSbT99+VfwFl/vSZOTmkgQAAAABJRU5ErkJggg=="
+											width="20" height="19" alt="내 상점관리">내 상점 관리
+									</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-					<div class="sc-jwKygS gSsteC">
-						<div class="sc-fvLVrH gjsPAc">
-							<h2 class="sc-dXfzlN krTAri">
-								<img
-									src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3MiIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDcyIDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZmlsbD0iI0ZGNTA1OCIgZD0iTTEwLjYzLjI0MmMuNTg0LS4zMjIgMS4yOTMtLjMyMyAxLjg3OCAwbDkuNTcgNS4yNjRjLjcwOC4zODggMS4xIDEuMTcuOTkgMS45Ny0uNDY2IDMuNDM5LTIuNDYyIDExLjc2My0xMC42OTUgMTUuNzA4LS41MS4yNDUtMS4xMDUuMjU2LTEuNjI2LjAzNEMyLjAwMyAxOS40OC4zMyAxMC44OS4wMSA3LjQzNGMtLjA3My0uNzc4LjMxOS0xLjUyNiAxLjAwNC0xLjkwM3ptNC4wNzggNi4wNzdoLTQuNTI1Yy0uMTU3IDAtLjI5NS4wODItLjMzNi4yMzNsLTEuOTE1IDYuOTRjLS4wMjguMTA0LS4wMDcuMjIyLjA2LjMwOS4wNjUuMDg2LjE2OC4xNDguMjc2LjE0OGgyLjQ4MWwtMS40MiA0LjQwN2MtLjA1LjE1Ny4wMTUuMzE1LjE1OC4zOTcuMDU0LjAzMS4xMTQuMDQ2LjE3My4wNDYuMDk2IDAgLjE5MS0uMDQuMjYtLjExNWw2LjI2NC02Ljk2MmMuMDkzLS4xMDIuMTE2LS4xOTYuMDYtLjMyMS0uMDU2LS4xMjYtLjE4LS4xNTQtLjMxOC0uMTU0aC0yLjc3OWwxLjg4LTQuNDI4Yy4wNDctLjEwOC4wMzYtLjI3MS0uMDI5LS4zNjktLjA2NC0uMDk4LS4xNzMtLjEzLS4yOS0uMTN6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLjIpIi8+CiAgICAgICAgPHBhdGggZmlsbD0iIzFFMUQyOSIgZD0iTTM1LjgxMSA0LjMyNGMxLjU1NiAwIDIuODY2LjYyOCAzLjg5NSAxLjg2NiAxLjAzNSAxLjI0NyAxLjU2IDIuNzM2IDEuNTYgNC40MjUgMCAxLjgzNC0uNTIgMy4zODUtMS41NDQgNC42MS0xLjAxOCAxLjIxOS0yLjM1NSAxLjgzNi0zLjk3MyAxLjgzNi0xLjczNSAwLTIuOTU0LS40OTktMy42MjMtMS40ODNsLS4yNjktLjM5Ni0uMDYzIDYuNWMtLjAwMS4wODEtLjA2OS4xNDgtLjE1LjE0OGgtMi40MDdjLS4wODMgMC0uMTUtLjA2OC0uMTUtLjE1VjQuODc3YzAtLjA4My4wNjctLjE1LjE1LS4xNWgyLjQwNGMuMDgyIDAgLjE1LjA2Ny4xNS4xNXYxLjIybC4yNjMtLjMwOGMuODMzLS45NzIgMi4wOTctMS40NjUgMy43NTctMS40NjV6bTIyLjg2Mi40MDNjLjA2IDAgLjExNC4wMzUuMTM4LjA5bDMuMjQ1IDcuNDY3IDMuNDA0LTcuNDdjLjAyNC0uMDUzLjA3OC0uMDg3LjEzNy0uMDg3aDIuNzI4Yy4wNzYgMCAuMTE0LjA1LjEyOC4wNy4wMTMuMDIyLjA0LjA4LjAwNi4xNDdsLTguMzcgMTYuNzRjLS4wMjYuMDUyLS4wNzcuMDg0LS4xMzUuMDg0aC0yLjY1NmMtLjA3NyAwLS4xMTYtLjA1MS0uMTI5LS4wNzMtLjAxMy0uMDIyLS4wNC0uMDgtLjAwMy0uMTQ4bDMuNTc2LTYuNjI1LTQuOTg5LTkuOTc4Yy0uMDM0LS4wNjgtLjAwNy0uMTI1LjAwNi0uMTQ2LjAxNC0uMDIxLjA1Mi0uMDcxLjEyOC0uMDcxem0tMTAuOTQtLjQwMmMxLjY4IDAgMi45NjQuNTAzIDMuODE4IDEuNDk2bC4yNjQuMzA1di0xLjI1YzAtLjA4Mi4wNjctLjE1LjE1LS4xNWgyLjM0MmMuMDgzIDAgLjE1LjA2OC4xNS4xNXYxMS43ODJoLTIuNjQydi0xLjM3bC0uMjY0LjMwOGMtLjgzMy45NzItMi4wOTcgMS40NjUtMy43NTcgMS40NjUtMS42NTYgMC0yLjk5Ny0uNjQ3LTMuOTg0LTEuOTI0LS45OTYtMS4yODgtMS41MDItMi44Mi0xLjUwMi00LjU1MyAwLTEuNzMuNTE1LTMuMjI0IDEuNTMtNC40NCAxLjAwNy0xLjIwNyAyLjMxNy0xLjgyIDMuODk1LTEuODJ6bS0xMi40NTggMi4zYy0xLjAxMyAwLTEuODY1LjQxNS0yLjUzMiAxLjIzMi0uNjU5LjgxLS45OTMgMS43NTItLjk5MyAyLjgwNSAwIDEuMDUzLjM1NSAyLjAwOCAxLjA1NyAyLjgzNy43MDguODM2IDEuNTM4IDEuMjYgMi40NjggMS4yNiAxLjA5NSAwIDEuOTY4LS4zOTMgMi41OTMtMS4xNy42MTktLjc2Ny45MzItMS43NDcuOTMyLTIuOTEyIDAtMS4wODItLjMxMy0yLjAzNS0uOTMtMi44MzItLjYyNi0uODEtMS40OTktMS4yMi0yLjU5NS0xLjIyem0xMy4wMSAwYy0xLjA0MiAwLTEuOTAzLjM3Ny0yLjU2IDEuMTItLjY1LjczNi0uOTgyIDEuNzIzLS45ODIgMi45MzIgMCAxLjIxLjMzNiAyLjIwMi45OTggMi45NDguNjY2Ljc1MyAxLjUzNyAxLjEzNSAyLjU5IDEuMTM1IDEuMDUxIDAgMS45MTItLjM3MiAyLjU1OC0xLjEwNC42NDEtLjcyNi45NjctMS43MjkuOTY3LTIuOTc5IDAtMS4xNjctLjMzNi0yLjE0Mi0uOTk3LTIuOS0uNjY3LS43NjQtMS41MzQtMS4xNTEtMi41NzUtMS4xNTF6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLjIpIi8+CiAgICA8L2c+Cjwvc3ZnPgo="
-									width="78" height="26" alt="">안전결제<a
-									href="https://m.bunjang.co.kr/banner/pay?utm_source=pay&amp;utm_medium=product-detail-btn&amp;utm_campaign=pay-master-buyer-2109#buyer"
-									target="_blank" rel="noopener noreferrer">번개페이란?</a>
-							</h2>
-							<div class="sc-OxbzP jIiOrw">
-								<a data-order-type="shipping" class="sc-lnrBVv geTZKN"><div
-										class="sc-eSePXt bxwKFb">
-										<h3 class="sc-cPuPxo hmQHIx">택배거래</h3>
-										<span class="sc-aewfc gErUTq">안전하게 상품을 받을 때까지,<br>번개페이가
-											결제금액을 보관해요
-										</span>
-									</div></a><a data-order-type="in_person" class="sc-hvvHee ctlkBe"><div
-										class="sc-eSePXt bxwKFb">
-										<h3 class="sc-cPuPxo hmQHIx">직거래</h3>
-										<span class="sc-aewfc gErUTq">직거래도 현금없이 간편하게 결제할 수 있어요</span>
-									</div></a>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
-			<div class="sc-igwadP gDEQrh">
-				<div class="sc-ckYZGd hTQReO"></div>
-			</div>
+			
 		</div>
 		<th:block
 			th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>

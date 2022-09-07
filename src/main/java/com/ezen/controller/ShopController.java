@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.dto.LoginUser;
 import com.ezen.dto.Member;
@@ -73,9 +74,34 @@ public class ShopController {
 	}
 	
 	@GetMapping("/product/manage")
-	public String productManageView() {
+	public String productManageView(HttpSession session, Model model) {
+		String loginUser = (String)session.getAttribute("userId");
+		
+		List<Product> proList1 = productService.findProductByEmail(loginUser);
+		int count = productService.countProduct(loginUser);
+		
+		model.addAttribute("User", loginUser);
+		model.addAttribute("productList", proList1);
+		model.addAttribute("count", count);
 		
 		return "product/manage";
 	}
 
+	@GetMapping("/product/edit")
+	public String productEditView(@RequestParam(value="P_ID") Product vo, Model model, HttpSession session) {
+		
+		Product product = productService.findProduct(vo);
+		
+		model.addAttribute("productList", product);
+		return "product/editForm";
+	}
+	
+	@GetMapping("/product/delete")
+	public String productDelete(@RequestParam(value="P_ID") Product vo, Model model, HttpSession session) {
+		
+		
+		productService.deleteProduct(vo.getP_ID());
+		
+		return "redirect:/shop/product/manage";
+	}
 }
