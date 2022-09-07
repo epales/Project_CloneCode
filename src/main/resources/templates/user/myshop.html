@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>내 상점화면</title>
+<title>내 상점</title>
 <th:block th:replace="/fragments/layouts/headerFragment.html :: headerFragment"></th:block>
 <link rel="stylesheet" th:href="@{/css/myshop.css}">
 <script type="text/javascript" th:src="@{/js/myshop.js}"></script>
@@ -83,22 +83,8 @@ function Follow(userName) {
 									width="100" height="100" alt="상점 프로필 이미지"
 									class="mainPageTopLeftContentImg">
 								<div class="mainPageTopLeftContentName"><p style="float:left" th:text="${session.username}"></p><p style="float:left">의 상점</p></div>
-								<div class="mainPageTopLeftContentStar">
-								
-								</div>
 								<div class="mainPageTopLeftContentManage">
 									<a class="mainPageTopLeftContentManager" href="/shop/product/manage">내 상점 관리</a>
-								</div>
-							</div>
-						</div>
-						<div class="sc-jwKygS gSsteC">
-							<div class="sc-btzYZH loGZtw">
-								<h2 class="sc-lhVmIH hWqodb">프로필 수정</h2>
-								<p class="sc-bYSBpT kYaBSe">프로필 사진 추가/수정은 번개장터 앱에서만 가능해요</p>
-								<div class="sc-elJkPf cgZVKM">
-									<button type="button" class="sc-jtRfpW caPtxQ">앱으로
-										이동하기</button>
-									<button type="button" class="sc-kTUwUJ cFsfis">취소</button>
 								</div>
 							</div>
 						</div>
@@ -112,6 +98,7 @@ function Follow(userName) {
 						</div>
 						<div class="mainPageTopRightContentSuccess">본인인증 완료</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
