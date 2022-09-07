@@ -3,13 +3,98 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인 페이지</title>
 <head>
-	<th:block th:replace="/fragments/layouts/headerFragment.html :: headerFragment"></th:block>
+<th:block
+	th:replace="/fragments/layouts/headerFragment.html :: headerFragment"></th:block>
 </head>
-<link rel="stylesheet" th:href="@{/css/product.css}">
+<link rel="stylesheet" th:href="@{/css/manage.css}">
+<script type="text/javascript" th:inline="javascript">
+var search = document.getElementById("myProduct");
+
+$(document).on('keydown', '#myProduct', function(e) {
+	if (e.keyCode == 13 && !e.shiftKey) {
+		const message = $(this).val(); // 현재 입력된 메세지를 담는다.
+
+		let search3 = $('#myProduct').val();
+
+		if (search3.replace(/\s|  /gi, "").length == 0) {
+			return false;
+			$('#myProduct').focus();
+		}
+		var url = "/shop/search/" + message;
+		location.replace(url);
+		return true;
+
+	}
+});
+</script>
 <body style="overflow: auto;">
-<!-- 본문 글 -->
-<th:block th:replace="/fragments/layouts/nav.html :: fragment-nav"></th:block>
-<div>상품 관리</div>
-<th:block th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
+	<!-- 본문 글 -->
+	<th:block th:replace="/fragments/layouts/nav.html :: fragment-nav"></th:block>
+	<div class="sc-zDqdV KTEbe">
+		<div class="sc-grYksN bdjFXR">
+			<nav class="sc-iysEgW hPoAmr">
+			<div class="sc-gtXRHa olfVL">
+				<a class="sc-fxgLge fTCePo" href="/sellForm">상품등록</a>
+			</div>
+			<div class="sc-gtXRHa gdXTTs">
+				<a class="sc-fxgLge fTCePo" href="/shop/product/manage">상품관리</a>
+			</div>
+			</nav>
+		</div>
+		<div class="sc-kBzFSH hFZuTV">
+			<main class="sc-jEdsij bfaSKF"> 
+			<header class="sc-eBipZS jxtWGj">
+				<div class="sc-eMgOci bDTWcy">
+					<input type="text" placeholder="상품명을 입력해주세요." value="" class="myProduct" id="myProduct" autocomplete="off">
+					<button type="submit" class="sc-wENpt gDYVix"></button>
+				</div>
+			</header>
+			<table>
+				<thead>
+					<tr>
+						<th>사진</th>
+						<th>판매상태</th>
+						<th>상품명</th>
+						<th>가격</th>
+						<th>찜</th>
+						<th>최근수정일</th>
+						<th>기능</th>
+					</tr>
+				</thead>
+				<tbody th:each="product : ${productList}">
+					<tr>
+						<td>
+							<a th:href="@{/product_detail(P_ID=${product.P_ID})}">
+								<img th:src="@{/image/}+${product.image1}" alt="상품이미지" width="166" height="166">
+							</a>
+						</td>
+						<td>
+							<div class=" css-2b097c-container">
+								<div class="sc-wRHdD ljqaOA">
+									<div class=" css-1hwfws3">
+										<div class=" css-1uccc91-singleValue">판매 중</div>
+									</div>
+									<div class="sc-jTqLGJ duunpS"></div>
+								</div>
+							</div>
+						</td>
+						<td><a th:href="@{/product_detail(P_ID=${product.P_ID})}" th:text="${product.P_TITLE}"></a></td>
+						<td><b th:text="${product.PRICE}"></b></td>
+						<td><b th:text="${product.likesCount}"></b></td>
+						<td><span th:text="${product.P_DATE}"></span></td>
+						<td>
+							<a class="sc-jgwFWF iDkAQj" th:href="@{/shop/product/edit(P_ID=${product.P_ID})}">수정</a>
+							<br>
+							<a style="color:red;"class="sc-jgwFWF iDkAQj" th:href="@{/shop/product/delete(P_ID=${product.P_ID})}">삭제</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+				<div class="sc-fIIFii csKIcC" th:if="${productList == null}">등록된 상품이 없습니다</div>
+			</main>
+		</div>
+	</div>
+	<th:block
+		th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
 </body>
 </html>

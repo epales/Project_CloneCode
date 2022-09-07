@@ -27,4 +27,15 @@ public class SearchController {
 		
 		return "product/searchProduct";
 	}
+	
+	@GetMapping("/shop/search/{message:.+}")
+	public String managesSarch(@PathVariable(name = "message")String message, Model model) {
+			
+		List<Product> productList = productService.searchProductOnlyTitle(message);
+		
+		model.addAttribute("productList", productList);
+		model.addAttribute("message", message);
+		
+		return "product/manage";
+	}
 }

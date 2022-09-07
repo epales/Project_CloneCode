@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>상품 수정하기</title>
+<link rel="stylesheet" th:href="@{/css/sellform.css}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+<script type="text/javascript" th:src="@{/js/member.js}"></script>
+<script type="text/javascript" th:src="@{/js/test2.js}"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<th:block
+	th:replace="/fragments/layouts/headerFragment.html :: headerFragment"></th:block>
+<script type="text/javascript">
+window.onload = function() {
+	document.getElementById("findAddress").addEventListener( "click",function() { //주소입력칸을 클릭하면//카카오 지도 발생
+		new daum.Postcode({
+			oncomplete : function(data) { //선택시 입력값 세팅
+				document.getElementById("address_detail").value = data.address; // 주소 넣기
+				document.querySelector("input[id=address_detail]").focus(); //상세입력 포커싱
+			}
+		}).open();
+	});
+}
+
+$(document).ready(function() {
+
+	$("#notAddress").click(function() {
+		$("#address_detail").val("지역설정안함");
+	});
+	$(".dQrzlv").click(function() {
+		$(".kzXpnJ").removeClass("act");
+		$(".dQrzlv").addClass("act");
+	});
+	$(".kzXpnJ").click(function() {
+		$(".dQrzlv").removeClass("act");
+		$(".kzXpnJ").addClass("act");
+	});
+
+	$(".notExchange").click(function() {
+		$(".Exchange").removeClass("act");
+		$(".notExchange").addClass("act");
+	});
+	$(".Exchange").click(function() {
+
+		$(".notExchange").removeClass("act");
+		$(".Exchange").addClass("act");
+	});
+
+	$("#check").off("click").on("click",function() {
+		if ($("#check").hasClass("notShippingCheck") == true) {
+			$(this).addClass("shippingCheck");
+			$(this).removeClass("notShippingCheck");
+			$("#check input[name=SHIPPINGPEE]");
+			$("#SHIPPINGPEE").val("Y");
+		} else if ($("#check").hasClass("notShippingCheck") == false) {
+			$(this).addClass("notShippingCheck");
+			$(this).removeClass("shippingCheck");
+			$("#check input[name=SHIPPINGPEE]");
+			$("#SHIPPINGPEE").val("N");
+		}
+	});
+
+	$(".jcLwXM").off("click").on("click",function() {
+		if ($(".jcLwXM").hasClass("savePayCheck") == true) {
+			$(this).addClass("savePayNotCheck");
+			$(this).removeClass("savePayCheck");
+			$(this).addValue("savePayCheck");
+		} else if ($(".jcLwXM").hasClass("savePayCheck") == false) {
+			$(this).addClass("savePayCheck");
+			$(this).removeClass("savePayNotCheck");
+		}
+	});
+
+	$(window).scroll(function() {
+
+		if ($(this).scrollTop() > 1710) {
+			$(".kJFbCP").css('position', 'relative');
+		} else {
+			$(".kJFbCP").css('position', 'fixed');
+		}
+	});
+
+	$("#firstcat").on("click","button",function() {
+		var $cat2ul = $("#secondcatul");
+		var $cat3ul = $("#thirdcatul");
+		var $selectcat1 = $("#selectcat1");
+		var $selectcat2 = $("#selectcat2");
+		var $selectcat3 = $("#selectcat3");
+		$selectcat1.empty();
+		$selectcat2.empty();
+		$selectcat3.empty();
+
+		$("#category1").val("2");
+
+		getOption2($(this).html());
+
+		$cat2ul.empty();
+		$cat3ul.empty();
+		$cat2ul.append("<ul class='sc-hAXbOi hZiIqV' id='secondcat'></ul>");
+		$cat3ul.append("소분류 선택");
+	});
+
+	$("#secondcatul").on("click","button",function() {
+		var $cat3ul = $("#thirdcatul");
+		var $selectcat2 = $("#selectcat2");
+		var $selectcat3 = $("#selectcat3");
+		$selectcat2.empty();
+		$selectcat3.empty();
+		getOption3($(this).html());
+
+		$("#category2").val("2");
+
+		$cat3ul.empty();
+		$cat3ul.append("<ul class='sc-hAXbOi hZiIqV' id='thirdcat'></ul>");
+	});
+
+	$("#thirdcatul").on("click", "button", function() {
+		var $selectcat3 = $("#selectcat3");
+		$selectcat3.empty();
+		$("#category3").val("2");
+		getOption4($(this).html());
+	});
+});
+function getOption2(option) {
+	$.ajax({
+		type : 'GET',
+		url : '/category',
+		data : {"category" : option},
+		dataType : 'json',
+		success : function(result) {
+			var $cat2 = $("#secondcat");
+			var $selectcat1 = $("#selectcat1");
+			$cat2.empty();
+			$.each(result,function(index, el) {
+				console.log('element',index, el);
+			$cat2.append("<li class='sc-cCVOAp kJlieW'><button type='button' class='sc-cfWELz gNMaOW'>"+ el+ "</button></li>");
+			});
+			$selectcat1.append(option + "&nbsp;>&nbsp; " + "<input type='hidden' name='CATEGORY1' value="+option+">");
+			}
+		}).fail(function(error) {
+			alert("에러" + JSON.stringify(error));
+	})
+}
+
+function getOption3(option) {
+	$.ajax({
+		type : 'GET',
+		url : '/category',
+		data : {"category" : option},
+		dataType : 'json',
+		success : function(result) {
+			var $cat3 = $("#thirdcat");
+			var $selectcat2 = $("#selectcat2");
+			$cat3.empty();
+			$.each(result,function(index, el) {
+				console.log('element', index, el);
+				$cat3 .append("<li class='sc-cCVOAp kJlieW'><button type='button' class='sc-cfWELz gNMaOW'>" + el + "</button></li>");
+			});
+			$selectcat2 .append(option + "&nbsp;>&nbsp; " + "<input type='hidden' name='CATEGORY2' value="+option+">");
+			}
+		}).fail(function(error) {
+	alert("에러" + JSON.stringify(error));
+	})
+}
+function getOption4(option) {
+	var $selectcat3 = $("#selectcat3");
+	$selectcat3.append(option + "<input type='hidden'  name='CATEGORY3' value="+option+">");
+}
+</script>
+</head>
+<body style="overflow: auto;">
+	<th:block th:replace="/fragments/layouts/nav.html :: fragment-nav"></th:block>
+	<!-- 본문 글 -->
+	<div class="sc-imapFV dyRHkT">
+		<div class="sc-fATqzn ZBvXd">
+			<nav class="sc-eitiEO jjGZoh">
+			<div class="sc-keFjpB csHxlN">
+				<a class="sc-bhlBdH libDGv" href="/sellForm">상품등록</a>
+			</div>
+			<div class="sc-keFjpB clRWq">
+				<a class="sc-bhlBdH libDGv" href="/shop/product/manage">상품관리</a>
+			</div>
+			</nav>
+		</div>
+		<form id="dataForm" name="dataForm" method="post"
+			enctype="multipart/form-data">
+			<input id="email" name="email" type="hidden" th:value="${session.userId}"> 
+			<input id="username" name="username" type="hidden" th:value="${session.username}">
+			<input id="P_ID" name="P_ID" type="hidden" th:value="${productList.P_ID}">
+			<input id="likesCount" name="likesCount" type="hidden" th:value="${productList.likesCount}">
+			<div class="sc-izvnbC eIxVfd">
+				<div class="sc-cbMPqi jETxPj">
+					<div class="sc-gMcBNU jeqdkH">
+						<h2>
+							기본정보<span>*필수항목</span>
+						</h2>
+						<ul class="sc-dYzWWc hOFNTa">
+							<li class="sc-iLVFha iwsyNh">
+								<div class="sc-cgzHhG fMDfrj">
+									상품이미지<span>*</span><small></small>
+								</div>
+								<div class="sc-jtHxuu kfgfBW">
+									<ul id="View_area" class="sc-hlILIN esydjP">
+										<li class="sc-jQMNup dghCFG">
+											<button id="btn-upload" type="button" style="outline: none;">이미지 추가</button> 
+												<input type="file" id="input_file" accept="image/jpg, image/jpeg, image/png" onchange="previewImage(this,'View_area')" multiple>
+										</li>
+									</ul>
+									<div class="sc-TuwoP isocOz">
+										<b>* 상품 이미지는 640x640에 최적화 되어 있습니다.</b><br>- 상품 이미지는 PC에서는
+										1:1, 모바일에서는 1:1.23 비율로 보여집니다. <br>- 이미지는 상품 등록 시 정사각형으로
+										잘려서 등록됩니다.<br>- 이미지를 클릭할 경우 원본 이미지를 확인할 수 있습니다.<br>-
+										이미지를 클릭 후 이동하여 등록순서를 변경할 수 있습니다.<br>- 큰 이미지일 경우 이미지가 깨지는
+										경우가 발생할 수 있습니다.<br>최대 지원 사이즈인 640 X 640으로 리사이즈 해서
+										올려주세요.(개당 이미지 최대 10M)
+									</div>
+								</div>
+							</li>
+							<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG iReqUw">
+									제목<span>*</span>
+								</div>
+								<div class="sc-jtHxuu kfgfBW">
+									<div class="sc-dlyikq hdamdz">
+										<div class="sc-blIhvV dUxHUN">
+											<input type="text" placeholder="상품 제목을 입력해주세요." id="P_TITLE" class="sc-glUWqk gDXthV" name="P_TITLE" th:value="${productList.P_TITLE}"> 
+												<a href="https://help.bunjang.co.kr/faq/2/220" target="_blank">
+												거래금지 품목</a>
+										</div>
+									</div>
+								</div></li>
+							<li class="sc-iLVFha iwsyNh">
+								<div class="sc-cgzHhG jowNbo">
+									카테고리<span>*</span>
+								</div>
+								<div class="sc-jtHxuu kfgfBW">
+									<div class="sc-fCPvlr wNrKZ">
+										<div class="sc-gAmQfK bUJOfH">
+											<ul class="sc-hAXbOi hZiIqV" id="firstcat">
+												<li class="sc-cCVOAp kJlieW">
+													<button type="button" class="sc-cfWELz gNMaOW">패션</button>
+												</li>
+												<li class="sc-cCVOAp kJlieW">
+													<button type="button" class="sc-cfWELz gNMaOW">가전/디지털</button>
+												</li>
+												<li class="sc-cCVOAp kJlieW">
+													<button type="button" class="sc-cfWELz gNMaOW">도서</button>
+												</li>
+												<li class="sc-cCVOAp kJlieW">
+													<button type="button" class="sc-cfWELz gNMaOW">식품</button>
+												</li>
+											</ul>
+										</div>
+										<div class="sc-gAmQfK bUJOfH" id="secondcatul">중분류 선택</div>
+										<div class="sc-gAmQfK bUJOfH" id="thirdcatul">소분류 선택</div>
+									</div>
+									<h3 class="sc-kAdXeD iUkvws">
+										선택한 카테고리 : 
+										<b id="selectcat1"><th:block th:text="${productList.CATEGORY1}"/> &nbsp;>&nbsp; <input type="hidden" name="CATEGORY1" th:value="${productList.CATEGORY1}"></b> 
+										<b id="selectcat2"><th:block th:text="${productList.CATEGORY2}"/> &nbsp;>&nbsp; <input type="hidden" name="CATEGORY2" th:value="${productList.CATEGORY2}"></b> 
+										<b id="selectcat3"><th:block th:text="${productList.CATEGORY3}"/><input type="hidden" name="CATEGORY3" th:value="${productList.CATEGORY3}"></b>
+									</h3>
+									<input type="hidden" id="category1" value="2">
+									<input type="hidden" id="category2" value="2"> 
+									<input type="hidden" id="category3" value="2">
+
+								</div>
+							</li>
+							<li class="sc-iLVFha iwsyNh">
+								<div class="sc-cgzHhG iReqUw">
+									거래지역<span>*</span>
+								</div>
+								<div class="sc-jtHxuu kfgfBW">
+									<div class="sc-bTiqRo iYFFKG">
+										<button type="button" id="findAddress"
+											class="sc-bEufUU jJcvsb">주소 검색</button>
+										<button type="button" id="notAddress" class="sc-bEufUU jJcvsb">지역설정안함</button>
+									</div>
+									<input readonly placeholder="선호 거래 지역을 검색해주세요." id="address_detail" class="sc-gFXMyG ivFisA" name="REGION" th:value="${productList.REGION}">
+								</div>
+							</li>
+							<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG drXtBZ">
+									상태<span>*</span>
+								</div>
+								<div class="sc-jtHxuu kfgfBW">
+									<div class="sc-dPNhBE ePieHk" th:if="${productList.CONDITION == 0}">
+										<label for="중고상품" class="kzXpnJ act"> 
+										<input id="중고상품" name="CONDITION" type="radio" value="0" checked> 중고상품
+										</label> <label for="새상품" class="dQrzlv"> 
+										<input id="새상품" name="CONDITION" type="radio" value="1"> 새상품
+										</label>
+									</div>
+									<div class="sc-dPNhBE ePieHk" th:if="${productList.CONDITION != 0}">
+										<label for="중고상품" class="kzXpnJ"> 
+										<input id="중고상품" name="CONDITION" type="radio" value="0" checked> 중고상품
+										</label> <label for="새상품" class="dQrzlv act"> 
+										<input id="새상품" name="CONDITION" type="radio" value="1"> 새상품
+										</label>
+									</div>
+								</div></li>
+							<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG drXtBZ">
+									교환<span>*</span>
+								</div>
+								<div class="sc-jtHxuu kfgfBW">
+									<div class="sc-dPNhBE ePieHk" th:if="${productList.EXCHANGE == 0}">
+										<label for="교환불가" class="notExchange act"> 
+											<input id="교환불가" name="EXCHANGE" type="radio" value="0" checked=""> 교환불가
+										</label> 
+										<label for="교환가능" class="Exchange"> 
+											<input id="교환가능" name="EXCHANGE" type="radio" value="1"> 교환가능
+										</label>
+									</div>
+									<div class="sc-dPNhBE ePieHk" th:if="${productList.EXCHANGE != 0}">
+										<label for="교환불가" class="notExchange"> 
+											<input id="교환불가" name="EXCHANGE" type="radio" value="0" checked=""> 교환불가
+										</label> 
+										<label for="교환가능" class="Exchange act"> 
+											<input id="교환가능" name="EXCHANGE" type="radio" value="1"> 교환가능
+										</label>
+									</div>
+								</div></li>
+							<li class="sc-iLVFha iwsyNh">
+								<div class="sc-cgzHhG iReqUw">
+									가격<span>*</span>
+								</div>
+								<div class="sc-jtHxuu kfgfBW">
+									<div class="sc-gQNndl jNxOgc">
+										<input type="text" placeholder="숫자만 입력해주세요." name="PRICE"
+											id="price" class="sc-MYvYT hPgTYY" th:value="${productList.PRICE}">원
+									</div>
+									<div class="sc-RmnOB gnoLfy">
+										<div class="emkahU">
+											<label for="shipping" id="check" class="notShippingCheck" th:if="${productList.SHIPPINGPEE == 'N'}">
+												<input id="SHIPPINGPEE" name="SHIPPINGPEE" value="N" type="checkbox" checked="checked">배송비 포함
+											</label>
+											<label for="shipping" id="check" class="shippingCheck" th:if="${productList.SHIPPINGPEE == 'Y'}">
+												<input id="SHIPPINGPEE" name="SHIPPINGPEE" value="Y" type="checkbox" checked="checked">배송비 포함
+											</label>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="sc-iLVFha iwsyNh"><div class="sc-cgzHhG edsRwT">
+									설명<span>*</span>
+								</div>
+								<div class="sc-jtHxuu kfgfBW">
+									<textarea name="P_EXPLAIN" rows="6" id="explain" class="sc-dNoQZL cWRaxv" placeHolder="상품 설명을 입력해주세요!" th:text="${productList.P_EXPLAIN}"></textarea>
+									<div class="sc-igwadP kufikJ"></div>
+									<div class="sc-ckYZGd fiKONI">
+										<span>혹시 
+											<a href="https://help.bunjang.co.kr/notice/607" target="_blank">카카오톡 ID</a>를 적으셨나요?
+										</span>
+									</div>
+								</div></li>
+							<li class="sc-iLVFha iwsyNh">
+								<div class="sc-cgzHhG edsRwT">연관태그</div>
+								<div class="sc-jtHxuu kfgfBW">
+									<div class="sc-bvTASY eDywOX">
+										<div class="sc-koErNt iyRYQc">
+											<div class="sc-jRhVzh bXXMNm">
+												<input type="text" name="P_TAG" placeholder="연관태그를 입력해주세요. (최대 1개)" th:value="${productList.P_TAG}">
+											</div>
+										</div>
+									</div>
+									<ul class="sc-hZeNU hZCvWd">
+										<li><p>태그는 검색의 부가정보로 사용 되지만, 검색 결과 노출을 보장하지는 않습니다.</p></li>
+										<li><p>검색 광고는 태그정보를 기준으로 노출됩니다.</p></li>
+										<li><p>상품과 직접 관련이 없는 다른 상품명, 브랜드, 스팸성 키워드 등을 입력하면 노출이
+												중단되거나 상품이 삭제될 수 있습니다.</p></li>
+									</ul>
+								</div>
+							</li>
+							<li class="sc-iLVFha iwsyNh">
+								<div class="sc-cgzHhG drXtBZ">수량</div>
+								<div class="sc-jtHxuu kfgfBW">
+									<div class="sc-cnTzU ktoqkB">
+										<input type="text" id="count" class="sc-dXLFzO hLMOEE" name="COUNT" th:value="${productList.COUNT}">개
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+
+
+				</div>
+			</div>
+
+			<footer class="sc-eQGPmX kJFbCP">
+			<div class="sc-dAOnuy ebcoLy">
+				<button type="button" onclick="updateAction()"
+					class="sc-cSYcjD iVFWkY"></button>
+			</div>
+			</footer>
+		</form>
+	</div>
+
+	<th:block
+		th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
+</body>
+</html>
