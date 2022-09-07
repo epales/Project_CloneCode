@@ -1,6 +1,5 @@
 package com.ezen.persistence;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -20,8 +19,8 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	@Query("SELECT b FROM Product b")
 	List<Product> findAllProduct();
 	
-	//@Query("SELECT b FROM Product b WHERE b.email=?1 ORDER BY P_ID DESC limit 2")
-	//List<Product> findProductCount2ByEmail(String email);
+	@Query
+	List<Product> findTop2ByEmailOrderByLikesCountDesc(String email);
 	
 	@Query("SELECT b FROM Product b WHERE b.email=?1")
 	List<Product> findProductByEmail(String email);

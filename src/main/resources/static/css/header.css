@@ -187,12 +187,12 @@ body {
     background: rgb(255, 255, 255);
     margin-bottom: 6px;
 }
-.f2 img{
+.f2 .f3 img{
 	background-color: white;
 	box-shadow: rgb(0 0 0 / 12%) 0px 0px 7px 0px;
     margin: 16px auto 6px;
-    width: 55px;
-    height: 55px;
+    width: 66px;
+    height: 66px;
     padding: 8px;
 }
 .f3{
@@ -487,4 +487,21 @@ button{
     margin-right: 20px;
     position: relative;
 }
-
+/* nav 찜 */
+.fYTToU {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+.kkRiyA {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(247, 0, 0);
+    padding-bottom: 7px;
+}
+.kkRiyA img {
+    margin-right: 5px;
+}

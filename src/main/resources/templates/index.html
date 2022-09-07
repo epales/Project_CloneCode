@@ -69,7 +69,7 @@
         id="article-list-pagination" style="display:none;">
        </ul>
 </div>
-</div>
+
    <script type="text/javascript" th:inline="javascript">
     const articlesPerPageSize = 50;
     
@@ -93,6 +93,7 @@
 	
     function getArticle(art) {
     	
+    	console.log(art.p_id);
     	console.log(art.price);
         //const articleImage = getArticleImage();
         
@@ -112,7 +113,7 @@
        	
        	div0.className="productform";
        	
-        article.className = 'aClass';
+       	article.className = 'aClass';
         article.href = "/product_detail?P_ID="+art.p_ID;
        	article.target ="_blank";
        	article.rel="noopener noreferrer";
@@ -214,6 +215,7 @@
     };
 
     </script>
+</div>
 <th:block th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
 </body>
 </html>
