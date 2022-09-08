@@ -35,6 +35,11 @@ public interface LikesRepository extends CrudRepository<Likes, String> {
 	@Query(value="DELETE FROM Likes WHERE rseq=?1 AND id=?2", nativeQuery = true)
 	void deleteLikes(Long rseq, String id);
 	
+	@Modifying
+	@Transactional
+	@Query(value="DELETE FROM Likes WHERE rseq=?1", nativeQuery = true)
+	void deleteLikesByProduct(Long rseq);
+	
 	@Query(value="SELECT * FROM Likes WHERE rseq=?1 AND id=?2", nativeQuery = true)
 	Likes findByRseqAndId(Long rseq, String id);
 	

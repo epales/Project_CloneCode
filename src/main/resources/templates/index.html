@@ -68,10 +68,11 @@
       <ul class="article-list__pagination article-list__pagination--inactive"
         id="article-list-pagination" style="display:none;">
        </ul>
+     
 </div>
 
    <script type="text/javascript" th:inline="javascript">
-    const articlesPerPageSize = 10;
+    const articlesPerPageSize = 25;
     
     function getPageId(n) {
         return 'article-page-' + n;
@@ -93,8 +94,7 @@
 	
     function getArticle(art) {
     	
-    	console.log(art.p_id);
-    	console.log(art.price);
+    	
         //const articleImage = getArticleImage();
         
         const div0 = document.createElement("div");

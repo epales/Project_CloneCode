@@ -41,11 +41,9 @@ public class MainController {
     
 	@GetMapping("/index")
 	public String index(Model model, HttpSession session) {
-		
-		List<Product> product = productService.findAllProduct();
-		model.addAttribute("productList", product);
-		
+	
 		String loginUser = (String)session.getAttribute("userId");
+		
 		if(loginUser != null) {
 			int likesCount = likeService.findLikesCountById(loginUser);
 			model.addAttribute("likesCount", likesCount);
@@ -114,7 +112,7 @@ public class MainController {
 			model.addAttribute("userId", session.getAttribute("userId"));
 			model.addAttribute("username", session.getAttribute("username"));
 			
-			List<Product> product = productService.findProductByEmail(loginUser);
+			
 			int count = productService.countProduct(loginUser);
 			
 			List<Likes> like = likeService.findrseqLikesById(loginUser);
@@ -147,13 +145,10 @@ public class MainController {
 			System.out.println("팔로워:" + follower);
 			
 			model.addAttribute("followings",following);
-			model.addAttribute("followers",follower);
-			
+			model.addAttribute("followers",follower);	
 			model.addAttribute("followingCount",followingCount);
 			model.addAttribute("followerCount",followerCount);
-			
 			model.addAttribute("likeProductList", likeProduct);
-			model.addAttribute("productList", product);
 			model.addAttribute("count", count);
 			model.addAttribute("likesCount", likesCount);
 			

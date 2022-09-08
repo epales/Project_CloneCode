@@ -174,7 +174,7 @@ function Option3(option) {
 								<button class="e_button1" onClick="kakaoLogout();">로그아웃</button>
 							</div>
 							<div th:unless="${session.password == null}">
-								<button class="e_button1" onClick="location='logoutAction'">로그아웃</button>
+								<button class="e_button1" onClick="location.href='/logoutAction'">로그아웃</button>
 							</div>
 						</div>
 						<!-- //팝업용 임시 버튼입니다. -->

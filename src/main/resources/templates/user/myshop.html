@@ -127,23 +127,13 @@ function Follow(userName) {
 						<div class="sc-dvpmds ilouDI">
 						<div class="clear">
 						<div class="mainform">
-							<div class="productform" th:each="product : ${productList}">
-						<a class="aClass" th:href="@{product_detail(P_ID=${product.P_ID})}" target="_blank" rel="noopener noreferrer">
-							<div class="imageBlock">
-								<img th:src="@{/image/}+${product.image1}" class="imageClass" width="194" height="194" alt="상품 이미지">
-								<div class="middleBlock"></div>
-							</div>
-							<div class="titleBlock">
-								<div class="titleText"><p th:text="${product.P_TITLE}"></p></div>
-									<div class="priceBlock">
-										<div class="priceText"><b th:text="${product.PRICE}"></b></div>
-											<div class="timeStamp">
-												<span th:text="${product.P_DATE}"></span>
-											</div>
-									</div>
-							</div>
-						</a>
-					</div>
+							<div class="article-list" id="article-list">
+      
+						      </div>
+						      <!-- Pagination List -->
+						      <ul class="article-list__pagination article-list__pagination--inactive"
+						        id="article-list-pagination" style="display:none;">
+						       </ul>
 						</div>
 					</div>
 					</div>
@@ -237,6 +227,167 @@ function Follow(userName) {
 		</div>
 	</div>
 </div>
+<script type="text/javascript" th:inline="javascript">
+    const articlesPerPageSize = 5;
+    
+    function getPageId(n) {
+        return 'article-page-' + n;
+    }
+     
+    function getDocumentHeight() {
+        const body = document.body;
+        const html = document.documentElement;
+        
+        return Math.max(
+            body.scrollHeight, body.offsetHeight,
+            html.clientHeight, html.scrollHeight, html.offsetHeight
+        );
+    };
+     
+    function getScrollTop() {
+        return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    }
+	
+    function getArticle(art) {
+    	
+    	
+        //const articleImage = getArticleImage();
+        
+        const div0 = document.createElement("div");
+        const article = document.createElement("a");
+        const div1 = document.createElement("div");
+       	const img = document.createElement("img");
+       	const div2 = document.createElement("div");
+       	const div3 = document.createElement("div");
+       	const div4 = document.createElement("div");
+       	const p1 = document.createElement("p");
+       	const div5 = document.createElement("div");
+       	const div6 = document.createElement("div");
+       	const b1 = document.createElement("b");
+       	const div7 = document.createElement("div");
+       	const span1 = document.createElement("span");
+       	
+       	div0.className="productform";
+       	
+       	article.className = 'aClass';
+        article.href = "/product_detail?P_ID="+art.p_ID;
+       	article.target ="_blank";
+       	article.rel="noopener noreferrer";
+       	
+        img.src = "image/"+art.image1;
+        img.className = "imageClass";
+        img.style.width = '194px';
+        img.style.height = '194px';
+        
+        div1.className="imageBlock";
+        
+        div2.className="middleBlock";
+        
+        div3.className="titleBlock";
+        
+        div4.className="titleText";
+        
+        p1.textContent=art.p_TITLE;
+        
+        div5.className="priceBlock";
+        
+        div6.className="priceText";
+        
+        b1.textContent=art.price;
+        
+        div7.className="timeStamp";
+        
+        span1.textContent=art.p_DATE;
+        
+        div0.appendChild(article);
+        article.appendChild(div1);
+        div1.appendChild(img);
+        div1.appendChild(div2);
+        article.appendChild(div3);
+        div3.appendChild(div4);
+        div4.appendChild(p1);
+        div3.appendChild(div5);
+        div5.appendChild(div6);
+        div6.appendChild(b1);
+        div5.appendChild(div7);
+        div7.appendChild(span1);
+        return div0;
+    }
+
+    function addPaginationPage(page) {
+        const pageLink = document.createElement('a');
+        pageLink.href = '#' + getPageId(page);
+        pageLink.innerHTML = page;
+        
+        const listItem = document.createElement('li');
+        listItem.className = 'article-list__pagination__item';
+        listItem.appendChild(pageLink);
+        
+        articleListPagination.appendChild(listItem);
+        
+        if (page === 2) {
+            articleListPagination.classList.remove('article-list__pagination--inactive');
+        }
+    }
+     
+
+    function addPage(page) {
+    	$.ajax({
+            type: 'GET',
+            url: '/scroll/userlist',
+            data: {
+              page: page, // current Page
+              size: articlesPerPageSize, // max page size
+              message: [[${session.userId}]]
+            },
+            dataType: 'json',
+          }).done(function (result) {
+            if (result.length == 0) {
+              return;
+            }
+            const pageElement = document.createElement('div');
+            pageElement.id = getPageId(page);
+            pageElement.className = 'productSession';
+            const div10 = document.createElement('div');
+            div10.className = "mainform";
+            pageElement.appendChild(div10);
+            for (var i = 0; i < result.length; i++) {
+            	div10.appendChild(getArticle(result[i]));
+            }
+            articleList.appendChild(pageElement);
+        addPaginationPage(page);
+       });
+    }
+     
+    const articleList = document.getElementById('article-list');
+    const articleListPagination = document.getElementById('article-list-pagination');
+    
+    let page = 0;
+     
+    addPage(page++);
+     
+    window.onscroll = function() {
+    	if (getScrollTop() > getDocumentHeight() - window.innerHeight-400){
+    		
+        	didScroll = true;
+    	
+    	 return; 
+    	}
+    	
+    }
+    
+    setInterval(function() {
+        if (didScroll) {
+            hasScrolled();
+            didScroll = false;
+        }
+    }, 3000);
+    
+    function hasScrolled() {
+    	addPage(page++)
+    }
+    
+    </script>
 <th:block th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
 </body>
 </html>

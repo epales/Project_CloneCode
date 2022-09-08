@@ -29,7 +29,7 @@
 </div>
 </div>
    <script type="text/javascript" th:inline="javascript">
-    const articlesPerPageSize = 10;
+    const articlesPerPageSize = 25;
     
     function getPageId(n) {
         return 'article-page-' + n;
@@ -51,8 +51,7 @@
 	
     function getArticle(art) {
     	
-    	console.log(art.price);
-        
+   
         const div0 = document.createElement("div");
         const article = document.createElement("a");
         const div1 = document.createElement("div");

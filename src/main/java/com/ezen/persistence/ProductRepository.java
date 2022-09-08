@@ -13,20 +13,26 @@ import com.ezen.dto.Product;
 
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
+	
 	@Query("SELECT b FROM Product b WHERE b.P_ID=?1")
 	Product findProduct(Long id);
-	
 	@Query("SELECT b FROM Product b")
 	List<Product> findAllProduct();
 	
 	@Query
 	List<Product> findTop2ByEmailOrderByLikesCountDesc(String email);
+	@Query
+	List<Product> findTopByEmailOrderByLikesCountDesc(String email);
+	
 	
 	@Query("SELECT b FROM Product b WHERE b.email=?1")
 	List<Product> findProductByEmail(String email);
 	
 	@Query("SELECT COUNT(b) FROM Product b WHERE b.email=?1")
 	int CountProductByEmail(String email);
+	
+	@Query("SELECT COUNT(b) FROM Product b WHERE b.email=?1 AND b.P_TITLE LIKE %?2%")
+	int CountProductByEmailAndMsg(String email,String msg);
 	
 	@Query("SELECT b FROM Product b WHERE b.P_ID=?1")
 	Product findProductById(Long id);
@@ -58,6 +64,12 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	
 	@Query("SELECT b FROM Product b ORDER BY b.P_ID DESC")
 	Page<Product> findAllByOrderByIdDesc(Pageable pageable);
+	
+	@Query("SELECT b FROM Product b WHERE b.email LIKE %?1% OR b.P_EXPLAIN LIKE %?1% ORDER BY b.P_ID DESC")
+	Page<Product> findProductByOrderByEmailDesc(String email, Pageable pageable);
+	
+	@Query("SELECT b FROM Product b WHERE b.email=?1 AND b.P_TITLE LIKE %?2% ORDER BY b.P_ID DESC")
+	Page<Product> findProductByOrderByEmailAndTitleDesc(String email, String message,Pageable pageable);
 	
 	@Query("SELECT b FROM Product b WHERE b.P_TITLE LIKE %?1% OR b.P_EXPLAIN LIKE %?1% ORDER BY b.P_ID DESC")
 	Page<Product> findProductByOrderBytitleDesc(String title, Pageable pageable);

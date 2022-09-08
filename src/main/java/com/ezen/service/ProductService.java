@@ -58,6 +58,10 @@ public class ProductService {
 		
 		return proRepo.CountProductByEmail(email);
 	}
+	public int countProduct(String email,String msg) {
+	
+		return proRepo.CountProductByEmailAndMsg(email,msg);
+	}
 	
 	public void plusLikes(Product rseq) {
 		proRepo.plusLikes(rseq.getLikesCount(), rseq.getP_ID());
@@ -89,10 +93,15 @@ public class ProductService {
 	public Page<Product> findAllByOrderByIdDesc(Pageable pageable){
 		return proRepo.findAllByOrderByIdDesc(pageable);
 	}
+	public Page<Product> findProductByOrderByEmailDesc(Pageable pageable, String email){
+		return proRepo.findProductByOrderByEmailDesc(email, pageable);
+	}
+	public Page<Product> findProductByOrderByEmailAndMessageDesc(Pageable pageable, String email, String message){
+		return proRepo.findProductByOrderByEmailAndTitleDesc(email,message,pageable);
+	}
 	public Page<Product> findProductByOrderBytitleDesc(Pageable pageable,String title){
 		return proRepo.findProductByOrderBytitleDesc(title,pageable);
 	}
-	
 	public Page<Product> findProductByOrderByCategoryDesc(Pageable pageable,String category){
 		return proRepo.findProductByOrderByCategoryDesc(category,pageable);
 	}
@@ -105,5 +114,8 @@ public class ProductService {
 	
 	public List<Product> limitProduct2(String email){
 		return proRepo.findTop2ByEmailOrderByLikesCountDesc(email);
+	}
+	public List<Product> limitProduct1(String email){
+		return proRepo.findTopByEmailOrderByLikesCountDesc(email);
 	}
 }
