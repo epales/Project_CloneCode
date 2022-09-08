@@ -56,14 +56,11 @@ public class ShopController {
 		if(user1 !=null && user2 == null) {
 			int followingCount = followService.findFollowingCountById(user1.getEmail());
 			int followerCount = followService.findFollowerCountById(user1.getEmail());
-			
-			List<Product> proList1 = productService.findProductByEmail(user1.getEmail());
-			
+
 			List<Follow> follower = followService.findUserByFollower(user1.getEmail());
 			List<Follow> following = followService.findUserByFollowing(user1.getEmail());
 			
 			model.addAttribute("User", user1);
-			model.addAttribute("productList", proList1);
 			model.addAttribute("count", count);
 			model.addAttribute("followingCount",followingCount);
 			model.addAttribute("followerCount",followerCount);
@@ -80,15 +77,13 @@ public class ShopController {
 		} else if(user2 != null && user1 == null) {
 			
 			int followingCount = followService.findFollowingCountById(user2.getEmail());
-			int followerCount = followService.findFollowerCountById(user2.getEmail());
-			
-			List<Product> proList2 = productService.findProductByEmail(user2.getEmail());
+			int followerCount = followService.findFollowerCountById(user2.getEmail());		
+
 			
 			List<Follow> follower = followService.findUserByFollower(user2.getEmail());
 			List<Follow> following = followService.findUserByFollowing(user2.getEmail());
 			
 			model.addAttribute("User", user2);
-			model.addAttribute("productList", proList2);
 			model.addAttribute("count", count);
 			model.addAttribute("followingCount",followingCount);
 			model.addAttribute("followerCount",followerCount);
@@ -130,8 +125,9 @@ public class ShopController {
 	public String productManageView(HttpSession session, Model model) {
 		String loginUser = (String)session.getAttribute("userId");
 		
-		List<Product> proList1 = productService.findProductByEmail(loginUser);
+		List<Product> proList1 = productService.limitProduct1(loginUser);
 		int count = productService.countProduct(loginUser);
+		
 		
 		model.addAttribute("User", loginUser);
 		model.addAttribute("productList", proList1);
@@ -154,7 +150,8 @@ public class ShopController {
 		
 		
 		productService.deleteProduct(vo.getP_ID());
-		likesService.deleteLikes(vo.getP_ID(), vo.getEmail());
+		likesService.deleteLikesByProduct(vo.getP_ID());
+		
 		return "redirect:/shop/product/manage";
 	}
 }

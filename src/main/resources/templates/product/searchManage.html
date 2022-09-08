@@ -68,7 +68,7 @@ $(document).on('keydown', '#myProduct', function(e) {
 		        id="article-list-pagination" style="display:none;">
 		        </ul>
 			</table>
-				<div class="sc-fIIFii csKIcC" th:if="${productList.isEmpty()}">등록된 상품이 없습니다</div>
+				<div class="sc-fIIFii csKIcC" th:if="${count==0}" >등록된 상품이 없습니다</div>
 			</main>
 		</div>
 	</div>
@@ -204,11 +204,12 @@ $(document).on('keydown', '#myProduct', function(e) {
     function addPage(page) {
     	$.ajax({
             type: 'GET',
-            url: '/scroll/userlist',
+            url: '/search/message/scroll/list',
             data: {
               page: page, // current Page
               size: articlesPerPageSize, // max page size
-              message: [[${session.userId}]]
+              email:[[${session.userId}]],
+              message: [[${message}]]
             },
             dataType: 'json',
           }).done(function (result) {

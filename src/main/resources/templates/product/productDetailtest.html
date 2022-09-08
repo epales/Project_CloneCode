@@ -35,13 +35,14 @@ $(document).ready(function () {
 	     			location.reload();
 	     			likeImg.val("1")   
 	               	like.val("1");
+	     			alert("추천이 완료되었습니다! d=(´▽｀)");
 					}
 	            }, error: function () {
 	                console.log('오류입니다.');
 	            }
 	        });
 			 $("#likeImg").css("src", "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGNzJGMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K");
-	         alert("추천이 완료되었습니다! d=(´▽｀)");
+	         
 		} else {
 			$.ajax({
 	            url: '/product/likes',
@@ -57,14 +58,14 @@ $(document).ready(function () {
 	            	location.reload();
 	            	likeImg.val("0")   
 	                like.val("0"); 
-	               
+	            	alert("추천이 취소되었습니다 ( ĭ˄ĭ)=p");
 					}
 	            }, error: function () {
 	                console.log('오류입니다.');
 	            }
 	        });
 			$("#likeImg").prop("src", "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGNzJGMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K");
-   			alert("추천이 취소되었습니다 ( ĭ˄ĭ)=p");
+   			
 		}
 	}); 
 	
@@ -85,17 +86,21 @@ $(document).ready(function () {
 						alert("로그인 후 사용가능한 기능입니다.");
 						var url = "loginForm";
 						location.replace(url);	
-					}else{
+					} else if(data == 2) {
+						alert("자기자신은 팔로우 할 수 없어요");
+						location.reload();
+					} else {
 	     			console.log("팔로우 성공");
 	     			location.reload();
 	     			followImg.val("1")   
 	               	follow.val("1");
+	     			 alert("팔로우 완료되었습니다! d=(´▽｀)");
 					}
 	            }, error: function () {
 	                console.log('오류입니다.');
 	            }
 	        });
-			  alert("팔로우 완료되었습니다! d=(´▽｀)");
+			 
 		} else {
 			$.ajax({
 	            url: '/member/follow',
@@ -106,18 +111,21 @@ $(document).ready(function () {
 	            		alert("로그인 후 사용가능한 기능입니다.");
 						var url = "loginForm";
 						location.replace(url);
-					}else{
+					} else if(data == 2) {
+						alert("자기자신은 팔로우 할 수 없어요");
+						location.reload();
+					} else{
 	            	console.log("팔로우 취소");
 	            	location.reload();
 	            	followImg.val("0")   
 	                follow.val("0"); 
-	               
+	            	alert("팔로우 취소되었습니다 ( ĭ˄ĭ)=p");
 					}
 	            }, error: function () {
 	                console.log('오류입니다.');
 	            }
 	        });
-			alert("팔로우 취소되었습니다 ( ĭ˄ĭ)=p");
+			
 		}
 	}); 
 	

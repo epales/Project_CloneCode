@@ -41,6 +41,9 @@ public class LikesService {
 	public void deleteLikes(Long rseq, String id) {
 		LikesRepo.deleteLikes(rseq, id);
 	}
+	public void deleteLikesByProduct(Long rseq ) {
+		LikesRepo.deleteLikesByProduct(rseq);
+	}
 	
 	public Likes findByRseqAndId(Likes likes) {
 		return LikesRepo.findByRseqAndId(likes.getRseq(), likes.getId());

@@ -60,7 +60,7 @@ public class FollowController {
 			int error = 0;
 			return error;
 		} else if(follows.getFollower() == follows.getFollowing()){
-			int error = 0;
+			int error = 2;
 			return error;
 		} else if(follow.isEmpty()){
 			int result = followService.insertFollow(follows);	
