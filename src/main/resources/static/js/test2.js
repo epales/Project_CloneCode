@@ -287,7 +287,7 @@ function registerAction(){
    	      contentType: false,
    	      success: function (data) {
    	    	if(JSON.parse(data)['result'] == "OK"){
-   	    		alert("파일업로드 성공");
+   	    		alert("상품 등록이 완료되었습니다.");
    	    		var moveurl= "/index";
    	    		location.replace(moveurl);
 			} else
@@ -370,7 +370,7 @@ function updateAction(){
    	      contentType: false,
    	      success: function (data) {
    	    	if(JSON.parse(data)['result'] == "OK"){
-   	    		alert("파일업로드 성공");
+   	    		alert("상품 수정이 완료되었습니다.");
    	    		var moveurl= "/index";
    	    		location.replace(moveurl);
 			} else

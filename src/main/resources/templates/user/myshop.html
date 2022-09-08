@@ -240,16 +240,7 @@ function Follow(userName) {
 												width="120" height="120" alt="프로필 이미지">
 											</a>
 											<a class="sc-jtHxuu jnsWmN" th:href="@{/shop/}+${follower.follower}"><span th:text="${follower.followerName}"></span></a>
-											<div class="sc-fFTYTi cUKifA">
-												<button class="sc-cEvuZC fWEZrl" th:Name="${follower.follower}" th:value=${follower.follower} th:if="${following == 0}" th:onclick="Follow(this.getAttribute('Name'))">
-													<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAcCAYAAAATFf3WAAAAAXNSR0IArs4c6QAAAfZJREFUWAntVrFOAkEQ5VYjjZ9gjKWcP0BNYeIPkFjYaWHUxo6CC4GCzkpiY2dhwg+YUEBBox8gWBo+wMoGizvn4WKysLN3c3diwybHZmfem3nM7d6sV0g4ms3mQRiGpwQ/pGdX0yY095RS90EQvGpbrpMXF63b7W6Nx+ObKIrOCasYfOh53l2pVLquVqtfDMZqbjQaERw0W7VwCWfBIG40Gj2RuAsyuLAKGGDBmZFz+nElLaBylKciyFXRHAHFDWUFYs/p1+qOsOAFB9wFc+olK1AfCNbvyKg01wFJ7nIJwGlNO7JwjZybxspczD8lpjXZaok7P60cnfO7KsjFWqndVcEJKfFTqgHXGNx3bl45zu+qYM/IIFtk4RqZWIFoX4QMDXSyRai5ydAxKFYgeivaVwx/yQ1Onn2ZFYjM6K009ZdU8Ia+5vAIoccpEI3f9/0jqkqH4rpeNy4LHWCll4U4vdYbhI30X9ctm5a1TVKB31dMtxDVarUuqdGfUIB9erYlgSzYT7K90SfnoV6v39Iede1hC/3HNBPYbrf3ptPpI5nKLDKb47lYLB7XarV3aRjchNUfi4OmMnIgl1TgBo0rIp5JiSnwO8Ph8GMwGLxIuLhcYs+tZKTJhZLjQKxqiHNBYNbTKvlz4lziTStRkwd2LTBrFb8B8aSntyo1wCwAAAAASUVORK5CYII="
-														width="20" height="14" alt="화이트 테마 언팔로우 버튼 아이콘">팔로우
-												</button>
-												<button id="followCheck" th:myName="${follower.follower}" class="sc-cEvuZC kjYBif" th:value=${follower.follower} th:if="${following == 1}" th:onclick="cancelFollow(this.getAttribute('myName'))">
-													<img id="followImage" name="followImage" th:if="${following == 1}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAcCAYAAAAX4C3rAAAAAXNSR0IArs4c6QAAAyRJREFUWAntVs9LFHEUf9/vqpDpbLegIDr0i4pOHTp0UjQikCwS1p1dpUSQlDAIii57CLpEhBehJHQbtz+goCy0Q7cOHaKI7MehU3WI3VlNXN15vTfTyLDOd2fWUezgwvL9znufz/t+5vu+3/dGQMhfsafniFWy+kBgOyLuYZoQ4jugeCEb5FjzxMSHkKHWBBNBLMxkGszZz3dJ1gAJlH54EmwB4Kh2YP9VkcmU/DBRbb4Lu0FZZOHTl2eIcFklkrHsY4yNJY7Ljzri8PA2N0ZVoc5OYosLDh6xxeEEI4MQBV1PFH7++vgnnd7NWKVQPpOc7qCAq/1iwOGu9oS1mAm9DywwBIhdS8t4lHlKoXxxqqVbtShz7EunAgTYC936FQS8DwhLQshz8dyjKaYohfLtDoipdvtwsb+/UU1wPPlE8ia96D0qJ4sQg7PaZPapy1EKJYJdglxgLWMl10wmO83i/Ld8KnVcFcdMpm6T7xb9F6i2dMQN47kXqxTqBUWdoyUuIMBOKOO0mUif9MajlxKFRGrEsqzrtJPzMRE7s8MwXnoxPFcKtYt5JTrkcyVX6+xI0cUwqI5plrCm8rrexqGo/MlCd3oMwRqixzkp4XRzLvvKbxmlUO44foRQtgqu6Ooqawf39dCOjZHYRlGGJ8WEfp5KWQ7Aukh2U0KsXTOM16r4ys5kt8yl8jtKjfplfKJyl5L1sWN+LZXTTGdxhMbBFaoQeQHyVDyXfbNi85koRTgL4agPJ8CEo34imUQvgfGcMUSTO/YzwO96Ca1BIhmrFMpO7t0Ufobn4X5ixuFUR+/IGdcIcSMWEy3bDeNtdbTjVabeJf8vHyWBQl3Bm/2Z5+rYGtdrB1ZSz8XXnP06SHUuRR8Fh2iBpoiLzNEtf08X/YE2OfkwYiywhS709u4tlZYfU307ETWgL1+I6bqGOr1pfPyHrz+EUfJObqhIFoHYWl5cznLBD6HJF2Kne8N20rMkHae2op7u85hqmko+kzUxIoDRwktrpct/F2et/Jp4lPjDNRE8YG6hUW+3J1zAFLE5AKF0V+31StYmOLaErvem/wV6ElIsklNjOAAAAABJRU5ErkJggg=="
-													 width="20" height="14" alt="팔로우 버튼 아이콘">팔로잉
-												</button>
-											</div>
+											
 											</div>
 										</div>
 									</div>
