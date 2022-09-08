@@ -16,7 +16,11 @@ import com.ezen.dto.Follow;
 import com.ezen.dto.LoginUser;
 import com.ezen.dto.Member;
 import com.ezen.dto.Product;
+
+import com.ezen.service.LikesService;
+
 import com.ezen.service.FollowService;
+
 import com.ezen.service.MemberService;
 import com.ezen.service.ProductService;
 
@@ -29,9 +33,12 @@ public class ShopController {
 	
 	@Autowired
 	private MemberService memberService;
-	
+
+	@Autowired LikesService likesService;
+
 	@Autowired
 	private FollowService followService;
+
 	
 	
 	@GetMapping(value = "/{email}" )
@@ -147,7 +154,7 @@ public class ShopController {
 		
 		
 		productService.deleteProduct(vo.getP_ID());
-		
+		likesService.deleteLikes(vo.getP_ID(), vo.getEmail());
 		return "redirect:/shop/product/manage";
 	}
 }

@@ -71,7 +71,7 @@
 </div>
 
    <script type="text/javascript" th:inline="javascript">
-    const articlesPerPageSize = 50;
+    const articlesPerPageSize = 10;
     
     function getPageId(n) {
         return 'article-page-' + n;
@@ -210,10 +210,26 @@
     addPage(page++);
      
     window.onscroll = function() {
-        if (getScrollTop() < getDocumentHeight() - window.innerHeight) return;
-        addPage(page++);
-    };
-
+    	if (getScrollTop() > getDocumentHeight() - window.innerHeight-400){
+    		
+        	didScroll = true;
+    	
+    	 return; 
+    	}
+    	
+    }
+    
+    setInterval(function() {
+        if (didScroll) {
+            hasScrolled();
+            didScroll = false;
+        }
+    }, 3000);
+    
+    function hasScrolled() {
+    	addPage(page++)
+    }
+    
     </script>
 </div>
 <th:block th:replace="/fragments/layouts/footerFragment.html :: footerFragment"></th:block>
