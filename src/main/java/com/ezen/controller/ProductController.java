@@ -101,11 +101,11 @@ public class ProductController {
 		LoginUser user2 = memberService.getUser(vo.getEmail());
 		Member user1 = memberService.getMember(vo.getEmail());
 		
-		long categoryId1 = testService.getCategoryId(vo.getCATEGORY1());
+		Long categoryId1 = testService.getCategoryId(vo.getCATEGORY1());
 		
 		List<String> category2 = testService.getCategoryName(categoryId1);
 		
-		long categoryId2 = testService.getCategoryId(vo.getCATEGORY2());
+		Long categoryId2 = testService.getCategoryId(vo.getCATEGORY2());
 		List<String> category3 = testService.getCategoryName(categoryId2);
 		
 		Optional<Likes> likes = null;
@@ -115,9 +115,13 @@ public class ProductController {
 		follow = followService.findFollowByFollowerAndFollowing((String)session.getAttribute("userId"),vo.getEmail()); 
 		
 		if(likes.isEmpty()) {
+			
 			model.addAttribute("likes", 0);
+			
+			
 		} else {
 			model.addAttribute("likes", 1);
+			
 		}
 		
 		if(follow.isEmpty()) {
@@ -130,10 +134,13 @@ public class ProductController {
 		System.out.println("유저 2: " + user2);
 		
 		if(user1 !=null && user2 == null) {
-			
+			List<Product> limit= productService.limitProduct2(user1.getEmail());
+			model.addAttribute("limit", limit);
 			model.addAttribute("User", user1);
 		
 		} else  {	
+			List<Product> limit= productService.limitProduct2(user2.getEmail());
+			model.addAttribute("limit", limit);
 			model.addAttribute("User", user2);
 		}
 		
@@ -143,7 +150,7 @@ public class ProductController {
 		
 		model.addAttribute("productList", product);
 		model.addAttribute("userId", session.getAttribute("userId"));
-		model.addAttribute("username", session.getAttribute("username"));
+		model.addAttribute("username", vo.getUsername());
 		model.addAttribute("categoryList2", category2);
 		model.addAttribute("categoryList3", category3);
 		model.addAttribute("count", count);
