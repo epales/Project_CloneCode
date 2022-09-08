@@ -16,11 +16,11 @@ import com.ezen.dto.Follow;
 import com.ezen.dto.LoginUser;
 import com.ezen.dto.Member;
 import com.ezen.dto.Product;
-
+<<<<<<< HEAD
 import com.ezen.service.LikesService;
-
+=======
 import com.ezen.service.FollowService;
-
+>>>>>>> refs/remotes/origin/Final
 import com.ezen.service.MemberService;
 import com.ezen.service.ProductService;
 
@@ -34,12 +34,12 @@ public class ShopController {
 	@Autowired
 	private MemberService memberService;
 	
-
+<<<<<<< HEAD
 	@Autowired LikesService likesService;
-
+=======
 	@Autowired
 	private FollowService followService;
-
+>>>>>>> refs/remotes/origin/Final
 	
 	
 	@GetMapping(value = "/{email}" )
