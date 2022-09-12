@@ -45,7 +45,7 @@ public class Product {
 	
 	private int PRICE;
 	
-	private String SHIPPINGPEE; // 0 배송비 없음 , 1 배송비 있음
+	private String SHIPPINGFEE; // 0 배송비 없음 , 1 배송비 있음
 	
 	private String P_EXPLAIN;
 	
