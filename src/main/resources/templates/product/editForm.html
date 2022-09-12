@@ -53,13 +53,13 @@ $(document).ready(function() {
 		if ($("#check").hasClass("notShippingCheck") == true) {
 			$(this).addClass("shippingCheck");
 			$(this).removeClass("notShippingCheck");
-			$("#check input[name=SHIPPINGPEE]");
-			$("#SHIPPINGPEE").val("Y");
+			$("#check input[name=SHIPPINGFEE]");
+			$("#SHIPPINGFEE").val("Y");
 		} else if ($("#check").hasClass("notShippingCheck") == false) {
 			$(this).addClass("notShippingCheck");
 			$(this).removeClass("shippingCheck");
-			$("#check input[name=SHIPPINGPEE]");
-			$("#SHIPPINGPEE").val("N");
+			$("#check input[name=SHIPPINGFEE]");
+			$("#SHIPPINGFEE").val("N");
 		}
 	});
 
@@ -332,11 +332,11 @@ function getOption4(option) {
 									</div>
 									<div class="sc-RmnOB gnoLfy">
 										<div class="emkahU">
-											<label for="shipping" id="check" class="notShippingCheck" th:if="${productList.SHIPPINGPEE == 'N'}">
-												<input id="SHIPPINGPEE" name="SHIPPINGPEE" value="N" type="checkbox" checked="checked">배송비 포함
+											<label for="shipping" id="check" class="notShippingCheck" th:if="${productList.SHIPPINGFEE == 'N'}">
+												<input id="SHIPPINGFEE" name="SHIPPINGFEE" value="N" type="checkbox" checked="checked">배송비 포함
 											</label>
-											<label for="shipping" id="check" class="shippingCheck" th:if="${productList.SHIPPINGPEE == 'Y'}">
-												<input id="SHIPPINGPEE" name="SHIPPINGPEE" value="Y" type="checkbox" checked="checked">배송비 포함
+											<label for="shipping" id="check" class="shippingCheck" th:if="${productList.SHIPPINGFEE == 'Y'}">
+												<input id="SHIPPINGFEE" name="SHIPPINGFEE" value="Y" type="checkbox" checked="checked">배송비 포함
 											</label>
 										</div>
 									</div>

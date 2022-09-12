@@ -434,10 +434,10 @@ function createTalk(){
 												</div>
 												<div class="sc-iFMziU gUIgSj">
 												<div class="sc-keVrkP fOykTJ">배송비</div>
-													<div class="sc-gVLVqr goYkVa" th:if="${productList.SHIPPINGPEE == 'N'}">
+													<div class="sc-gVLVqr goYkVa" th:if="${productList.SHIPPINGFEE == 'N'}">
 													<span >배송비 별도</span>
 													</div>
-													<div class="sc-gVLVqr goYkVa" th:unless="${productList.SHIPPINGPEE == 'N'}">
+													<div class="sc-gVLVqr goYkVa" th:unless="${productList.SHIPPINGFEE == 'N'}">
 													<span >배송비 포함</span>
 													</div>
 												</div>
