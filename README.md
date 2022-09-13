@@ -41,3 +41,6 @@ JavaScript
 jQuery
 
 Thymeleaf
+
+## 3. ERD 설계<br/>
+![ERD](https://user-images.githubusercontent.com/105237699/189926185-8956fb96-a945-4ab5-baa2-d70013930241.JPG)<br/>
