@@ -23,6 +23,7 @@
 - Spring JPA
 - Java 11
 - Oracle DB
+- H2 DataBase
 
 🔅**Front end**
 
@@ -35,7 +36,7 @@
 ## 3. ERD 설계<br/>
 ![ERD](https://user-images.githubusercontent.com/105237699/189926185-8956fb96-a945-4ab5-baa2-d70013930241.JPG)<br/>
 
-## 6. 페이지 설명<br/>
+## 4. 페이지 설명<br/>
 **index.html**<br/>
 > **사이트 메인 페이지**<br/>
 > - 로그인 화면 이동, 내 상점, 번개톡 가능<br/>
