@@ -40,7 +40,7 @@
 🔗[요구사항정의서_박혜찬.xlsx](https://github.com/epales/Project_CloneCode/files/9604377/_.xlsx)
 <br/>
 ## 5. 포트폴리오<br/>
-🔗[포폴.pdf](https://github.com/epales/Project_CloneCode/files/9605123/default.pdf)
+🔗[코딩-포트폴리오.pdf](https://github.com/epales/Project_CloneCode/files/9605242/-._.-._.pdf)
 <br/>
 
 ## 6. 페이지 설명<br/>
@@ -97,4 +97,3 @@
 >**talk.html**<br/>
 
 >**userShop.html**<br/>
-
