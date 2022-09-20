@@ -52,27 +52,48 @@
 > - 최신등록 상품 무한스크롤 조회 가능<br/>
 
 -fragments-
->**footerFragment.html**<br/>
->**headerFragment.html**<br/>
->**nav.html**<br/>
+> **headerFragment.html**<br/>
+> - Page Header의 Script, CSS 연결 부분<br/>
+
+> **nav.html**<br/>
+> - Page Header의 내용<br/>
+
+> **footerFragment.html**<br/>
+> - Page Footer<br/>
 
 -product-
 >**editForm.html**<br/>
+> - 등록상품 수정 페이지<br/>
+
 >**manage.html**<br/>
+
 >**productDetailtest.html**<br/>
+
 >**searchCategoryProduct.html**<br/>
+
 >**searchManage.html**<br/>
+
 >**searchProduct.html**<br/>
+
 >**sellForm.html**<br/>
 
 -user-
 >**changePwdOk.html**<br/>
+
 >**findIdAndPassword.html**<br/>
+
 >**findIdResult.html**<br/>
+
 >**findPasswordResult.html**<br/>
+
 >**join.html**<br/>
+
 >**login_fail.html**<br/>
+
 >**loginForm.html**<br/>
+
 >**myshop.html**<br/>
+
 >**talk.html**<br/>
+
 >**userShop.html**<br/>
