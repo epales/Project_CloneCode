@@ -51,7 +51,7 @@
 > - 제목 검색, 카테고리 검색 가능<br/>
 > - 최신등록 상품 무한스크롤 조회 가능<br/>
 
--fragments-
+**fragments**<br/>
 > **headerFragment.html**<br/>
 > - Page Header의 Script, CSS 연결 부분<br/>
 
@@ -61,39 +61,56 @@
 > **footerFragment.html**<br/>
 > - Page Footer<br/>
 
--product-
+**product**<br/>
 >**editForm.html**<br/>
 > - 등록상품 수정 페이지<br/>
 
 >**manage.html**<br/>
+> - 등록상품 관리 페이지<br/>
 
 >**productDetailtest.html**<br/>
+> - 상품 상세 페이지<br/>
 
 >**searchCategoryProduct.html**<br/>
+> - 카테고리 검색 페이지<br/>
 
 >**searchManage.html**<br/>
+> - 등록상품 관리 검색결과페이지<br/>
 
 >**searchProduct.html**<br/>
+> - 상품 검색 페이지<br/>
 
 >**sellForm.html**<br/>
+> - 판매상품 등록 페이지<br/>
 
--user-
+**user**<br/>
+
 >**changePwdOk.html**<br/>
+> - 비밀변호 변경완료 페이지<br/>
 
 >**findIdAndPassword.html**<br/>
+> - 아이디, 비밀번호 찾기 페이지<br/>
 
 >**findIdResult.html**<br/>
+> - 아이디 찾기 결과 페이지<br/>
 
 >**findPasswordResult.html**<br/>
+> - 패스워드 찾기 결과 페이지<br/>
 
 >**join.html**<br/>
+> - 회원가입 페이지<br/>
 
 >**login_fail.html**<br/>
+> - 로그인 실패 페이지<br/>
 
 >**loginForm.html**<br/>
+> - 로그인 화면 페이지<br/>
 
 >**myshop.html**<br/>
+> - 내 상점(마이) 페이지<br/>
 
 >**talk.html**<br/>
+> - 번개톡 페이지<br/>
 
 >**userShop.html**<br/>
+> - 판매자 상점 페이지<br/>
