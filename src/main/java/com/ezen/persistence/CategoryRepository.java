@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.ezen.dto.Categories;
 
-public interface TestRepository extends CrudRepository<Categories, Long> {
+public interface CategoryRepository extends CrudRepository<Categories, Long> {
 
 	@Query("SELECT b.CategoryId FROM Categories b WHERE b.CategoryName=?1")
 	Long findIdByCategoryName(String category);

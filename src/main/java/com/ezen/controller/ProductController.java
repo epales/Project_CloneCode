@@ -29,7 +29,7 @@ import com.ezen.service.FollowService;
 import com.ezen.service.LikesService;
 import com.ezen.service.MemberService;
 import com.ezen.service.ProductService;
-import com.ezen.service.TestService;
+import com.ezen.service.CategoryService;
 
 @Controller	
 public class ProductController {
@@ -44,7 +44,7 @@ public class ProductController {
 	private LikesService Likesservice;
 	
 	@Autowired
-	private TestService testService;
+	private CategoryService testService;
 	
 	@Autowired
 	private FollowService followService;
@@ -158,7 +158,7 @@ public class ProductController {
 		model.addAttribute("followerCount",followerCount);
 		
 		
-		return "product/productDetailtest";
+		return "product/productDetail";
 	}
 	
 	

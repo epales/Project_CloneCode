@@ -19,7 +19,7 @@ import com.ezen.dto.Product;
 import com.ezen.service.ProductService;
 
 @Controller
-public class TestApiController {
+public class ScrollApiController {
 
 	@Autowired
 	private ProductService pService;
