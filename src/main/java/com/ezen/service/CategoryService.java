@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ezen.dto.Categories;
-import com.ezen.persistence.TestRepository;
+import com.ezen.persistence.CategoryRepository;
 
 @Service
-public class TestService {
+public class CategoryService {
 
 	@Autowired
-    private TestRepository testRepo;
+    private CategoryRepository testRepo;
 
     public Long getCategoryId(String category) {
     	System.out.println("카테고리값:" + category);
