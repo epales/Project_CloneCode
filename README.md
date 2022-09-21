@@ -68,7 +68,7 @@
 >**manage.html**<br/>
 > - 등록상품 관리 페이지<br/>
 
->**productDetailtest.html**<br/>
+>**productDetail.html**<br/>
 > - 상품 상세 페이지<br/>
 
 >**searchCategoryProduct.html**<br/>
