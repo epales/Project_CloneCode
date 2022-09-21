@@ -150,6 +150,7 @@ public class ShopController {
 		
 		
 		productService.deleteProduct(vo.getP_ID());
+		
 		likesService.deleteLikesByProduct(vo.getP_ID());
 		
 		return "redirect:/shop/product/manage";

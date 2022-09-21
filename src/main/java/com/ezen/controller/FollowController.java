@@ -58,17 +58,21 @@ public class FollowController {
 		
 		if (follows.getFollower() == null) {
 			int error = 0;
+			System.out.println("에러1+"+error);
 			return error;
-		} else if(follows.getFollower() == follows.getFollowing()){
+		} else if(follows.getFollower().equals(follows.getFollowing())){
 			int error = 2;
+			System.out.println("에러2+"+error);
 			return error;
 		} else if(follow.isEmpty()){
 			int result = followService.insertFollow(follows);	
+			System.out.println("에러3+"+result);
 			return result;
 		} else {
 			followService.deleteFollow(follows);
 			return 1;
 		}
+		
 	}
 	
 }

@@ -156,7 +156,7 @@ function Follow(userName) {
 						<div class="productform" th:each="likeProduct : ${likeProductList}">
 						<a class="aClass" th:href="@{/product_detail(P_ID=${likeProduct.P_ID})}" target="_blank" rel="noopener noreferrer">
 							<div class="imageBlock">
-								<img th:src="@{/image}+${/likeProduct.image1}" class="imageClass" width="194" height="194" alt="상품 이미지">
+								<img th:src="@{/image/}+${likeProduct.image1}" class="imageClass" width="194" height="194" alt="상품 이미지">
 								<div class="middleBlock"></div>
 							</div>
 							<div class="titleBlock">

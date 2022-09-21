@@ -41,7 +41,7 @@ public class LikesService {
 	public void deleteLikes(Long rseq, String id) {
 		LikesRepo.deleteLikes(rseq, id);
 	}
-	public void deleteLikesByProduct(Long rseq ) {
+	public void deleteLikesByProduct(Long rseq) {
 		LikesRepo.deleteLikesByProduct(rseq);
 	}
 	
