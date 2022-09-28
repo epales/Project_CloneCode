@@ -22,7 +22,6 @@
 - Spring Boot
 - Spring JPA
 - Java 11
-- Oracle DB
 - H2 DataBase
 
 🔅**Front end**
